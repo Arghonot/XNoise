@@ -1,0 +1,21 @@
++Scale
+	-Doesn't sample at other 3d coordinates but resample the same texture at different longitudes/latitudes
++Turbulence
+	-Doesn't sample 3d perlin directly but resample the texture at another coordinate (might change this later)
++Terrace
+	-Code it
++Curve
+	-Fix it
++Voronoi
+	-render plain color on gpu render.
++ScaleBias
+	-is it really working ?
++Select
+	-Really need to implement fallof (useless gpu node otherwise).
++Displace
+	-Need more checks otherwise it seems that it doesnt' have a proper behaviour (weird checker thing happening...)
++Rotate
+	-Z doesn't work
+	-Is this the expected behaviour ?
++Turbulence
+	-It seems like this node rotate / stretch the texture somehow... need a fix asap
