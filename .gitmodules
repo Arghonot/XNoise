@@ -1,0 +1,9 @@
+[submodule "Submodules/LibNoise"]
+	path = Submodules/LibNoise
+	url = https://github.com/Arghonot/LibNoise.Unity.git
+[submodule "Submodules/XNode"]
+	path = Submodules/XNode
+	url = https://github.com/Siccity/xNode.git
+[submodule "Submodules/GraphHelpers"]
+	path = Submodules/GraphHelpers
+	url = https://github.com/Arghonot/CustomGraphs.git
