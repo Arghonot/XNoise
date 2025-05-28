@@ -12,10 +12,7 @@ namespace Xnoise
 
         public override object Run()
         {
-            return new Abs(
-                GetInputValue<SerializableModuleBase>(
-                    "Controller",
-                    this.Controller));
+            return new Abs(GetInputValue<SerializableModuleBase>("Controller", this.Controller));
         }
     }
 }
