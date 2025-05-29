@@ -58,25 +58,24 @@ namespace Xnoise
             XnoiseGraph graph = target as XnoiseGraph;
             NodeEditorWindow.current.graphEditor = this;
 
-            if (graph.blackboard == null)
-            {
-                var bb = CreateNode(typeof(Graph.Blackboard), new Vector2(0, 0));
-                graph.blackboard = bb as Graph.Blackboard;
-                graph.blackboard.InitializeBlackboard();
-            }
-            
-            // we do not want to have two outputs
-            if (graph.root == null && ContainsNodeOfType(typeof(RootModuleBase)) != null)
-            {
-                graph.root = (RootModuleBase)ContainsNodeOfType(typeof(RootModuleBase));
-            }
-            else if (graph.root == null)
-            {
-                var root = CreateNode(typeof(RootModuleBase), new Vector2(500, 150));
-                graph.root = root as RootModuleBase;
-            }
+            graph.Initialize();
+            //if (graph.blackboard == null)
+            //{
+            //    var bb = CreateNode(typeof(Graph.Blackboard), new Vector2(0, 0));
+            //    graph.blackboard = bb as Graph.Blackboard;
+            //    graph.blackboard.InitializeBlackboard(); // TODO redundant code with graph's inner stuff
+            //}
+
+            //// we do not want to have two outputs
+            //if (graph.root == null && ContainsNodeOfType(typeof(RootModuleBase)) != null)
+            //{
+            //    graph.root = (RootModuleBase)ContainsNodeOfType(typeof(RootModuleBase));
+            //}
+            //else if (graph.root == null)
+            //{
+            //    var root = CreateNode(typeof(RootModuleBase), new Vector2(500, 150));
+            //    graph.root = root as RootModuleBase;
+            //}
         }
-
-
     }
 }
