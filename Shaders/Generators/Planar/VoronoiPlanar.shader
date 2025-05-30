@@ -40,7 +40,7 @@ Shader "Xnoise/Generators/VoronoiPlanar"
             float4 _OffsetPosition, _Rotation;
 
             #include "UnityCG.cginc"
-            #include "../../LibnoiseUtils.cginc"
+            #include "../../CGINCs/LibnoiseUtils.cginc"
             #include "../../CGINCs/Voronoi.cginc"
 
             SamplerState   sampler_Permutations;

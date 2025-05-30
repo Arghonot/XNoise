@@ -19,8 +19,8 @@
             #pragma fragment frag
 
             #include "UnityCG.cginc"
-            #include "../../noiseSimplex.cginc"
-            #include "../../LibnoiseUtils.cginc"
+            #include "../../CGINCs/noiseSimplex.cginc"
+            #include "../../CGINCs/LibnoiseUtils.cginc"
 
             struct appdata
             {

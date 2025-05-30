@@ -46,7 +46,7 @@ Shader "Xnoise/Generators/VoronoiSpherical"
             float4 _DisplacementMap_ST;
 
             #include "UnityCG.cginc"
-            #include "../../LibnoiseUtils.cginc"
+            #include "../../CGINCs/LibnoiseUtils.cginc"
             #include "../../CGINCs/Voronoi.cginc"
 
             float4 _Permutations_ST;

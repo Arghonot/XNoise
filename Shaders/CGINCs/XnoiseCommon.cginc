@@ -1,0 +1,6 @@
+#ifndef XNOISE_COMMON_INCLUDED
+#define XNOISE_COMMON_INCLUDED
+
+#define UNIT_SCALE 1000.0
+
+#endif

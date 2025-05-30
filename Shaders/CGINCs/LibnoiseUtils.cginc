@@ -1,4 +1,4 @@
-#ifndef LIBNOISE_SHADER_UTILS
+﻿#ifndef LIBNOISE_SHADER_UTILS
 #define LIBNOISE_SHADER_UTILS
 
 // from https://gist.github.com/patricknelson/f4dcaedda9eea5f5cf2c359f68aa35fd
@@ -16,6 +16,8 @@ float3 rotateVector(float4 quat, float3 vec ) {
     float4 qv = multQuat( quat, float4(vec, 0.0) );
     return multQuat( qv, float4(-quat.x, -quat.y, -quat.z, quat.w) ).xyz;
 }
+
+// TODO still need these even with the displacement map ?
 
 // return a position using an origin(pos), an offset(offsets) and a rotation(rot)
 float3 GetRotatedPositions(float3 pos, float3 offsets, float4 rot)
@@ -42,6 +44,17 @@ float3 GetSphericalCartesianFromUV(float Ln, float Lat, float radius)
 		radius * cos(Lat) * sin(Ln),
 		radius * cos(Lat) * cos(Ln),
 		radius * sin(Lat));
+}
+
+float3 GetCylindricalCartesianFromUV(float2 uv, float3 origin, float radius)
+{
+    float theta = uv.x * 6.283185307179586; // 2π radians
+    float y = uv.y;
+
+    float x = radius * cos(theta);
+    float z = radius * sin(theta);
+
+    return float3(origin.x + x, origin.y + y, origin.z + z);
 }
 
 float2 GetSphericalFromCartesian(float x, float y, float z)

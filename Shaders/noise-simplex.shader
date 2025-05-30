@@ -16,7 +16,7 @@ SubShader {
 		#pragma vertex vert
 		#pragma fragment frag
 		
-		#include "noiseSimplex.cginc"
+		#include "CGINCs/noiseSimplex.cginc"
 		
 		struct v2f {
 			float4 pos : SV_POSITION;
