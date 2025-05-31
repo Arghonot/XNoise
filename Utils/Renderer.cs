@@ -16,6 +16,11 @@ namespace Xnoise
         [SerializeField] public float north = -90.0f;
         [SerializeField] public float west = -180.0f;
         [SerializeField] public float east = 180.0f;
+        [SerializeField] public float angleMin = -180.0f;   // or 0.0f
+        [SerializeField] public float angleMax = 180.0f;    // or 360.0f
+        [SerializeField] public float heightMin = -1.0f;    // bottom of the cylinder
+        [SerializeField] public float heightMax = 1.0f;     // top of the cylinder
+
         [SerializeField] public int width = 512;
         [SerializeField] public int Height = 0;
         [SerializeField] public Texture2D tex = null;
@@ -70,6 +75,10 @@ namespace Xnoise
                     west,
                     east);
             }
+            else if (projectionMode == 2)
+            {
+                map.GenerateCylindrical(Noise2D.AngleMin, Noise2D.AngleMax, Noise2D.Top, Noise2D.Bottom);
+            }
 
 
             tex = map.GetTexture();
@@ -96,11 +105,11 @@ namespace Xnoise
             }
             else if (projectionMode == 1)
             {
-                map.GenerateSpherical(
-                    south,
-                    north,
-                    west,
-                    east);
+                map.GenerateSpherical(south, north, west, east);
+            }
+            else if (projectionMode == 2)
+            {
+                map.GenerateCylindrical(angleMin, angleMax, heightMin, heightMax);
             }
 
             tex = map.GetTexture();
