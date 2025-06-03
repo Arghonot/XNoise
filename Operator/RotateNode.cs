@@ -8,24 +8,23 @@ namespace Xnoise
     public class RotateNode : LibnoiseNode
     {
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
-        public SerializableModuleBase Controller;
+        public SerializableModuleBase Input;
 
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
-        public double XAngle;
+        public double XDegrees;
 
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
-        public double YAngle;
+        public double YDegrees;
 
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
-        public double ZAngle;
+        public double ZDegrees;
 
         public override object Run()
         {
-            return new Rotate();
-                //GetInputValue<double>("XAngle", this.XAngle),
-                //GetInputValue<double>("YAngle", this.YAngle),
-                //GetInputValue<double>("ZAngle", this.ZAngle),
-                //GetInputValue<SerializableModuleBase>("Controller", this.Controller));
+            return new Rotate(GetInputValue<double>("XDegrees", this.XDegrees),
+                GetInputValue<double>("YDegrees", this.YDegrees),
+                GetInputValue<double>("ZDegrees", this.ZDegrees),
+                GetInputValue<SerializableModuleBase>("Input", this.Input));
         }
     }
 }

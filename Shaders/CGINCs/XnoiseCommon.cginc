@@ -26,11 +26,11 @@ float3 ApplyTransformOperations(float3 p, float2 uv)
     p = p + qw * t + cross(q, t);
 
     // Sample turbulence (centered around 0)
-    float4 turbulence = tex2D(_TurbulenceMap, uv).xyzw;
-    turbulence = (turbulence - 0.5) * 2.0;
+    //float4 turbulence = tex2D(_TurbulenceMap, uv).xyzw;
+    //turbulence = (turbulence - 0.5) * 2.0;
 
     // Apply turbulence
-    p += turbulence.xyz * (turbulence.w * UNIT_SCALE);
+    //p += turbulence.xyz * (turbulence.w * UNIT_SCALE);
 
     return p;
 }
