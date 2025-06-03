@@ -25,11 +25,15 @@ float ValueNoise3D(int x, int y, int z, int seed)
     return 1.0 - (ValueNoise3DInt(x, y, z, seed) / 1073741824.0);
 }
 
-float VoronoiGetValue(float x, float y, float z)
+float VoronoiGetValue(float3 position, float seed, float frequency, float distance, float displacement)
 {
-    x *= _Frequency;
-    y *= _Frequency;
-    z *= _Frequency;
+    float x = position.x;
+    float y = position.y;
+    float z = position.z;
+    
+    x *= frequency;
+    y *= frequency;
+    z *= frequency;
 
     int xInt = (x > 0.0 ? (int)x : (int)x - 1);
     int yInt = (y > 0.0 ? (int)y : (int)y - 1);
@@ -49,9 +53,9 @@ float VoronoiGetValue(float x, float y, float z)
 
                 // Calculate the position and distance to the seed point inside of
                 // this unit cube.
-                float xPos = xCur + ValueNoise3D(xCur, yCur, zCur, _Seed);
-                float yPos = yCur + ValueNoise3D(xCur, yCur, zCur, _Seed + 1);
-                float zPos = zCur + ValueNoise3D(xCur, yCur, zCur, _Seed + 2);
+                float xPos = xCur + ValueNoise3D(xCur, yCur, zCur, seed);
+                float yPos = yCur + ValueNoise3D(xCur, yCur, zCur, seed + 1);
+                float zPos = zCur + ValueNoise3D(xCur, yCur, zCur, seed + 2);
                 float xDist = xPos - x;
                 float yDist = yPos - y;
                 float zDist = zPos - z;
@@ -70,7 +74,7 @@ float VoronoiGetValue(float x, float y, float z)
     }
 
     float value;
-    if (_Distance > 0)
+    if (distance > 0)
     {
         // Determine the distance to the nearest seed point.
         float xDist = xCandidate - x;
@@ -85,11 +89,11 @@ float VoronoiGetValue(float x, float y, float z)
     }
 
     // Return the calculated distance with the displacement value applied.
-    return value + (_Displacement * (float)ValueNoise3D(
+    return value + (displacement * (float) ValueNoise3D(
         (int)(floor(xCandidate)),
         (int)(floor(yCandidate)),
         (int)(floor(zCandidate)),
-        _Seed));
+        seed));
 }
 
 #endif

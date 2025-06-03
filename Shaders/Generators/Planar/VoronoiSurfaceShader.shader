@@ -1,40 +1,36 @@
-Shader "Xnoise/Generators/PerlinSurfaceShader"
+Shader "Xnoise/Generators/VoronoiSurfaceShader"
 {
     Properties
     {
-        _Frequency("Frequency", Float) = 1
-        _Lacunarity("Lacunarity", Float) = 1
-        _Persistence("Persistence", Float) = 1
-        _Octaves("Octaves", Float) = 1
-        _Radius("Radius", Float) = 1.0
-        _OffsetPosition("Offset", Vector) = (0, 0, 0, 0)
-        _Rotation("Rotation", Vector) = (0, 0, 0, 1)
-        _DisplacementMap("Displacement Map", 2D) = "white" {}
-        _Seed("Seed", Float) = 1
+        _Permutations("Permutations", 2D) = "white" {}
+        _Frequency("Frequency", Float) = 0.0
+        _Displacement("Displacement", Float) = 0.0
+        _Distance("_Distance", Int) = 0
+        _Radius("Radius", Float) = 0.0
+        _OffsetPosition("Offset", Vector) = (0,0,0,0)
+        _Rotation("rotation", Vector) = (0, 0, 0, 1)
+        _DisplacementMap("DisplacementMap", 2D) = "white" {}
+        _Seed("Seed", Int) = 42
     }
 
     SubShader
     {
-        Tags { "RenderType"="Opaque" }
+        Tags { "RenderType" = "Opaque" }
         LOD 100
 
         CGINCLUDE
         #include "UnityCG.cginc"
-        #include "../../CGINCs/noiseSimplex.cginc"
         #include "../../CGINCs/LibnoiseUtils.cginc"
-        #include "../../CGINCs/Perlin.cginc"
+        #include "../../CGINCs/Voronoi.cginc"
 
         sampler2D _DisplacementMap;
         float4 _DisplacementMap_ST;
+        sampler2D _Permutations;
+        float4 _Permutations_ST;
 
-        float _Frequency;
-        float _Lacunarity;
-        float _Persistence;
-        float _Octaves;
-        float _Seed;
-        float4 _OffsetPosition;
-        float4 _Rotation;
-        int _Radius;
+        float _Frequency, _Displacement, _Radius;
+        int _Seed, _Distance;
+        float4 _OffsetPosition, _Rotation;
 
         struct appdata
         {
@@ -58,17 +54,19 @@ Shader "Xnoise/Generators/PerlinSurfaceShader"
 
         float4 FinalColor(float3 coord)
         {
-            float3 rotated = GetRotatedPositions(coord, _OffsetPosition, _Rotation);
-            float3 displaced = rotated + tex2D(_DisplacementMap, coord.xy).rgb;
+            _Radius = _Frequency;
 
-            float perlinVal = GetPerlin(displaced, _Seed, _Frequency, _Lacunarity, _Persistence, _Octaves);
-            float normalized = (perlinVal + 1.0) * 0.5;
+            float3 rotated = GetRotatedPositions(coord, _OffsetPosition.xyz, _Rotation);
+            float3 displaced = rotated + tex2D(_DisplacementMap, coord.xy);
+            float3 position = float3(displaced.x + _OffsetPosition.x, displaced.z + _OffsetPosition.y, displaced.y + _OffsetPosition.z);
+
+            float val = VoronoiGetValue(position, _Seed, _Frequency, _Distance, _Displacement);
+            float normalized = val * 0.5 + 0.5;
 
             return float4(normalized, normalized, normalized, 1);
         }
         ENDCG
 
-        // ---- PASS 0: PLANAR ----
         Pass
         {
             Name "PLANAR"
@@ -84,7 +82,6 @@ Shader "Xnoise/Generators/PerlinSurfaceShader"
             ENDCG
         }
 
-        // ---- PASS 1: SPHERICAL ----
         Pass
         {
             Name "SPHERICAL"
@@ -100,7 +97,6 @@ Shader "Xnoise/Generators/PerlinSurfaceShader"
             ENDCG
         }
 
-        // ---- PASS 2: CYLINDRICAL ----
         Pass
         {
             Name "CYLINDRICAL"
@@ -110,7 +106,7 @@ Shader "Xnoise/Generators/PerlinSurfaceShader"
 
             float4 frag(v2f i) : SV_Target
             {
-                float3 coord = GetCylindricalCartesianFromUV(i.uv, _OffsetPosition.xyz, _Radius);
+                float3 coord = GetCylindricalCartesianFromUV(i.uv.x, i.uv.y, _Radius);
                 return FinalColor(coord);
             }
             ENDCG
