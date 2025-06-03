@@ -8,19 +8,22 @@ namespace Xnoise
     [CreateNodeMenu("NoiseGraph/Modifier/Scale")]
     public class ScaleNode : LibnoiseNode
     {
-        [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.InheritedAny)]
-        public SerializableModuleBase input;
+        [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
+        public SerializableModuleBase Input;
 
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
-        public double x;
+        public double X;
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
-        public double y;
+        public double Y;
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
-        public double z;
+        public double Z;
 
         public override object Run()
         {
-            return new Scale(GetInputValue("x", this.x), GetInputValue("y", this.y), GetInputValue("z", this.z), GetInputValue("input", this.input));
+            return new Scale(GetInputValue<double>("X", this.X),
+                GetInputValue<double>("Y", this.Y),
+                GetInputValue<double>("Z", this.Z),
+                GetInputValue<SerializableModuleBase>("Input", this.Input));
         }
     }
 }

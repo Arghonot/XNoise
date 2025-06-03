@@ -16,6 +16,7 @@
         CGINCLUDE
         #include "UnityCG.cginc"
         #include "../CGINCs/LibnoiseUtils.cginc"
+        #include "../CGINCs/XnoiseCommon.cginc"
 
         struct appdata
         {
@@ -30,8 +31,6 @@
         };
 
         float _Frequency, _Lacunarity, _Octaves, _Persistence;
-        int _Radius;
-        float4 _OffsetPosition, _Rotation;
         sampler2D _DisplacementMap;
         float4 _DisplacementMap_ST;
 

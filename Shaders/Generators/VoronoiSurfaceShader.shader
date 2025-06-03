@@ -20,17 +20,17 @@ Shader "Xnoise/Generators/VoronoiSurfaceShader"
 
         CGINCLUDE
         #include "UnityCG.cginc"
-        #include "../../CGINCs/LibnoiseUtils.cginc"
-        #include "../../CGINCs/Voronoi.cginc"
+        #include "../CGINCs/LibnoiseUtils.cginc"
+        #include "../CGINCs/Voronoi.cginc"
+        #include "../CGINCs/XnoiseCommon.cginc"
 
         sampler2D _DisplacementMap;
         float4 _DisplacementMap_ST;
         sampler2D _Permutations;
         float4 _Permutations_ST;
 
-        float _Frequency, _Displacement, _Radius;
+        float _Frequency, _Displacement;
         int _Seed, _Distance;
-        float4 _OffsetPosition, _Rotation;
 
         struct appdata
         {

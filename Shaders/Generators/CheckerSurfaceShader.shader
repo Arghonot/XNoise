@@ -14,6 +14,7 @@
         CGINCLUDE
         #include "UnityCG.cginc"
         #include "../CGINCs/LibnoiseUtils.cginc"
+         #include "../CGINCs/XnoiseCommon.cginc"
 
         struct appdata
         {
@@ -26,9 +27,6 @@
             float2 uv : TEXCOORD0;
             float4 vertex : SV_POSITION;
         };
-
-        float _Radius;
-        float4 _OffsetPosition, _Rotation;
 
         v2f vert(appdata v)
         {

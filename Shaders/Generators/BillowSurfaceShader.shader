@@ -21,9 +21,9 @@ Shader "Xnoise/Generators/BillowSurfaceShader"
         #include "../CGINCs/noiseSimplex.cginc"
         #include "../CGINCs/LibnoiseUtils.cginc"
         #include "../CGINCs/Billow.cginc"
+        #include "../CGINCs/XnoiseCommon.cginc"
 
-        float _Seed, _Frequency, _Lacunarity, _Octaves, _Persistence, _Radius;
-        float4 _OffsetPosition, _Rotation;
+        float _Seed, _Frequency, _Lacunarity, _Octaves, _Persistence;
 
         struct appdata
         {

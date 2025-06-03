@@ -21,10 +21,10 @@ Shader "Xnoise/Generators/RidgedMultifractalSurfaceShader"
         #include "../CGINCs/noiseSimplex.cginc"
         #include "../CGINCs/LibnoiseUtils.cginc"
         #include "../CGINCs/RidgedMultifractal.cginc"
+        #include "../CGINCs/XnoiseCommon.cginc"
 
         sampler2D _DisplacementMap;
-        float _Frequency, _Lacunarity, _Octaves, _Radius;
-        float4 _OffsetPosition, _Rotation;
+        float _Frequency, _Lacunarity, _Octaves;
         int _Seed;
 
         struct appdata

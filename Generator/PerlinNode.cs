@@ -34,24 +34,6 @@ namespace Xnoise
 
         public override object Run()
         {
-            //if editing the graph -> we stick to current variables
-            //if (Application.isEditor && !Application.isPlaying)
-            //{
-            //    return new Perlin(
-            //        this.frequency,
-            //        this.lacunarity,
-            //        this.persistence,
-            //        this.Octaves,
-            //        this.Seed,
-            //        this.Quality);
-            //}
-
-            //Debug.Log("frequency " + GetInputValue<double>("frequency", this.frequency));
-            //Debug.Log("lacunarity " + GetInputValue<double>("lacunarity", this.lacunarity));
-            //Debug.Log("persistence " + GetInputValue<double>("persistence", this.persistence));
-            //Debug.Log("Octaves " + GetInputValue<int>("Octaves", this.Octaves));
-            //Debug.Log("Seed " + GetInputValue<int>("Seed", this.Seed));
-
             return new Perlin(
                 GetInputValue<double>("frequency", this.frequency),
                 GetInputValue<double>("lacunarity", this.lacunarity),
