@@ -48,7 +48,7 @@ Shader "Xnoise/Generators/BillowSurfaceShader"
         float4 BillowFragment(float3 pos)
         {
             float3 rotated = GetRotatedPositions(pos, _OffsetPosition, _Rotation);
-            float color = GetBillow(rotated, _Frequency, _Persistence, _Lacunarity, _Octaves) * 0.5 + 0.5;
+            float color = (GetBillow(rotated, _Frequency, _Persistence, _Lacunarity, _Octaves) + 1) * 0.5;
             return float4(color, color, color, 1);
         }
         ENDCG

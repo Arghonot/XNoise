@@ -61,7 +61,7 @@ Shader "Xnoise/Generators/VoronoiSurfaceShader"
             float3 position = float3(displaced.x + _OffsetPosition.x, displaced.z + _OffsetPosition.y, displaced.y + _OffsetPosition.z);
 
             float val = VoronoiGetValue(position, _Seed, _Frequency, _Distance, _Displacement);
-            float normalized = val * 0.5 + 0.5;
+            float normalized = (val + 1) * 0.5;
 
             return float4(normalized, normalized, normalized, 1);
         }
