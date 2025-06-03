@@ -18,9 +18,9 @@ Shader "Xnoise/Generators/BillowSurfaceShader"
 
         CGINCLUDE
         #include "UnityCG.cginc"
-        #include "../../CGINCs/noiseSimplex.cginc"
-        #include "../../CGINCs/LibnoiseUtils.cginc"
-        #include "../../CGINCs/Billow.cginc"
+        #include "../CGINCs/noiseSimplex.cginc"
+        #include "../CGINCs/LibnoiseUtils.cginc"
+        #include "../CGINCs/Billow.cginc"
 
         float _Seed, _Frequency, _Lacunarity, _Octaves, _Persistence, _Radius;
         float4 _OffsetPosition, _Rotation;

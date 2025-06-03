@@ -1,8 +1,6 @@
 ﻿using LibNoise.Operator;
 using LibNoise;
 using UnityEngine;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Xnoise
 {
@@ -15,8 +13,6 @@ namespace Xnoise
         public double[] controlPoints;
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
         public bool inverted;
-
-        public Material mat;
 
         public override object Run()
         {
@@ -31,8 +27,6 @@ namespace Xnoise
             {
                 terrace.Add(GetInputValue(i));
             }
-
-            mat = terrace._materialGPU;
 
             return terrace;
         }

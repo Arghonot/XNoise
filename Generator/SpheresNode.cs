@@ -18,8 +18,7 @@ namespace Xnoise
                 return new Spheres(this.frequency);
             }
 
-            return new Spheres(
-                GetInputValue<double>("frequency", this.frequency));
+            return new Spheres(GetInputValue<double>("frequency", this.frequency));
         }
     }
 }

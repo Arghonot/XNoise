@@ -18,9 +18,9 @@ Shader "Xnoise/Generators/RidgedMultifractalSurfaceShader"
 
         CGINCLUDE
         #include "UnityCG.cginc"
-        #include "../../CGINCs/noiseSimplex.cginc"
-        #include "../../CGINCs/LibnoiseUtils.cginc"
-        #include "../../CGINCs/RidgedMultifractal.cginc"
+        #include "../CGINCs/noiseSimplex.cginc"
+        #include "../CGINCs/LibnoiseUtils.cginc"
+        #include "../CGINCs/RidgedMultifractal.cginc"
 
         sampler2D _DisplacementMap;
         float _Frequency, _Lacunarity, _Octaves, _Radius;

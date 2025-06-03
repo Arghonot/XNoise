@@ -2,16 +2,10 @@
 using System.Collections.Generic;
 using LibNoise;
 using UnityEngine;
+using Xnoise;
 
 public class BinarizeModule : SerializableModuleBase
 {
-    #region Fields
-
-    private Shader _sphericalGPUShader = Shader.Find("Xnoise/Modifiers/Binarize");
-    private Material _materialGPU;
-
-    #endregion
-
     #region Constructors
 
     public BinarizeModule() : base(1)
@@ -42,11 +36,11 @@ public class BinarizeModule : SerializableModuleBase
     /// 
     public override RenderTexture GetValueGPU(GPURenderingDatas renderingDatas)
     {
-        _materialGPU = new Material(_sphericalGPUShader);
+        _materialGPU = XNoiseShaderCache.GetMaterial(XNoiseShaderPaths.Binarize);
 
         _materialGPU.SetTexture("_TextureA", Modules[0].GetValueGPU(renderingDatas));
 
-        return GetImage(_materialGPU, renderingDatas.size);
+        return GetImage(_materialGPU, renderingDatas);
     }
 
     public override double GetValueCPU(double x, double y, double z)

@@ -20,9 +20,9 @@ Shader "Xnoise/Generators/PerlinSurfaceShader"
 
         CGINCLUDE
         #include "UnityCG.cginc"
-        #include "../../CGINCs/noiseSimplex.cginc"
-        #include "../../CGINCs/LibnoiseUtils.cginc"
-        #include "../../CGINCs/Perlin.cginc"
+        #include "../CGINCs/noiseSimplex.cginc"
+        #include "../CGINCs/LibnoiseUtils.cginc"
+        #include "../CGINCs/Perlin.cginc"
 
         sampler2D _DisplacementMap;
         float4 _DisplacementMap_ST;

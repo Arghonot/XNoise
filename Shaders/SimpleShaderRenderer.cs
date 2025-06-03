@@ -22,7 +22,7 @@ namespace Xnoise
         public string PictureName = "Test";
 
         [ContextMenu("Run")]
-        public object Run()
+        public override object Run()
         {
             Stopwatch watch = new Stopwatch();
             watch.Start();
