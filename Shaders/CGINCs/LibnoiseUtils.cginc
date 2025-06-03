@@ -77,4 +77,14 @@ float2 GetUVFromSpherical(float ln, float lat)
 	return uv;
 }
 
+float Normalize(float input)
+{
+    return (input + 1) * 0.5;
+}
+
+float3 Normalize(float3 input)
+{
+    return float3(Normalize(input.x), Normalize(input.y), Normalize(input.z));
+}
+
 #endif

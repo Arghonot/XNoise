@@ -1,4 +1,4 @@
-﻿Shader "Xnoise/Generators/Const"
+﻿Shader "Xnoise/Generators/ConstSurfaceShader"
 {
     Properties
     {
