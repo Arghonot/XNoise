@@ -6,6 +6,6 @@ namespace Xnoise
         public const string Perlin= "Xnoise/Generators/PerlinSurfaceShader";
         public const string Voronoi = "Xnoise/Generators/VoronoiSurfaceShader";
         public const string Billow = "Xnoise/Generators/BillowSurfaceShader";
-        public const string RidgedMultifractal = "Xnoise/Generators/RidgedMultifractalPlanar";
+        public const string RidgedMultifractal = "Xnoise/Generators/RidgedMultifractalSurfaceShader";
     }
 }
