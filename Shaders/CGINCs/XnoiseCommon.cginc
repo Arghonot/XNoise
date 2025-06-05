@@ -1,7 +1,7 @@
 #ifndef XNOISE_COMMON_INCLUDED
 #define XNOISE_COMMON_INCLUDED
 
-#define UNIT_SCALE 1000.0
+#define UNIT_SCALE 10.0
 
 float _Radius;
 float3 _OffsetPosition;
@@ -9,6 +9,7 @@ float3 _Scale;
 float4 _Rotation;
 sampler2D _TurbulenceMap;
 float4 _TurbulenceMap_ST;
+float _TurbulencePower;
 
 float3 ApplyTransformOperations(float3 p, float2 uv)
 {
@@ -26,11 +27,11 @@ float3 ApplyTransformOperations(float3 p, float2 uv)
     p = p + qw * t + cross(q, t);
 
     // Sample turbulence (centered around 0)
-    //float4 turbulence = tex2D(_TurbulenceMap, uv).xyzw;
-    //turbulence = (turbulence - 0.5) * 2.0;
+    float4 turbulence = tex2D(_TurbulenceMap, uv).xyzw;
+    turbulence = (turbulence - 0.5) * 2.0;
 
     // Apply turbulence
-    //p += turbulence.xyz * (turbulence.w * UNIT_SCALE);
+    p = p + (turbulence.xyz * (turbulence.w * UNIT_SCALE));
 
     return p;
 }

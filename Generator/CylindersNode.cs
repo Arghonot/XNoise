@@ -15,12 +15,10 @@ namespace Xnoise
             // if editing the graph -> we stick to current variables
             if (Application.isEditor && !Application.isPlaying)
             {
-                return new Cylinders(
-                    this.frequency);
+                return new Cylinders(this.frequency);
             }
 
-            return new Cylinders(
-                GetInputValue<double>("frequency", this.frequency));
+            return new Cylinders(GetInputValue<double>("frequency", this.frequency));
         }
     }
 }

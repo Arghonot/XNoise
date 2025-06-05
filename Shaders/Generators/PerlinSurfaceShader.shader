@@ -9,8 +9,8 @@ Shader "Xnoise/Generators/PerlinSurfaceShader"
         _Radius("Radius", Float) = 1.0
         _OffsetPosition("Offset", Vector) = (0, 0, 0, 0)
         _Rotation("Rotation", Vector) = (0, 0, 0, 1)
-        _DisplacementMap("Displacement Map", 2D) = "white" {}
         _Seed("Seed", Float) = 1
+        _TurbulenceMap("Turbulence Map", 2D) = "white" {}
     }
 
     SubShader
@@ -25,8 +25,8 @@ Shader "Xnoise/Generators/PerlinSurfaceShader"
         #include "../CGINCs/Perlin.cginc"
         #include "../CGINCs/XnoiseCommon.cginc"
 
-        sampler2D _DisplacementMap;
-        float4 _DisplacementMap_ST;
+        //sampler2D _TurbulenceMap;
+        //float4 _TurbulenceMap_ST;
 
         float _Frequency;
         float _Lacunarity;
@@ -56,14 +56,11 @@ Shader "Xnoise/Generators/PerlinSurfaceShader"
 
         float4 FinalColor(float3 coord, float2 uv)
         {
-            //float3 rotated = GetRotatedPositions(coord, _OffsetPosition, _Rotation);
             float3 transformedPos = ApplyTransformOperations(coord, uv);
-            //float3 displaced = rotated + tex2D(_DisplacementMap, coord.xy).rgb;
-
             float perlinVal = GetPerlin(transformedPos, _Seed, _Frequency, _Lacunarity, _Persistence, _Octaves);
-            float normalized = (perlinVal + 1.0) * 0.5;
 
-            return float4(normalized, normalized, normalized, 1);
+            perlinVal = Normalize(perlinVal);
+            return float4(perlinVal, perlinVal, perlinVal, 1);
         }
         ENDCG
 
@@ -77,8 +74,7 @@ Shader "Xnoise/Generators/PerlinSurfaceShader"
 
             float4 frag(v2f i) : SV_Target
             {
-                float3 coord = GetPlanarCartesianFromUV(i.uv, float3(0, 0, 0));
-                return FinalColor(coord, i.uv);
+                return FinalColor(GetPlanarCartesianFromUV(i.uv, _OffsetPosition.xyz), i.uv);
             }
             ENDCG
         }
@@ -93,8 +89,7 @@ Shader "Xnoise/Generators/PerlinSurfaceShader"
 
             float4 frag(v2f i) : SV_Target
             {
-                float3 coord = GetSphericalCartesianFromUV(i.uv.x, i.uv.y, _Radius);
-                return FinalColor(coord, i.uv);
+                return FinalColor(GetSphericalCartesianFromUV(i.uv.x, i.uv.y, _Radius), i.uv);
             }
             ENDCG
         }
@@ -109,8 +104,7 @@ Shader "Xnoise/Generators/PerlinSurfaceShader"
 
             float4 frag(v2f i) : SV_Target
             {
-                float3 coord = GetCylindricalCartesianFromUV(i.uv, _OffsetPosition.xyz, _Radius);
-                return FinalColor(coord, i.uv);
+                return FinalColor(GetCylindricalCartesianFromUV(i.uv, _OffsetPosition.xyz, _Radius), i.uv);
             }
             ENDCG
         }
