@@ -9,7 +9,7 @@ Shader "Xnoise/Generators/VoronoiSurfaceShader"
         _Radius("Radius", Float) = 0.0
         _OffsetPosition("Offset", Vector) = (0,0,0,0)
         _Rotation("rotation", Vector) = (0, 0, 0, 1)
-        _DisplacementMap("DisplacementMap", 2D) = "white" {}
+        _TurbulenceMap("Turbulence Map", 2D) = "black" {}
         _Seed("Seed", Int) = 42
     }
 

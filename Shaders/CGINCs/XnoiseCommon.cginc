@@ -2,6 +2,7 @@
 #define XNOISE_COMMON_INCLUDED
 
 #define UNIT_SCALE 10.0
+#define Multiplier 100000.0
 
 float _Radius;
 float3 _OffsetPosition;
@@ -31,7 +32,7 @@ float3 ApplyTransformOperations(float3 p, float2 uv)
     turbulence = (turbulence - 0.5) * 2.0;
 
     // Apply turbulence
-    p = p + (turbulence.xyz * (turbulence.w * UNIT_SCALE));
+    p = p + (turbulence.xyz * UNIT_SCALE);
 
     return p;
 }

@@ -6,7 +6,7 @@
         _Radius("radius",Float) = 1.0
         _OffsetPosition("Offset", Vector) = (0,0,0,0)
         _Rotation("rotation", Vector) = (0, 0, 0, 1)
-        _DisplacementMap("DisplacementMap", 2D) = "white" {}
+        _TurbulenceMap("Turbulence Map", 2D) = "black" {}
     }
     SubShader
     {
@@ -55,19 +55,6 @@
             return 1.0 - (nd * 4.0);
         }
 
-        /*fixed4 frag(v2f i) : SV_Target
-        {
-            float3 pos = GetSphericalCartesianFromUV(i.uv.x, i.uv.y, _Radius);
-                
-            pos = GetRotatedPositions(pos, _OffsetPosition, _Rotation) + tex2D(_DisplacementMap, i.uv);
-
-            float color = ComputeCylinder(
-                pos.x + _OffsetPosition.x,
-                pos.y + _OffsetPosition.y,
-                pos.z + _OffsetPosition.z) / 2 + 0.5f;
-
-            return float4(color, color, color, 1);
-        }*/
         ENDCG
         Pass
         {

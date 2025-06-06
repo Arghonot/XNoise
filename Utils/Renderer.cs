@@ -3,6 +3,7 @@ using System.Diagnostics;
 using UnityEngine;
 using XNode;
 using System.IO;
+using System;
 
 namespace Xnoise
 {
@@ -10,6 +11,7 @@ namespace Xnoise
     [NodeTint(Graph.ColorProfile.Debug)]
     public class Renderer : Node
     {
+        public static int index = 0;
         string DataPath = "/";
         [SerializeField] public string PictureName = "Test";
         [SerializeField] public float south = 90.0f;
@@ -90,6 +92,7 @@ namespace Xnoise
 
         public void RenderGPU()
         {
+            index = 0;
             Stopwatch watch = new Stopwatch();
             watch.Start();
 
@@ -122,9 +125,7 @@ namespace Xnoise
         {
             if (tex == null) return;
 
-            UnityEngine.Debug.Log(Application.dataPath + DataPath + PictureName + ".png");
-
-            File.WriteAllBytes(Application.dataPath + DataPath + PictureName + ".png", tex.EncodeToPNG());
+            ImageFileHelpers.SaveToPng(tex, DataPath, PictureName);
         }
     }
 }    

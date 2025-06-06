@@ -6,6 +6,7 @@
         _Radius("radius",Float) = 1.0
         _OffsetPosition("Offset", Vector) = (0,0,0,0)
         _Rotation("rotation", Vector) = (0, 0, 0, 1)
+        _TurbulenceMap("Turbulence Map", 2D) = "black" {}
     }
     SubShader
     {

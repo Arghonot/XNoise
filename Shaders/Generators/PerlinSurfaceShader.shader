@@ -10,7 +10,7 @@ Shader "Xnoise/Generators/PerlinSurfaceShader"
         _OffsetPosition("Offset", Vector) = (0, 0, 0, 0)
         _Rotation("Rotation", Vector) = (0, 0, 0, 1)
         _Seed("Seed", Float) = 1
-        _TurbulenceMap("Turbulence Map", 2D) = "white" {}
+        _TurbulenceMap("Turbulence Map", 2D) = "black" {}
     }
 
     SubShader

@@ -2,9 +2,10 @@
 {
     Properties
     {
-        _TextureA("TextureA", 2D) = "white" {}
-        _TextureB("TextureB", 2D) = "white" {}
-        _TextureC("TextureC", 2D) = "white" {}
+        _OriginalDisplacementMap("Original Displacement Map", 2D) = "black" {}
+        _TextureA("TextureA", 2D) = "black" {}
+        _TextureB("TextureB", 2D) = "black" {}
+        _TextureC("TextureC", 2D) = "black" {}
     }
         SubShader
         {
@@ -19,6 +20,7 @@
 
                 #include "UnityCG.cginc"
                 #include "../CGINCs/LibnoiseUtils.cginc"
+                #include "../CGINCs/XnoiseCommon.cginc"
 
                 struct appdata
                 {
@@ -32,6 +34,8 @@
                     float4 vertex : SV_POSITION;
                 };
 
+                sampler2D _OriginalDisplacementMap;
+                float4 _OriginalDisplacementMap_ST;
                 sampler2D _TextureA;
                 float4 _TextureA_ST;
                 sampler2D _TextureB;
@@ -54,21 +58,21 @@
                     return 0.21 * sample.r + 0.71 * sample.g + 0.07 * sample.b;
                 }
 
-                float3 GetDisplace(float2 uv1)
+                float4 GetDisplace(float2 uv1)
                 {
                     float x = getColorGrayscale(tex2D(_TextureA, uv1));
                     float y = getColorGrayscale(tex2D(_TextureB, uv1));
                     float z = getColorGrayscale(tex2D(_TextureC, uv1));
 
-                    return float3(x, y, z);
+                    return float4(x, y, z, 1);
                 }
 
                 fixed4 frag(v2f i) : SV_Target
                 {
-                    float3 color = GetDisplace(
-                            i.uv);
+                    float4 color = GetDisplace(i.uv) / UNIT_SCALE;
+                    float4 originalColor = tex2D(_OriginalDisplacementMap, i.uv);
 
-                    return float4(color.x, color.y, color.z, 1);
+                    return float4(originalColor.x + color.x, originalColor.y + color.y, originalColor.z + color.z, originalColor.w + color.w);
                 }
                 ENDCG
             }
