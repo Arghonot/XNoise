@@ -21,7 +21,7 @@ namespace Xnoise
         public const string Subtract = "Xnoise/Combiners/Subtract";
         public const string ScaleBias = "Xnoise/Modifiers/ScaleBias";
         public const string Power = "Xnoise/Combiners/Power";
-        public const string Curve = "Xnoise/Modifier/Curve";
+        public const string Curve = "Xnoise/Modifiers/Curve";
         public const string Multiply = "Xnoise/Combiners/Multiply";
         public const string Min = "Xnoise/Combiners/Min";
         public const string Exponent = "Xnoise/Modifiers/Exponent";

@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Generic
-  m_Shader: {fileID: 4800000, guid: 8842a821fee843949a7d998369691aca, type: 3}
+  m_Shader: {fileID: 4800000, guid: a0ad2d13666ce1846a0af31e79772cfe, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -89,15 +89,15 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _TextureA:
-        m_Texture: {fileID: 2800000, guid: a016d0adb607d1041a35e8ece40bedfc, type: 3}
+        m_Texture: {fileID: 2800000, guid: 84bb8f5d3d7fb8a44919259ae69d890a, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _TextureB:
-        m_Texture: {fileID: 2800000, guid: 9153785e27693f042891b811b56d7d95, type: 3}
+        m_Texture: {fileID: 2800000, guid: ba25cb2ff028fa24fbf41e58a0c9fee5, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _TextureC:
-        m_Texture: {fileID: 2800000, guid: aa83dbf6126991b429a12f3098fd63de, type: 3}
+        m_Texture: {fileID: 2800000, guid: 1c30f92290bdd434cb128e8d9c2acca4, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _TurbulenceMap:
@@ -134,6 +134,7 @@ Material:
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
     - _Exponent: 2
+    - _FallOff: 2
     - _Frequency: 2
     - _GlossMapScale: 0
     - _Glossiness: 0
