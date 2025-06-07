@@ -48,7 +48,10 @@
 
             float GetClamp(float value)
             {
-                return clamp(value * 2 - 1, _Minimum, _Maximum);
+                if (value < _Minimum) return _Minimum;
+                if (value > _Maximum) return _Maximum;
+                return value;
+                //return clamp(value * 2 - 1, _Minimum, _Maximum);
             }
 
             fixed4 frag(v2f i) : SV_Target

@@ -50,7 +50,7 @@
 
             fixed4 frag(v2f i) : SV_Target
             {
-                float color = (GetValueAbs(tex2D(_TextureA, i.uv)) + 1.0) / 2.0;
+                float color = GetValueAbs(tex2D(_TextureA, i.uv));
 
                 return float4(color, color, color, 1);
             }

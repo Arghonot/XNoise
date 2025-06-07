@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Generic
-  m_Shader: {fileID: 4800000, guid: 19646584dcc62084ca1f6271d40e2343, type: 3}
+  m_Shader: {fileID: 4800000, guid: 8ba3d4176872178408e90c76319bb9c6, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -89,11 +89,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _TextureA:
-        m_Texture: {fileID: 2800000, guid: 553c22b442c423e47932adbe884273d5, type: 3}
+        m_Texture: {fileID: 2800000, guid: 27adf0d44a69cc645941a4702d7cb7b1, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _TextureB:
-        m_Texture: {fileID: 2800000, guid: eec3c9015ec0e5d4bbd3516131e957ce, type: 3}
+        m_Texture: {fileID: 2800000, guid: c5f757afaf889d6459be6a8a63135021, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _TextureC:
@@ -138,7 +138,9 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Lacunarity: 2
+    - _Maximum: 0.9
     - _Metallic: 0
+    - _Minimum: 0.1
     - _OcclusionStrength: 1
     - _Octaves: 4
     - _Parallax: 0.005

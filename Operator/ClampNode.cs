@@ -18,20 +18,10 @@ namespace Xnoise
 
         public override object Run()
         {
-            Clamp clamp = new Clamp(
-                GetInputValue<SerializableModuleBase>(
-                    "Input",
-                    this.Input));
+            Clamp clamp = new Clamp(GetInputValue<SerializableModuleBase>("Input", this.Input));
 
-            clamp.Maximum =
-                GetInputValue<double>(
-                    "Minimum",
-                    this.Minimum);
-            clamp.Maximum =
-                GetInputValue<double>(
-                    "Maximum",
-                    this.Maximum);
-
+            clamp.Minimum = GetInputValue<double>("Minimum", this.Minimum);
+            clamp.Maximum = GetInputValue<double>("Maximum", this.Maximum);
             return clamp;
         }
     }

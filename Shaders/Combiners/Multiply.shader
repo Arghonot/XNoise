@@ -54,7 +54,7 @@
                 float a = tex2D(_TextureA, i.uv1);
                 float b = tex2D(_TextureB, i.uv2);
 
-                float color = (a * b) / 2.0;
+                float color = (a * b);
 
                 return float4(color, color, color, 1);
             }
