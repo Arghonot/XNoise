@@ -49,11 +49,9 @@
 
             fixed4 frag (v2f i) : SV_Target
             {
-                float a = (tex2D(_TextureA, i.uv1) * 2) - 1;
-                float b = (tex2D(_TextureB, i.uv2) * 2) - 1;
-                float color = ((b - a) + 1) / 2;
-
-                //float color = (tex2D(_TextureB, i.uv2) - tex2D(_TextureA, i.uv1));
+                float a = tex2D(_TextureA, i.uv1);
+                float b = tex2D(_TextureB, i.uv2);
+                float color = clamp(a.x - b.x, 0, 1);
 
                 return float4(color, color, color, 1);
             }
