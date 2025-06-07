@@ -9,11 +9,15 @@ namespace Xnoise
     {
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
         public SerializableModuleBase Input;
+        [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
+        public double exponent;
 
         public override object Run()
         {
-            return new Exponent(
-                GetInputValue<SerializableModuleBase>("Input", this.Input));
+            var exp = new Exponent(GetInputValue<SerializableModuleBase>("Input", this.Input));
+
+            exp.Value = GetInputValue<double>("exponent", this.exponent);
+            return exp;
         }
     }
 }

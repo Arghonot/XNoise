@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Generic
-  m_Shader: {fileID: 4800000, guid: b61dd270047ff054ab24c956af4c2a9b, type: 3}
+  m_Shader: {fileID: 4800000, guid: 8842a821fee843949a7d998369691aca, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -89,11 +89,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _TextureA:
-        m_Texture: {fileID: 2800000, guid: f76e9584264fa6c4a9b4a8e8fb792a1d, type: 3}
+        m_Texture: {fileID: 2800000, guid: a016d0adb607d1041a35e8ece40bedfc, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _TextureB:
-        m_Texture: {fileID: 2800000, guid: bd995dc124cdb7443a0e7da3a7814dc1, type: 3}
+        m_Texture: {fileID: 2800000, guid: 9153785e27693f042891b811b56d7d95, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _TextureC:
@@ -133,6 +133,7 @@ Material:
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
+    - _Exponent: 2
     - _Frequency: 2
     - _GlossMapScale: 0
     - _Glossiness: 0

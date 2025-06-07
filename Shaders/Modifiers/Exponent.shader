@@ -3,6 +3,7 @@
     Properties
     {
         _TextureA("TextureA", 2D) = "white" {}
+        _Exponent("Exponent", Float) = 1.0
     }
         SubShader
     {
@@ -31,6 +32,7 @@
 
             sampler2D _TextureA;
             float4 _TextureA_ST;
+            float _Exponent;
 
             v2f vert(appdata v)
             {
@@ -45,7 +47,7 @@
 
             float GetValueExponent(float value)
             {
-                return exp(value * 2 - 1);
+                return pow(value, _Exponent);
             }
 
             fixed4 frag(v2f i) : SV_Target
