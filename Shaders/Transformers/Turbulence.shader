@@ -2,9 +2,10 @@
 {
     Properties
     {
-        _PerlinA("PerlinA", 2D) = "white" {}
-        _PerlinB("PerlinB", 2D) = "white" {}
-        _PerlinC("PerlinC", 2D) = "white" {}
+        _OriginalDisplacementMap("Original Displacement Map", 2D) = "black" {}
+        _PerlinA("PerlinA", 2D) = "black" {}
+        _PerlinB("PerlinB", 2D) = "black" {}
+        _PerlinC("PerlinC", 2D) = "black" {}
         _Power("Power", Float) = 1
     }
         SubShader
@@ -24,16 +25,17 @@
                 struct appdata
                 {
                     float4 vertex : POSITION;
-                    float2 uv1 : TEXCOORD0;
+                    float2 uv : TEXCOORD0;
                 };
 
                 struct v2f
                 {
-                    float2 uv1 : TEXCOORD0;
+                    float2 uv : TEXCOORD0;
                     float4 vertex : SV_POSITION;
                 };
 
                 float _Power;
+                sampler2D _OriginalDisplacementMap;
                 sampler2D _PerlinA;
                 float4 _PerlinA_ST;
                 sampler2D _PerlinB;
@@ -46,18 +48,20 @@
                     v2f o;
 
                     o.vertex = UnityObjectToClipPos(v.vertex);
-                    o.uv1 = TRANSFORM_TEX(v.uv1, _PerlinA);
+                    o.uv = v.uv;
 
                     return o;
                 }
 
-                fixed4 frag(v2f i) : SV_Target
+                float4 frag(v2f i) : SV_Target
                 {
-                    float xd = tex2D(_PerlinA, i.uv1);
-                    float yd = tex2D(_PerlinB, i.uv1);
-                    float zd = tex2D(_PerlinC, i.uv1);
+                    float xd = tex2D(_PerlinA, i.uv);
+                    float yd = tex2D(_PerlinB, i.uv);
+                    float zd = tex2D(_PerlinC, i.uv);
+                    float4 originalDisplacement = tex2D(_OriginalDisplacementMap, i.uv);
 
-                    return fixed4(xd, yd, zd, _Power / UNIT_SCALE);
+                    return originalDisplacement + ((float4(xd, yd, zd, 1) * _Power) / UNIT_SCALE);
+                    //return fixed4(xd, yd, zd, _Power / UNIT_SCALE);
                 }
                 ENDCG
             }

@@ -69,13 +69,12 @@
                     return float4(x, y, z, 1);
                 }
 
-                fixed4 frag(v2f i) : SV_Target
+                float4 frag(v2f i) : SV_Target
                 {
                     float4 color = (GetDisplace(i.uv) * _Influence) / UNIT_SCALE;
                     float4 originalColor = tex2D(_OriginalDisplacementMap, i.uv);
 
                     return originalColor + color;
-                    //return float4(originalColor.x + color.x, originalColor.y + color.y, originalColor.z + color.z, originalColor.w + color.w);
                 }
                 ENDCG
             }
