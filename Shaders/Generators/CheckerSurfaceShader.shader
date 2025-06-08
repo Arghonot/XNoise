@@ -36,13 +36,11 @@
             return o;
         }
 
-        float ComputeChecker(float x, float y, float z, float2 uv)
+        float ComputeChecker(float x, float y, float z)
         {
-            float3 transformedPos = ApplyTransformOperations(float3(x, y, z), uv);
-
-            int ix = (int)(floor(transformedPos.x));
-            int iy = (int)(floor(transformedPos.y));
-            int iz = (int)(floor(transformedPos.z));
+            int ix = (int)(floor(x));
+            int iy = (int)(floor(y));
+            int iz = (int)(floor(z));
 
             return (ix & 1 ^ iy & 1 ^ iz & 1) != 0 ? -1.0 : 1.0;
         }
@@ -57,8 +55,10 @@
 
             float4 frag_Planar(v2f i) : SV_Target
             {
-                float3 coord = GetPlanarCartesianFromUV(i.uv, _OffsetPosition.xyz + 1) * 2;
-                float sphereValue = Normalize(ComputeChecker(coord.x, coord.y, coord.z, i.uv));
+                float3 coord = GetPlanarCartesianFromUV(i.uv, _OffsetPosition) * 2;
+                float3 transformedPos = ApplyTransformOperations(coord, i.uv);
+                float sphereValue = Normalize(ComputeChecker(coord.x, coord.y, coord.z));
+
                 return float4(sphereValue, sphereValue, sphereValue, 1);
             }
             ENDCG
@@ -75,7 +75,9 @@
             {
                 float3 coord = GetSphericalCartesianFromUV(i.uv, _Radius);
                 coord += float3(10.0, 0.0, 0.0);
-                float sphereValue = Normalize(ComputeChecker(coord.x, coord.y, coord.z, i.uv));
+                float3 transformedPos = ApplyTransformOperations(coord, i.uv);
+
+                float sphereValue = Normalize(ComputeChecker(transformedPos.x, transformedPos.y, transformedPos.z));
                 return float4(sphereValue, sphereValue, sphereValue, 1);
             }
             ENDCG
@@ -91,7 +93,7 @@
             float4 frag_Cylindrical(v2f i) : SV_Target
             {
                 float3 coord = GetCylindricalCartesianFromUV(i.uv, _OffsetPosition.xyz, _Radius);
-                float sphereValue = Normalize(ComputeChecker(coord.x, coord.y, coord.z, i.uv));
+                float sphereValue = Normalize(ComputeChecker(coord.x, coord.y, coord.z));
                 return float4(sphereValue, sphereValue, sphereValue, 1);
             }
             ENDCG
