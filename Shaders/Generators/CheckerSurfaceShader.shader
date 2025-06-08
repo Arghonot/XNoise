@@ -36,7 +36,7 @@
             return o;
         }
 
-        float ComputeChecker(float x, float y, float z)
+        float GetColor(float x, float y, float z)
         {
             int ix = (int)(floor(x));
             int iy = (int)(floor(y));
@@ -44,11 +44,11 @@
 
             return (ix & 1 ^ iy & 1 ^ iz & 1) != 0 ? -1.0 : 1.0;
         }
-
         ENDCG
         Pass
         {
             Name "PLANAR"
+            Tags { "Projection" = "Planar" }
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag_Planar
@@ -57,16 +57,16 @@
             {
                 float3 coord = GetPlanarCartesianFromUV(i.uv, _OffsetPosition) * 2;
                 float3 transformedPos = ApplyTransformOperations(coord, i.uv);
-                float sphereValue = Normalize(ComputeChecker(coord.x, coord.y, coord.z));
+                float sphereValue = Normalize(GetColor(coord.x, coord.y, coord.z));
 
                 return float4(sphereValue, sphereValue, sphereValue, 1);
             }
             ENDCG
         }
-
         Pass
         {
             Name "SPHERICAL"
+            Tags { "Projection" = "Spherical" }
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag_Spherical
@@ -77,15 +77,15 @@
                 coord += float3(10.0, 0.0, 0.0);
                 float3 transformedPos = ApplyTransformOperations(coord, i.uv);
 
-                float sphereValue = Normalize(ComputeChecker(transformedPos.x, transformedPos.y, transformedPos.z));
+                float sphereValue = Normalize(GetColor(transformedPos.x, transformedPos.y, transformedPos.z));
                 return float4(sphereValue, sphereValue, sphereValue, 1);
             }
             ENDCG
         }
-
         Pass
         {
             Name "CYLINDRICAL"
+            Tags { "Projection" = "Cylindrical" }
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag_Cylindrical
@@ -93,7 +93,7 @@
             float4 frag_Cylindrical(v2f i) : SV_Target
             {
                 float3 coord = GetCylindricalCartesianFromUV(i.uv, _OffsetPosition.xyz, _Radius);
-                float sphereValue = Normalize(ComputeChecker(coord.x, coord.y, coord.z));
+                float sphereValue = Normalize(GetColor(coord.x, coord.y, coord.z));
                 return float4(sphereValue, sphereValue, sphereValue, 1);
             }
             ENDCG

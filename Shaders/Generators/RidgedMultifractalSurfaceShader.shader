@@ -23,7 +23,6 @@ Shader "Xnoise/Generators/RidgedMultifractalSurfaceShader"
         #include "../CGINCs/RidgedMultifractal.cginc"
         #include "../CGINCs/XnoiseCommon.cginc"
 
-        sampler2D _DisplacementMap;
         float _Frequency, _Lacunarity, _Octaves;
         int _Seed;
 
@@ -47,11 +46,9 @@ Shader "Xnoise/Generators/RidgedMultifractalSurfaceShader"
             return o;
         }
 
-        float4 ComputeRidged(float3 coord)
+        float4 GetColor(float3 coord)
         {
-            float3 rotated = GetRotatedPositions(coord, _OffsetPosition, _Rotation);
-            float3 displaced = rotated + tex2D(_DisplacementMap, coord.xy).rgb;
-            float value = GetRidgedMultifractal(displaced, _Frequency, _Lacunarity, _Octaves);
+            float value = GetRidgedMultifractal(coord, _Frequency, _Lacunarity, _Octaves);
             float normalized = (value + 1.0) * 0.5;
             return float4(normalized, normalized, normalized, 1);
         }
@@ -60,14 +57,14 @@ Shader "Xnoise/Generators/RidgedMultifractalSurfaceShader"
         Pass
         {
             Name "PLANAR"
+            Tags { "Projection" = "Planar" }
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag_planar
 
             float4 frag_planar(v2f i) : SV_Target
             {
-                //float3 coord = GetPlanarCartesianFromUV(i.uv, _OffsetPosition.xyz);
-                return ComputeRidged(GetPointPlanarFromUV(i.uv));
+                return GetColor(GetPointPlanarFromUV(i.uv));
             }
         ENDCG
         }
@@ -75,14 +72,14 @@ Shader "Xnoise/Generators/RidgedMultifractalSurfaceShader"
         Pass
         {
             Name "SPHERICAL"
+            Tags { "Projection" = "Spherical" }
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag_spherical
 
             float4 frag_spherical(v2f i) : SV_Target
             {
-                //float3 coord = GetSphericalCartesianFromUV(i.uv, _Radius);
-                return ComputeRidged(GetPointSphericalFromUV(i.uv));
+                return GetColor(GetPointSphericalFromUV(i.uv));
             }
             ENDCG
         }
@@ -90,14 +87,14 @@ Shader "Xnoise/Generators/RidgedMultifractalSurfaceShader"
         Pass
         {
             Name "CYLINDRICAL"
+            Tags { "Projection" = "Cylindrical" }
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag_cylindrical
 
             float4 frag_cylindrical(v2f i) : SV_Target
             {
-                //float3 coord = GetCylindricalCartesianFromUV(i.uv.x, i.uv.y, _Radius);
-                return ComputeRidged(GetPointCylindricalFromUV(i.uv));
+                return GetColor(GetPointCylindricalFromUV(i.uv));
             }
             ENDCG
         }

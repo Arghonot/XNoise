@@ -51,7 +51,7 @@ Shader "Xnoise/Generators/PerlinSurfaceShader"
             return o;
         }
 
-        float4 PerlinFragment(float3 coord)
+        float4 GetColor(float3 coord)
         {
             float color = GetPerlin(coord, _Seed, _Frequency, _Lacunarity, _Persistence, _Octaves);
 
@@ -59,48 +59,45 @@ Shader "Xnoise/Generators/PerlinSurfaceShader"
             return float4(color, color, color, 1);
         }
         ENDCG
-
-        // ---- PASS 0: PLANAR ----
         Pass
         {
             Name "PLANAR"
+            Tags { "Projection" = "Planar" }
             CGPROGRAM
             #pragma vertex vert
-            #pragma fragment frag
+            #pragma fragment frag_planar
 
-            float4 frag(v2f i) : SV_Target
+            float4 frag_planar(v2f i) : SV_Target
             {
-                return PerlinFragment(GetPointPlanarFromUV(i.uv));
+                return GetColor(GetPointPlanarFromUV(i.uv));
             }
             ENDCG
         }
-
-        // ---- PASS 1: SPHERICAL ----
         Pass
         {
             Name "SPHERICAL"
+            Tags { "Projection" = "Spherical" }
             CGPROGRAM
             #pragma vertex vert
-            #pragma fragment frag
+            #pragma fragment frag_spherical
 
-            float4 frag(v2f i) : SV_Target
+            float4 frag_spherical(v2f i) : SV_Target
             {
-                return PerlinFragment(GetPointSphericalFromUV(i.uv));
+                return GetColor(GetPointSphericalFromUV(i.uv));
             }
             ENDCG
         }
-
-        // ---- PASS 2: CYLINDRICAL ----
         Pass
         {
             Name "CYLINDRICAL"
+            Tags { "Projection" = "Cylindrical" }
             CGPROGRAM
             #pragma vertex vert
-            #pragma fragment frag
+            #pragma fragment frag_cylindrical
 
-            float4 frag(v2f i) : SV_Target
+            float4 frag_cylindrical(v2f i) : SV_Target
             {
-                return PerlinFragment(GetPointCylindricalFromUV(i.uv));
+                return GetColor(GetPointCylindricalFromUV(i.uv));
             }
             ENDCG
         }

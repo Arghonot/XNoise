@@ -24,11 +24,7 @@ Shader "Xnoise/Generators/VoronoiSurfaceShader"
         #include "../CGINCs/Voronoi.cginc"
         #include "../CGINCs/XnoiseCommon.cginc"
 
-        sampler2D _DisplacementMap;
-        float4 _DisplacementMap_ST;
         sampler2D _Permutations;
-        float4 _Permutations_ST;
-
         float _Frequency, _Displacement;
         int _Seed, _Distance;
 
@@ -52,15 +48,10 @@ Shader "Xnoise/Generators/VoronoiSurfaceShader"
             return o;
         }
 
-        float4 FinalColor(float3 coord)
+        float4 GetColor(float3 coord)
         {
             _Radius = _Frequency;
-
-            float3 rotated = GetRotatedPositions(coord, _OffsetPosition.xyz, _Rotation);
-            float3 displaced = rotated + tex2D(_DisplacementMap, coord.xy);
-            float3 position = float3(displaced.x + _OffsetPosition.x, displaced.z + _OffsetPosition.y, displaced.y + _OffsetPosition.z);
-
-            float val = VoronoiGetValue(position, _Seed, _Frequency, _Distance, _Displacement);
+            float val = VoronoiGetValue(coord, _Seed, _Frequency, _Distance, _Displacement);
             float normalized = (val + 1) * 0.5;
 
             return float4(normalized, normalized, normalized, 1);
@@ -70,14 +61,14 @@ Shader "Xnoise/Generators/VoronoiSurfaceShader"
         Pass
         {
             Name "PLANAR"
+            Tags { "Projection" = "Planar" }
             CGPROGRAM
             #pragma vertex vert
-            #pragma fragment frag
+            #pragma fragment frag_planar
 
-            float4 frag(v2f i) : SV_Target
+            float4 frag_planar(v2f i) : SV_Target
             {
-                float3 coord = GetPlanarCartesianFromUV(i.uv, _OffsetPosition.xyz);
-                return FinalColor(coord);
+                return GetColor(GetPointPlanarFromUV(i.uv));
             }
             ENDCG
         }
@@ -85,14 +76,14 @@ Shader "Xnoise/Generators/VoronoiSurfaceShader"
         Pass
         {
             Name "SPHERICAL"
+            Tags { "Projection" = "Spherical" }
             CGPROGRAM
             #pragma vertex vert
-            #pragma fragment frag
+            #pragma fragment frag_spherical
 
-            float4 frag(v2f i) : SV_Target
+            float4 frag_spherical(v2f i) : SV_Target
             {
-                float3 coord = GetSphericalCartesianFromUV(i.uv, _Radius);
-                return FinalColor(coord);
+                return GetColor(GetPointSphericalFromUV(i.uv));
             }
             ENDCG
         }
@@ -100,14 +91,14 @@ Shader "Xnoise/Generators/VoronoiSurfaceShader"
         Pass
         {
             Name "CYLINDRICAL"
+            Tags { "Projection" = "Cylindrical" }
             CGPROGRAM
             #pragma vertex vert
-            #pragma fragment frag
+            #pragma fragment frag_cylindrical
 
-            float4 frag(v2f i) : SV_Target
+            float4 frag_cylindrical(v2f i) : SV_Target
             {
-                float3 coord = GetCylindricalCartesianFromUV(i.uv.x, i.uv.y, _Radius);
-                return FinalColor(coord);
+                return GetColor(GetPointCylindricalFromUV(i.uv));
             }
             ENDCG
         }

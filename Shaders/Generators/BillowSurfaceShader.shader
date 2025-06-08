@@ -46,7 +46,7 @@ Shader "Xnoise/Generators/BillowSurfaceShader"
             return o;
         }
 
-        float4 BillowFragment(float3 pos)
+        float4 GetColor(float3 pos)
         {
             float color = GetBillow(pos, _Frequency, _Persistence, _Lacunarity, _Octaves);
 
@@ -54,54 +54,45 @@ Shader "Xnoise/Generators/BillowSurfaceShader"
             return float4(color, color, color, 1);
         }
         ENDCG
-
-        // PLANAR
         Pass
         {
             Name "PLANAR"
             Tags { "Projection" = "Planar" }
-
             CGPROGRAM
             #pragma vertex vert
-            #pragma fragment frag
+            #pragma fragment frag_planar
 
-            float4 frag(v2f i) : SV_Target
+            float4 frag_planar(v2f i) : SV_Target
             {
-                return BillowFragment(GetPointPlanarFromUV(i.uv));
+                return GetColor(GetPointPlanarFromUV(i.uv));
             }
             ENDCG
         }
-
-        // SPHERICAL
         Pass
         {
             Name "SPHERICAL"
             Tags { "Projection" = "Spherical" }
-
             CGPROGRAM
             #pragma vertex vert
-            #pragma fragment frag
+            #pragma fragment frag_spherical
 
-            float4 frag(v2f i) : SV_Target
+            float4 frag_spherical(v2f i) : SV_Target
             {
-                return BillowFragment(GetPointSphericalFromUV(i.uv));
+                return GetColor(GetPointSphericalFromUV(i.uv));
             }
             ENDCG
         }
-
-        // CYLINDRICAL
         Pass
         {
             Name "CYLINDRICAL"
             Tags { "Projection" = "Cylindrical" }
-
             CGPROGRAM
             #pragma vertex vert
-            #pragma fragment frag
+            #pragma fragment frag_cylindrical
 
-            float4 frag(v2f i) : SV_Target
+            float4 frag_cylindrical(v2f i) : SV_Target
             {
-                return BillowFragment(GetPointCylindricalFromUV(i.uv));
+                return GetColor(GetPointCylindricalFromUV(i.uv));
             }
             ENDCG
         }
