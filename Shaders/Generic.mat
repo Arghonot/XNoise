@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Generic
-  m_Shader: {fileID: 4800000, guid: a0ad2d13666ce1846a0af31e79772cfe, type: 3}
+  m_Shader: {fileID: 4800000, guid: 1fb464fe9888c174f988e5e32294c7a6, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -65,7 +65,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OriginalDisplacementMap:
-        m_Texture: {fileID: 2800000, guid: 8248669589cab8e46ba3db4366514ead, type: 3}
+        m_Texture: {fileID: 2800000, guid: 9d365216898e3ff4aae758dc757a2144, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ParallaxMap:
@@ -89,15 +89,15 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _TextureA:
-        m_Texture: {fileID: 2800000, guid: 84bb8f5d3d7fb8a44919259ae69d890a, type: 3}
+        m_Texture: {fileID: 2800000, guid: 0a14dc24b4d87d84ca8434fb1f58030d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _TextureB:
-        m_Texture: {fileID: 2800000, guid: ba25cb2ff028fa24fbf41e58a0c9fee5, type: 3}
+        m_Texture: {fileID: 2800000, guid: 719a6353b47d4154e8cd1053d0c03aba, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _TextureC:
-        m_Texture: {fileID: 2800000, guid: 1c30f92290bdd434cb128e8d9c2acca4, type: 3}
+        m_Texture: {fileID: 2800000, guid: 9d365216898e3ff4aae758dc757a2144, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _TurbulenceMap:
@@ -152,6 +152,8 @@ Material:
     - _Radius: 1
     - _ReceiveShadows: 1
     - _Seed: 8.66
+    - _SelectLowerBound: 1
+    - _SelectUpperBound: 1
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1

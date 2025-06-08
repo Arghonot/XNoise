@@ -6,6 +6,7 @@
         _TextureA("TextureA", 2D) = "black" {}
         _TextureB("TextureB", 2D) = "black" {}
         _TextureC("TextureC", 2D) = "black" {}
+        _Influence("Influence", Float) = 1
     }
         SubShader
         {
@@ -42,6 +43,7 @@
                 float4 _TextureB_ST;
                 sampler2D _TextureC;
                 float4 _TextureC_ST;
+                float _Influence;
 
                 v2f vert(appdata v)
                 {
@@ -69,10 +71,11 @@
 
                 fixed4 frag(v2f i) : SV_Target
                 {
-                    float4 color = GetDisplace(i.uv) / UNIT_SCALE;
+                    float4 color = (GetDisplace(i.uv) * _Influence) / UNIT_SCALE;
                     float4 originalColor = tex2D(_OriginalDisplacementMap, i.uv);
 
-                    return float4(originalColor.x + color.x, originalColor.y + color.y, originalColor.z + color.z, originalColor.w + color.w);
+                    return originalColor + color;
+                    //return float4(originalColor.x + color.x, originalColor.y + color.y, originalColor.z + color.z, originalColor.w + color.w);
                 }
                 ENDCG
             }

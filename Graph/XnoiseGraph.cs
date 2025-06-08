@@ -3,11 +3,6 @@ using System.Linq;
 using UnityEngine;
 using LibNoise;
 using System;
-using NUnit.Framework.Internal;
-using static UnityEngine.XR.XRDisplaySubsystem;
-using System.Diagnostics;
-using UnityEditor.Experimental.GraphView;
-using Unity.VisualScripting;
 
 namespace Xnoise
 {
