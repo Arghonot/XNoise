@@ -66,8 +66,8 @@ Shader "Xnoise/Generators/RidgedMultifractalSurfaceShader"
 
             float4 frag_planar(v2f i) : SV_Target
             {
-                float3 coord = GetPlanarCartesianFromUV(i.uv, _OffsetPosition.xyz);
-                return ComputeRidged(coord);
+                //float3 coord = GetPlanarCartesianFromUV(i.uv, _OffsetPosition.xyz);
+                return ComputeRidged(GetPointPlanarFromUV(i.uv));
             }
         ENDCG
         }
@@ -81,8 +81,8 @@ Shader "Xnoise/Generators/RidgedMultifractalSurfaceShader"
 
             float4 frag_spherical(v2f i) : SV_Target
             {
-                float3 coord = GetSphericalCartesianFromUV(i.uv, _Radius);
-                return ComputeRidged(coord);
+                //float3 coord = GetSphericalCartesianFromUV(i.uv, _Radius);
+                return ComputeRidged(GetPointSphericalFromUV(i.uv));
             }
             ENDCG
         }
@@ -96,8 +96,8 @@ Shader "Xnoise/Generators/RidgedMultifractalSurfaceShader"
 
             float4 frag_cylindrical(v2f i) : SV_Target
             {
-                float3 coord = GetCylindricalCartesianFromUV(i.uv.x, i.uv.y, _Radius);
-                return ComputeRidged(coord);
+                //float3 coord = GetCylindricalCartesianFromUV(i.uv.x, i.uv.y, _Radius);
+                return ComputeRidged(GetPointCylindricalFromUV(i.uv));
             }
             ENDCG
         }
