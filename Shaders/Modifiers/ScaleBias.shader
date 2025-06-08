@@ -47,16 +47,14 @@
             }
 
 
-            float getValueScaleBias(float value)
+            float GetValueScaleBias(float value)
             {
                 return value * _Scale + _Bias;
             }
 
-            float4 frag(v2f i) : SV_Target
+            float frag(v2f i) : SV_Target
             {
-                float color = getValueScaleBias(tex2Dlod(_TextureA, float4(i.uv, 0, 0)));
-    
-                return float4(color, color, color, 1);
+                return GetValueScaleBias(tex2Dlod(_TextureA, float4(i.uv, 0, 0)).x);
             }
             ENDCG
         }

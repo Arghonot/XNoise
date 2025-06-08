@@ -48,13 +48,11 @@ Shader "Xnoise/Generators/VoronoiSurfaceShader"
             return o;
         }
 
-        float4 GetColor(float3 coord)
+        float GetColor(float3 coord)
         {
             _Radius = _Frequency;
             float val = VoronoiGetValue(coord, _Seed, _Frequency, _Distance, _Displacement);
-            float normalized = (val + 1) * 0.5;
-
-            return float4(normalized, normalized, normalized, 1);
+            return (val + 1) * 0.5;
         }
         ENDCG
 
@@ -66,7 +64,7 @@ Shader "Xnoise/Generators/VoronoiSurfaceShader"
             #pragma vertex vert
             #pragma fragment frag_planar
 
-            float4 frag_planar(v2f i) : SV_Target
+            float frag_planar(v2f i) : SV_Target
             {
                 return GetColor(GetPointPlanarFromUV(i.uv));
             }
@@ -81,7 +79,7 @@ Shader "Xnoise/Generators/VoronoiSurfaceShader"
             #pragma vertex vert
             #pragma fragment frag_spherical
 
-            float4 frag_spherical(v2f i) : SV_Target
+            float frag_spherical(v2f i) : SV_Target
             {
                 return GetColor(GetPointSphericalFromUV(i.uv));
             }
@@ -96,7 +94,7 @@ Shader "Xnoise/Generators/VoronoiSurfaceShader"
             #pragma vertex vert
             #pragma fragment frag_cylindrical
 
-            float4 frag_cylindrical(v2f i) : SV_Target
+            float frag_cylindrical(v2f i) : SV_Target
             {
                 return GetColor(GetPointCylindricalFromUV(i.uv));
             }

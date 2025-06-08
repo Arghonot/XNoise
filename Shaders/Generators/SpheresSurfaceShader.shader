@@ -62,11 +62,10 @@
             #pragma vertex vert
             #pragma fragment frag_Planar
 
-            float4 frag_Planar(v2f i) : SV_Target
+            float frag_Planar(v2f i) : SV_Target
             {
                 float3 coord = GetPlanarCartesianFromUV(i.uv, _Radius);
-                float sphereValue = Normalize(GetSpheres(coord.x, coord.y, coord.z));
-                return float4(sphereValue, sphereValue, sphereValue, 1);
+                return Normalize(GetSpheres(coord.x, coord.y, coord.z));
             }
             ENDCG
         }
@@ -78,12 +77,11 @@
             #pragma vertex vert
             #pragma fragment frag_Spherical
 
-            float4 frag_Spherical(v2f i) : SV_Target
+            float frag_Spherical(v2f i) : SV_Target
             {
                 float3 coord = GetSphericalCartesianFromUV(i.uv, _Radius);
                 if (length(coord) <= 2) coord += float3(10.0, 0.0, 0.0);
-                float sphereValue = Normalize(GetSpheres(coord.x, coord.y, coord.z));
-                return float4(sphereValue, sphereValue, sphereValue, 1);
+                return Normalize(GetSpheres(coord.x, coord.y, coord.z));
             }
             ENDCG
         }
@@ -95,11 +93,10 @@
             #pragma vertex vert
             #pragma fragment frag_Cylindrical
 
-            float4 frag_Cylindrical(v2f i) : SV_Target
+            float frag_Cylindrical(v2f i) : SV_Target
             {
                 float3 coord = GetCylindricalCartesianFromUV(i.uv, _OffsetPosition.xyz, _Radius);
-                float sphereValue = Normalize(GetSpheres(coord.x, coord.y, coord.z));
-                return float4(sphereValue, sphereValue, sphereValue, 1);
+                return Normalize(GetSpheres(coord.x, coord.y, coord.z));
             }
             ENDCG
         }

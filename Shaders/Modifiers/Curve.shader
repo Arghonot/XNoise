@@ -50,9 +50,9 @@
                 return 0.21 * sample.r + 0.71 * sample.g + 0.07 * sample.b;
             }
 
-            float4 frag (v2f i) : SV_Target
+            float frag (v2f i) : SV_Target
             {
-                return tex2Dlod(_Gradient, float4(getColorGrayscale(tex2D(_Src, i.uv)), i.uv.y, 0, 0));
+                return tex2Dlod(_Gradient, float4(getColorGrayscale(tex2D(_Src, i.uv)), i.uv.y, 0, 0)).x;
             }
             ENDCG
         }

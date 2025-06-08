@@ -44,9 +44,9 @@
             #pragma vertex vert
             #pragma fragment frag_planar
 
-            float4 frag_planar(v2f i) : SV_Target
+            float frag_planar(v2f i) : SV_Target
             {
-                return float4(_Const, _Const, _Const, 1);
+                return _Const;
             }
             ENDCG
         }
@@ -58,9 +58,9 @@
             #pragma vertex vert
             #pragma fragment frag_spherical
 
-            float4 frag_spherical(v2f i) : SV_Target
+            float frag_spherical(v2f i) : SV_Target
             {
-                return float4(_Const, _Const, _Const, 1);
+                return _Const;
             }
             ENDCG
         }
@@ -72,9 +72,9 @@
             #pragma vertex vert
             #pragma fragment frag_cylindrical
 
-            float4 frag_cylindrical(v2f i) : SV_Target
+            float frag_cylindrical(v2f i) : SV_Target
             {
-                return float4(_Const, _Const, _Const, 1);
+                return _Const;
             }
             ENDCG
         }

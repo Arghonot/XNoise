@@ -3,8 +3,8 @@
     // This is a simple shader that contain the minimum to be used in Xnoise
     Properties
     {
-        _TextureA("TextureA", 2D) = "white" {}
-        _TextureB("TextureB", 2D) = "white" {}
+        _TextureA("TextureA", 2D) = "black" {}
+        _TextureB("TextureB", 2D) = "black" {}
     }
         SubShader
     {
@@ -22,37 +22,32 @@
             struct appdata
             {
                 float4 vertex : POSITION;
-                float2 uv1 : TEXCOORD0;
-                float2 uv2 : TEXCOORD1;
+                float2 uv : TEXCOORD0;
             };
 
             struct v2f
             {
-                float2 uv1 : TEXCOORD0;
-                float2 uv2 : TEXCOORD1;
+                float2 uv : TEXCOORD0;
                 float4 vertex : SV_POSITION;
             };
 
             sampler2D _TextureA;
-            float4 _TextureA_ST;
             sampler2D _TextureB;
-            float4 _TextureB_ST;
+            float4 _TextureA_ST;
 
             v2f vert(appdata v)
             {
                 v2f o;
 
                 o.vertex = UnityObjectToClipPos(v.vertex);
-                o.uv1 = TRANSFORM_TEX(v.uv1, _TextureA);
-                o.uv2 = TRANSFORM_TEX(v.uv2, _TextureB);
+                o.uv = v.uv;
 
                 return o;
             }
 
-            fixed4 frag(v2f i) : SV_Target
+            fixed frag(v2f i) : SV_Target
             {
-                float val = pow(tex2D(_TextureA, i.uv1), tex2D(_TextureB, i.uv1));
-                return fixed4(val, val, val, 1);
+                return pow(tex2Dlod(_TextureA, float4(i.uv, 0, 0)).x, tex2Dlod(_TextureB, float4(i.uv, 0, 0)).x);
             }
             ENDCG
         }

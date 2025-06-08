@@ -43,14 +43,12 @@
                 return o;
             }
 
-            float4 frag(v2f i) : SV_Target
+            float frag(v2f i) : SV_Target
             {
-                float a = tex2Dlod(_TextureA, float4(i.uv, 0, 0));
-                float b = tex2Dlod(_TextureB, float4(i.uv, 0, 0));
+                float a = tex2Dlod(_TextureA, float4(i.uv, 0, 0)).x;
+                float b = tex2Dlod(_TextureB, float4(i.uv, 0, 0)).x;
 
-                float color = (a * b);
-
-                return float4(color, color, color, 1);
+                return (a * b);
             }
             ENDCG
         }

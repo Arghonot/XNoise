@@ -53,12 +53,11 @@ Shader "Xnoise/Generators/PerlinSurfaceShader"
             return o;
         }
 
-        float4 GetColor(float3 coord)
+        float GetColor(float3 coord)
         {
             float color = GetPerlin(coord, _Seed, _Frequency, _Lacunarity, _Persistence, _Octaves);
 
-            color = Normalize(color);
-            return float4(color, color, color, 1);
+            return Normalize(color);
         }
         ENDCG
         Pass
@@ -69,7 +68,7 @@ Shader "Xnoise/Generators/PerlinSurfaceShader"
             #pragma vertex vert
             #pragma fragment frag_planar
 
-            float4 frag_planar(v2f i) : SV_Target
+            float frag_planar(v2f i) : SV_Target
             {
                 return GetColor(GetPointPlanarFromUV(i.uv));
             }
@@ -83,7 +82,7 @@ Shader "Xnoise/Generators/PerlinSurfaceShader"
             #pragma vertex vert
             #pragma fragment frag_spherical
 
-            float4 frag_spherical(v2f i) : SV_Target
+            float frag_spherical(v2f i) : SV_Target
             {
                 return GetColor(GetPointSphericalFromUV(i.uv));
             }
@@ -97,7 +96,7 @@ Shader "Xnoise/Generators/PerlinSurfaceShader"
             #pragma vertex vert
             #pragma fragment frag_cylindrical
 
-            float4 frag_cylindrical(v2f i) : SV_Target
+            float frag_cylindrical(v2f i) : SV_Target
             {
                 return GetColor(GetPointCylindricalFromUV(i.uv));
             }

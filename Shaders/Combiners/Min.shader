@@ -43,11 +43,9 @@
                 return o;
             }
 
-            float4 frag (v2f i) : SV_Target
+            float frag (v2f i) : SV_Target
             {
-                float color = min(tex2Dlod(_TextureA, float4(i.uv, 0, 0)), tex2Dlod(_TextureB, float4(i.uv, 0, 0)));
-
-                return float4(color, color, color, 1);
+                return min(tex2Dlod(_TextureA, float4(i.uv, 0, 0)).x, tex2Dlod(_TextureB, float4(i.uv, 0, 0)).x);
             }
             ENDCG
         }

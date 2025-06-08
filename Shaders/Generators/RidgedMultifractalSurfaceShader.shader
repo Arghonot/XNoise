@@ -46,11 +46,10 @@ Shader "Xnoise/Generators/RidgedMultifractalSurfaceShader"
             return o;
         }
 
-        float4 GetColor(float3 coord)
+        float GetColor(float3 coord)
         {
             float value = GetRidgedMultifractal(coord, _Frequency, _Lacunarity, _Octaves);
-            float normalized = (value + 1.0) * 0.5;
-            return float4(normalized, normalized, normalized, 1);
+            return (value + 1.0) * 0.5;
         }
         ENDCG
 
@@ -62,7 +61,7 @@ Shader "Xnoise/Generators/RidgedMultifractalSurfaceShader"
             #pragma vertex vert
             #pragma fragment frag_planar
 
-            float4 frag_planar(v2f i) : SV_Target
+            float frag_planar(v2f i) : SV_Target
             {
                 return GetColor(GetPointPlanarFromUV(i.uv));
             }
@@ -77,7 +76,7 @@ Shader "Xnoise/Generators/RidgedMultifractalSurfaceShader"
             #pragma vertex vert
             #pragma fragment frag_spherical
 
-            float4 frag_spherical(v2f i) : SV_Target
+            float frag_spherical(v2f i) : SV_Target
             {
                 return GetColor(GetPointSphericalFromUV(i.uv));
             }
@@ -92,7 +91,7 @@ Shader "Xnoise/Generators/RidgedMultifractalSurfaceShader"
             #pragma vertex vert
             #pragma fragment frag_cylindrical
 
-            float4 frag_cylindrical(v2f i) : SV_Target
+            float frag_cylindrical(v2f i) : SV_Target
             {
                 return GetColor(GetPointCylindricalFromUV(i.uv));
             }

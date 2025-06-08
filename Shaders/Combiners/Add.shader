@@ -43,9 +43,9 @@
                 return o;
             }
 
-            float4 frag (v2f i) : SV_Target
+            float frag (v2f i) : SV_Target
             {
-                return (tex2Dlod(_TextureA, float4(i.uv, 0, 0)) + tex2Dlod(_TextureB, float4(i.uv, 0, 0))) / 2.0;
+                return (tex2Dlod(_TextureA, float4(i.uv, 0, 0)).x + tex2Dlod(_TextureB, float4(i.uv, 0, 0)).x) / 2.0;
             }
             ENDCG
         }

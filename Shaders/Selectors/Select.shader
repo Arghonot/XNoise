@@ -113,9 +113,9 @@
 
             float GetValueSelect2(float2 uv)
             {
-                float valueC = tex2D(_TextureC, uv).r;
-                float valueA = tex2D(_TextureA, uv).r;
-                float valueB = tex2D(_TextureB, uv).r;
+                float valueC = tex2D(_TextureC, uv).x;
+                float valueA = tex2D(_TextureA, uv).x;
+                float valueB = tex2D(_TextureB, uv).x;
 
                 // Optional: expose these as uniform floats
                 float lowerBound = _SelectLowerBound;
@@ -160,9 +160,9 @@
 
             float GetValueSelect3(float2 uv)
             {
-                float cv = tex2Dlod(_TextureC, float4(uv, 0, 0)).r;
-                float va = tex2Dlod(_TextureA, float4(uv, 0, 0)).r;
-                float vb = tex2Dlod(_TextureB, float4(uv, 0, 0)).r;
+                float cv = tex2Dlod(_TextureC, float4(uv, 0, 0)).x;
+                float va = tex2Dlod(_TextureA, float4(uv, 0, 0)).x;
+                float vb = tex2Dlod(_TextureB, float4(uv, 0, 0)).x;
 
                 float minVal = _SelectLowerBound;
                 float maxVal = _SelectUpperBound;
@@ -209,11 +209,9 @@
             }
 
 
-            float4 frag(v2f i) : SV_Target
+            float frag(v2f i) : SV_Target
             {
-                float color = GetValueSelect3(i.uv);
-
-                return float4(color, color, color, 1);
+                return GetValueSelect3(i.uv);
             }
             ENDCG
         }

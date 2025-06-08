@@ -56,11 +56,9 @@
                 return 0;
             }
 
-            float4 frag(v2f i) : SV_Target
+            float frag(v2f i) : SV_Target
             {
-                float color = GetValueInvert(tex2Dlod(_TextureA, float4(i.uv, 0, 0)));
-
-                return float4(color, color, color, 1);
+                return GetValueInvert(tex2Dlod(_TextureA, float4(i.uv, 0, 0)).x);
             }
             ENDCG
         }

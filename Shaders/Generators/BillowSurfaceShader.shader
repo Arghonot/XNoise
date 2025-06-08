@@ -46,12 +46,10 @@ Shader "Xnoise/Generators/BillowSurfaceShader"
             return o;
         }
 
-        float4 GetColor(float3 pos)
+        float GetColor(float3 pos)
         {
             float color = GetBillow(pos, _Frequency, _Persistence, _Lacunarity, _Octaves);
-
-            color = Normalize(color);
-            return float4(color, color, color, 1);
+            return Normalize(color);
         }
         ENDCG
         Pass
@@ -62,7 +60,7 @@ Shader "Xnoise/Generators/BillowSurfaceShader"
             #pragma vertex vert
             #pragma fragment frag_planar
 
-            float4 frag_planar(v2f i) : SV_Target
+            float frag_planar(v2f i) : SV_Target
             {
                 return GetColor(GetPointPlanarFromUV(i.uv));
             }
@@ -76,7 +74,7 @@ Shader "Xnoise/Generators/BillowSurfaceShader"
             #pragma vertex vert
             #pragma fragment frag_spherical
 
-            float4 frag_spherical(v2f i) : SV_Target
+            float frag_spherical(v2f i) : SV_Target
             {
                 return GetColor(GetPointSphericalFromUV(i.uv));
             }
@@ -90,7 +88,7 @@ Shader "Xnoise/Generators/BillowSurfaceShader"
             #pragma vertex vert
             #pragma fragment frag_cylindrical
 
-            float4 frag_cylindrical(v2f i) : SV_Target
+            float frag_cylindrical(v2f i) : SV_Target
             {
                 return GetColor(GetPointCylindricalFromUV(i.uv));
             }

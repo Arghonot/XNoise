@@ -48,11 +48,9 @@
                 return abs((value * 2) - 1);
             }
 
-            float4 frag(v2f i) : SV_Target
+            float frag(v2f i) : SV_Target
             {
-                float color = GetValueAbs(tex2Dlod(_TextureA, float4(i.uv, 0, 0)));
-
-                return float4(color, color, color, 1);
+                return GetValueAbs(tex2Dlod(_TextureA, float4(i.uv, 0, 0))).x;
             }
             ENDCG
         }
