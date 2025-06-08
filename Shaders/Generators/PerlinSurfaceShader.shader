@@ -25,9 +25,6 @@ Shader "Xnoise/Generators/PerlinSurfaceShader"
         #include "../CGINCs/Perlin.cginc"
         #include "../CGINCs/XnoiseCommon.cginc"
 
-        //sampler2D _TurbulenceMap;
-        //float4 _TurbulenceMap_ST;
-
         float _Frequency;
         float _Lacunarity;
         float _Persistence;
@@ -42,8 +39,8 @@ Shader "Xnoise/Generators/PerlinSurfaceShader"
 
         struct v2f
         {
-            float2 uv : TEXCOORD0;
             float4 vertex : SV_POSITION;
+            float2 uv : TEXCOORD0;
         };
 
         v2f vert(appdata v)
@@ -54,13 +51,12 @@ Shader "Xnoise/Generators/PerlinSurfaceShader"
             return o;
         }
 
-        float4 FinalColor(float3 coord, float2 uv)
+        float4 PerlinFragment(float3 coord)
         {
-            float3 transformedPos = ApplyTransformOperations(coord, uv);
-            float perlinVal = GetPerlin(transformedPos, _Seed, _Frequency, _Lacunarity, _Persistence, _Octaves);
+            float color = GetPerlin(coord, _Seed, _Frequency, _Lacunarity, _Persistence, _Octaves);
 
-            perlinVal = Normalize(perlinVal);
-            return float4(perlinVal, perlinVal, perlinVal, 1);
+            color = Normalize(color);
+            return float4(color, color, color, 1);
         }
         ENDCG
 
@@ -74,7 +70,7 @@ Shader "Xnoise/Generators/PerlinSurfaceShader"
 
             float4 frag(v2f i) : SV_Target
             {
-                return FinalColor(GetPlanarCartesianFromUV(i.uv, _OffsetPosition.xyz), i.uv);
+                return PerlinFragment(GetPointPlanarFromUV(i.uv));
             }
             ENDCG
         }
@@ -89,7 +85,7 @@ Shader "Xnoise/Generators/PerlinSurfaceShader"
 
             float4 frag(v2f i) : SV_Target
             {
-                return FinalColor(GetSphericalCartesianFromUV(i.uv.x, i.uv.y, _Radius), i.uv);
+                return PerlinFragment(GetPointSphericalFromUV(i.uv));
             }
             ENDCG
         }
@@ -104,7 +100,7 @@ Shader "Xnoise/Generators/PerlinSurfaceShader"
 
             float4 frag(v2f i) : SV_Target
             {
-                return FinalColor(GetCylindricalCartesianFromUV(i.uv, _OffsetPosition.xyz, _Radius), i.uv);
+                return PerlinFragment(GetPointCylindricalFromUV(i.uv));
             }
             ENDCG
         }

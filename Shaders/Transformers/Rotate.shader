@@ -94,7 +94,7 @@
 
                 fixed4 frag(v2f i) : SV_Target
                 {
-                    float3 pos = GetSphericalCartesianFromUV(i.uv1.x, i.uv1.y, 1);
+                    float3 pos = GetSphericalCartesianFromUV(i.uv1, 1);
 
                     float color = GetRotate(
                             pos.x,

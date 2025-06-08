@@ -81,7 +81,7 @@
 
             float4 frag_Spherical(v2f i) : SV_Target
             {
-                float3 coord = GetSphericalCartesianFromUV(i.uv.x, i.uv.y, _Radius);
+                float3 coord = GetSphericalCartesianFromUV(i.uv, _Radius);
                 if (length(coord) <= 2) coord += float3(10.0, 0.0, 0.0);
                 float sphereValue = Normalize(ComputeCylinder(coord.x, coord.y, coord.z));
                 return float4(sphereValue, sphereValue, sphereValue, 1);

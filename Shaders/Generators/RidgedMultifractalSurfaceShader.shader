@@ -81,7 +81,7 @@ Shader "Xnoise/Generators/RidgedMultifractalSurfaceShader"
 
             float4 frag_spherical(v2f i) : SV_Target
             {
-                float3 coord = GetSphericalCartesianFromUV(i.uv.x, i.uv.y, _Radius);
+                float3 coord = GetSphericalCartesianFromUV(i.uv, _Radius);
                 return ComputeRidged(coord);
             }
             ENDCG

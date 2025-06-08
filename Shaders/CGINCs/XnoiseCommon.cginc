@@ -1,7 +1,7 @@
 #ifndef XNOISE_COMMON_INCLUDED
 #define XNOISE_COMMON_INCLUDED
 
-#define UNIT_SCALE 10.0
+#define UNIT_SCALE 100.0
 #define Multiplier 100000.0
 
 float _Radius;
@@ -35,6 +35,30 @@ float3 ApplyTransformOperations(float3 p, float2 uv)
     p = p + (turbulence.xyz * UNIT_SCALE);
 
     return p;
+}
+
+float3 GetPointPlanarFromUV(float2 uv)
+{
+    float3 coord = GetPlanarCartesianFromUV(uv, _OffsetPosition);
+    float3 transformedPos = ApplyTransformOperations(coord, uv);
+
+    return transformedPos;
+}
+
+float3 GetPointSphericalFromUV(float2 uv)
+{
+    float3 coord = GetSphericalCartesianFromUV(uv, _Radius);
+    float3 transformedPos = ApplyTransformOperations(coord, uv);
+    
+    return transformedPos;
+}
+
+float3 GetPointCylindricalFromUV(float2 uv)
+{
+    float3 coord = GetCylindricalCartesianFromUV(uv, _OffsetPosition.xyz, _Radius);
+    float3 transformedPos = ApplyTransformOperations(coord, uv);
+    
+    return transformedPos;
 }
 
 #endif

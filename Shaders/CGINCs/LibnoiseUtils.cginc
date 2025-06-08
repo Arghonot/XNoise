@@ -31,8 +31,10 @@ float3 GetPlanarCartesianFromUV(float2 uv, float3 origin)
 		return float3(origin.x + uv.x, origin.y + uv.y, origin.z);
 }
 
-float3 GetSphericalCartesianFromUV(float Ln, float Lat, float radius)
+float3 GetSphericalCartesianFromUV(float2 uv, float radius)
 {
+    float Ln = uv.x;
+    float Lat = uv.y;
 	Ln *= 360;
 	Lat *= 180;
 	Ln -= 180;

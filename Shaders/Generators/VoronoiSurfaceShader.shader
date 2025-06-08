@@ -91,7 +91,7 @@ Shader "Xnoise/Generators/VoronoiSurfaceShader"
 
             float4 frag(v2f i) : SV_Target
             {
-                float3 coord = GetSphericalCartesianFromUV(i.uv.x, i.uv.y, _Radius);
+                float3 coord = GetSphericalCartesianFromUV(i.uv, _Radius);
                 return FinalColor(coord);
             }
             ENDCG

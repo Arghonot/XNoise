@@ -46,10 +46,9 @@ Shader "Xnoise/Generators/BillowSurfaceShader"
             return o;
         }
 
-        float4 BillowFragment(float3 pos, float2 uv)
+        float4 BillowFragment(float3 pos)
         {
-            float3 transformedPos = ApplyTransformOperations(pos, uv);
-            float color = GetBillow(transformedPos, _Frequency, _Persistence, _Lacunarity, _Octaves);
+            float color = GetBillow(pos, _Frequency, _Persistence, _Lacunarity, _Octaves);
 
             color = Normalize(color);
             return float4(color, color, color, 1);
@@ -68,7 +67,7 @@ Shader "Xnoise/Generators/BillowSurfaceShader"
 
             float4 frag(v2f i) : SV_Target
             {
-                return BillowFragment(GetPlanarCartesianFromUV(i.uv, _OffsetPosition.xyz), i.uv);
+                return BillowFragment(GetPointPlanarFromUV(i.uv));
             }
             ENDCG
         }
@@ -85,7 +84,7 @@ Shader "Xnoise/Generators/BillowSurfaceShader"
 
             float4 frag(v2f i) : SV_Target
             {
-                return BillowFragment(GetSphericalCartesianFromUV(i.uv.x, i.uv.y, _Radius), i.uv);
+                return BillowFragment(GetPointSphericalFromUV(i.uv));
             }
             ENDCG
         }
@@ -102,7 +101,7 @@ Shader "Xnoise/Generators/BillowSurfaceShader"
 
             float4 frag(v2f i) : SV_Target
             {
-                return BillowFragment(GetCylindricalCartesianFromUV(i.uv, _OffsetPosition.xyz, _Radius), i.uv);
+                return BillowFragment(GetPointCylindricalFromUV(i.uv));
             }
             ENDCG
         }
