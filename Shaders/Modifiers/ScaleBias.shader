@@ -2,62 +2,63 @@
 {
     Properties
     {
-        _TextureA("TextureA", 2D) = "white" {}
+        _TextureA("TextureA", 2D) = "black" {}
         _Bias("Bias", Float) = 0
         _Scale("Scale", Float) = 1
     }
-        SubShader
+    SubShader
+    {
+        Cull Off
+        ZWrite Off
+        ZTest Always
+        Tags { "RenderType" = "Opaque" }
+        LOD 100
+
+        Pass
         {
-            Tags { "RenderType" = "Opaque" }
-            LOD 100
+            CGPROGRAM
+            #pragma vertex vert
+            #pragma fragment frag
 
-            Pass
+            #include "UnityCG.cginc"
+
+            struct appdata
             {
-                CGPROGRAM
-                #pragma vertex vert
-                #pragma fragment frag
+                float4 vertex : POSITION;
+                float2 uv : TEXCOORD0;
+            };
 
-                #include "UnityCG.cginc"
+            struct v2f
+            {
+                float2 uv : TEXCOORD0;
+                float4 vertex : SV_POSITION;
+            };
 
-                struct appdata
-                {
-                    float4 vertex : POSITION;
-                    float2 uv : TEXCOORD0;
-                };
+            float _Bias, _Scale;
+            sampler2D _TextureA;
+            float4 _TextureA_ST;
 
-                struct v2f
-                {
-                    float2 uv : TEXCOORD0;
-                    float4 vertex : SV_POSITION;
-                };
-
-                float _Bias, _Scale;
-                sampler2D _TextureA;
-                float4 _TextureA_ST;
-
-                v2f vert(appdata v)
-                {
-                    v2f o;
-
-                    o.vertex = UnityObjectToClipPos(v.vertex);
-                    o.uv = TRANSFORM_TEX(v.uv, _TextureA);
-
-                    return o;
-                }
-
-
-                float getValueScaleBias(float value)
-                {
-                    return value * _Scale + _Bias;
-                }
-
-                fixed4 frag(v2f i) : SV_Target
-                {
-                    float color = getValueScaleBias(tex2D(_TextureA, i.uv));
-    
-                    return float4(color, color, color, 1);
-                }
-                ENDCG
+            v2f vert(appdata v)
+            {
+                v2f o;
+                o.vertex = UnityObjectToClipPos(v.vertex);
+                o.uv = v.uv;
+                return o;
             }
+
+
+            float getValueScaleBias(float value)
+            {
+                return value * _Scale + _Bias;
+            }
+
+            float4 frag(v2f i) : SV_Target
+            {
+                float color = getValueScaleBias(tex2Dlod(_TextureA, float4(i.uv, 0, 0)));
+    
+                return float4(color, color, color, 1);
+            }
+            ENDCG
         }
+    }
 }

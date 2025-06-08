@@ -2,10 +2,13 @@
 {
     Properties
     {
-        _TextureA("TextureA", 2D) = "white" {}
+        _TextureA("TextureA", 2D) = "black" {}
     }
-        SubShader
+    SubShader
     {
+        Cull Off
+        ZWrite Off
+        ZTest Always
         Tags { "RenderType" = "Opaque" }
         LOD 100
 
@@ -35,10 +38,8 @@
             v2f vert(appdata v)
             {
                 v2f o;
-
                 o.vertex = UnityObjectToClipPos(v.vertex);
-                o.uv = TRANSFORM_TEX(v.uv, _TextureA);
-
+                o.uv = v.uv;
                 return o;
             }
 
@@ -48,9 +49,9 @@
                 return 1 - value;
             }
 
-            fixed4 frag(v2f i) : SV_Target
+            float4 frag(v2f i) : SV_Target
             {
-                float color = GetValueInvert(tex2D(_TextureA, i.uv));
+                float color = GetValueInvert(tex2Dlod(_TextureA, float4(i.uv, 0, 0)));
 
                 return float4(color, color, color, 1);
             }

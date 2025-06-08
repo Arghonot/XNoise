@@ -4,8 +4,11 @@
     {
         _TextureA("TextureA", 2D) = "black" {}
     }
-        SubShader
+    SubShader
     {
+        Cull Off
+        ZWrite Off
+        ZTest Always
         Tags { "RenderType" = "Opaque" }
         LOD 100
 

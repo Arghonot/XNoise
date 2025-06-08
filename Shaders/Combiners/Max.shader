@@ -2,14 +2,14 @@
 {
     Properties
     {
-        _TextureA("TextureA", 2D) = "white" {}
-        _TextureB("TextureB", 2D) = "white" {}
+        _TextureA("TextureA", 2D) = "black" {}
+        _TextureB("TextureB", 2D) = "black" {}
     }
     SubShader
     {
-        // No culling or depth
-        Cull Off ZWrite Off ZTest Always
-
+        Cull Off
+        ZWrite Off
+        ZTest Always
         Pass
         {
             CGPROGRAM
@@ -31,9 +31,8 @@
             };
 
             sampler2D _TextureA;
-            float4 _TextureA_ST;
             sampler2D _TextureB;
-            float4 _TextureB_ST;
+            float4 _TextureA_ST;
 
             v2f vert (appdata v)
             {
@@ -43,11 +42,10 @@
                 return o;
             }
 
-            sampler2D _MainTex;
 
-            fixed4 frag (v2f i) : SV_Target
+            float4 frag (v2f i) : SV_Target
             {
-                float color = max(tex2D(_TextureA, i.uv), tex2D(_TextureB, i.uv));
+                float color = max(tex2Dlod(_TextureA, float4(i.uv, 0, 0)), tex2Dlod(_TextureB, float4(i.uv, 0, 0)));
 
                 return float4(color, color, color, 1);
             }

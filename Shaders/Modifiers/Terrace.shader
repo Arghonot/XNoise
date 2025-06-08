@@ -2,11 +2,14 @@
 {
     Properties
     {
-        _Src ("Source", 2D) = "white" {}
-        _Gradient ("Gradient", 2D) = "white" {}
+        _Src ("Source", 2D) = "black" {}
+        _Gradient ("Gradient", 2D) = "black" {}
     }
     SubShader
     {
+        Cull Off
+        ZWrite Off
+        ZTest Always
         Tags { "RenderType"="Opaque" }
         LOD 100
 
@@ -47,7 +50,7 @@
                 return 0.21 * sample.r + 0.71 * sample.g + 0.07 * sample.b;
             }
 
-            fixed4 frag (v2f i) : SV_Target
+            float4 frag (v2f i) : SV_Target
             {
                 return tex2D(_Gradient, float2(getColorGrayscale(tex2D(_Src, i.uv)), i.uv.y));
             }

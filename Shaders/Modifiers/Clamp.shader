@@ -6,8 +6,11 @@
         _Minimum("Minimum", Float) = 0
         _Maximum("Maximum", Float) = 1
     }
-        SubShader
+    SubShader
     {
+        Cull Off
+        ZWrite Off
+        ZTest Always
         Tags { "RenderType" = "Opaque" }
         LOD 100
 
@@ -51,7 +54,7 @@
                 return value;
             }
 
-            fixed4 frag(v2f i) : SV_Target
+            float4 frag(v2f i) : SV_Target
             {
                 float color = GetClamp(tex2Dlod(_TextureA, float4(i.uv, 0, 0)));
 

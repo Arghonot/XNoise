@@ -7,13 +7,16 @@
     }
     SubShader
     {
+        Cull Off
+        ZWrite Off
+        ZTest Always
         Tags { "RenderType" = "Opaque" }
         LOD 100
 
         CGINCLUDE
         #include "UnityCG.cginc"
         #include "../CGINCs/LibnoiseUtils.cginc"
-         #include "../CGINCs/XnoiseCommon.cginc"
+        #include "../CGINCs/XnoiseCommon.cginc"
 
         struct appdata
         {

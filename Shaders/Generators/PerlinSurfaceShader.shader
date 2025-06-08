@@ -12,9 +12,11 @@ Shader "Xnoise/Generators/PerlinSurfaceShader"
         _Seed("Seed", Float) = 1
         _TurbulenceMap("Turbulence Map", 2D) = "black" {}
     }
-
     SubShader
     {
+        Cull Off
+        ZWrite Off
+        ZTest Always
         Tags { "RenderType"="Opaque" }
         LOD 100
 

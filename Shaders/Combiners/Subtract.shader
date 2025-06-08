@@ -2,12 +2,13 @@
 {
     Properties
     {
-        _TextureA("TextureA", 2D) = "white" {}
-        _TextureB("TextureB", 2D) = "white" {} }
+        _TextureA("TextureA", 2D) = "black" {}
+        _TextureB("TextureB", 2D) = "black" {} }
     SubShader
     {
-        // No culling or depth
-        Cull Off ZWrite Off ZTest Always
+        Cull Off
+        ZWrite Off
+        ZTest Always
 
         Pass
         {
@@ -20,37 +21,31 @@
             struct appdata
             {
                 float4 vertex : POSITION;
-                float2 uv1 : TEXCOORD0;
-                float2 uv2 : TEXCOORD1;
+                float2 uv : TEXCOORD0;
             };
 
             struct v2f
             {
-                float2 uv1 : TEXCOORD0;
-                float2 uv2 : TEXCOORD1;
+                float2 uv : TEXCOORD0;
                 float4 vertex : SV_POSITION;
             };
 
             sampler2D _TextureA;
-            float4 _TextureA_ST;
             sampler2D _TextureB;
-            float4 _TextureB_ST;
+            float4 _TextureA_ST;
 
             v2f vert (appdata v)
             {
                 v2f o;
-
                 o.vertex = UnityObjectToClipPos(v.vertex);
-                o.uv1 = TRANSFORM_TEX(v.uv1, _TextureA);
-                o.uv2 = TRANSFORM_TEX(v.uv2, _TextureB);
-
+                o.uv = v.uv;
                 return o;
             }
 
-            fixed4 frag (v2f i) : SV_Target
+            float4 frag (v2f i) : SV_Target
             {
-                float a = tex2D(_TextureA, i.uv1);
-                float b = tex2D(_TextureB, i.uv2);
+                float a = tex2Dlod(_TextureA, float4(i.uv, 0, 0));
+                float b = tex2Dlod(_TextureB, float4(i.uv, 0, 0));
                 float color = clamp(a.x - b.x, 0, 1);
 
                 return float4(color, color, color, 1);

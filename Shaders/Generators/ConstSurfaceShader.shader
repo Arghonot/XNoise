@@ -6,9 +6,11 @@
     }
     SubShader
     {
+        Cull Off
+        ZWrite Off
+        ZTest Always
         Tags { "RenderType" = "Opaque" }
         LOD 100
-
         CGINCLUDE
         #include "UnityCG.cginc"
 

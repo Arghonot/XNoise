@@ -8,6 +8,9 @@
     }
     SubShader
     {
+        Cull Off
+        ZWrite Off
+        ZTest Always
         Tags { "RenderType"="Opaque" }
         LOD 100
 
@@ -44,7 +47,7 @@
                 return o;
             }
 
-            fixed4 frag(v2f i) : SV_Target
+            float4 frag(v2f i) : SV_Target
             {
                 float color = lerp(tex2Dlod(_TextureA, float4(i.uv, 0, 0)), tex2Dlod(_TextureB, float4(i.uv, 0, 0)), tex2Dlod(_Controller, float4(i.uv, 0, 0)));
 

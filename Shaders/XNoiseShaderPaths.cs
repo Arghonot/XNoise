@@ -32,9 +32,5 @@ namespace Xnoise
         public const string Blend = "Xnoise/Selectors/Blend";
         public const string Add = "Xnoise/Combiners/Add";
         public const string Abs = "Xnoise/Modifiers/Abs";
-        public const string Translate = "Xnoise/Transformers/Translate"; // todo was using Rotate before !!!!!!!
-        // but is it needed at all in the end ?
-        public const string Rotate = "Xnoise/Transformers/Rotate"; // needed at all ?
-
     }
 }
