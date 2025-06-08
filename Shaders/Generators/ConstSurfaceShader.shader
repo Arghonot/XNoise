@@ -31,53 +31,48 @@
             v2f o;
             o.vertex = UnityObjectToClipPos(v.vertex);
             o.uv = v.uv;
-
             return o;
         }
         ENDCG
-
         Pass
         {
             Name "PLANAR"
+            Tags { "Projection" = "Planar" }
             CGPROGRAM
             #pragma vertex vert
-            #pragma fragment frag
+            #pragma fragment frag_planar
 
-            fixed4 frag(v2f i) : SV_Target
+            float4 frag_planar(v2f i) : SV_Target
             {
-                float color = (_Const);
-
-                return float4(color, color, color, 1);
+                return float4(_Const, _Const, _Const, 1);
             }
             ENDCG
         }
-                Pass
+        Pass
         {
             Name "SPHERICAL"
+            Tags { "Projection" = "Spherical" }
             CGPROGRAM
             #pragma vertex vert
-            #pragma fragment frag
+            #pragma fragment frag_spherical
 
-            fixed4 frag(v2f i) : SV_Target
+            float4 frag_spherical(v2f i) : SV_Target
             {
-                float color = (_Const);
-
-                return float4(color, color, color, 1);
+                return float4(_Const, _Const, _Const, 1);
             }
             ENDCG
         }
-                Pass
+        Pass
         {
             Name "CYLINDRICAL"
+            Tags { "Projection" = "Cylindrical" }
             CGPROGRAM
             #pragma vertex vert
-            #pragma fragment frag
+            #pragma fragment frag_cylindrical
 
-            fixed4 frag(v2f i) : SV_Target
+            float4 frag_cylindrical(v2f i) : SV_Target
             {
-                float color = (_Const);
-
-                return float4(color, color, color, 1);
+                return float4(_Const, _Const, _Const, 1);
             }
             ENDCG
         }

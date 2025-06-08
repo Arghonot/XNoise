@@ -2,7 +2,7 @@
 {
     Properties
     {
-        _TextureA("TextureA", 2D) = "white" {}
+        _TextureA("TextureA", 2D) = "black" {}
     }
         SubShader
     {
@@ -35,22 +35,19 @@
             v2f vert(appdata v)
             {
                 v2f o;
-
                 o.vertex = UnityObjectToClipPos(v.vertex);
-                o.uv = TRANSFORM_TEX(v.uv, _TextureA);
-
+                o.uv = v.uv;
                 return o;
             }
-
 
             float GetValueAbs(float value)
             {
                 return abs((value * 2) - 1);
             }
 
-            fixed4 frag(v2f i) : SV_Target
+            float4 frag(v2f i) : SV_Target
             {
-                float color = GetValueAbs(tex2D(_TextureA, i.uv));
+                float color = GetValueAbs(tex2Dlod(_TextureA, float4(i.uv, 0, 0)));
 
                 return float4(color, color, color, 1);
             }

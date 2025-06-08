@@ -2,7 +2,7 @@
 {
     Properties
     {
-        _TextureA("TextureA", 2D) = "white" {}
+        _TextureA("TextureA", 2D) = "black" {}
         _Minimum("Minimum", Float) = 0
         _Maximum("Maximum", Float) = 1
     }
@@ -38,10 +38,8 @@
             v2f vert(appdata v)
             {
                 v2f o;
-
                 o.vertex = UnityObjectToClipPos(v.vertex);
-                o.uv = TRANSFORM_TEX(v.uv, _TextureA);
-
+                o.uv = v.uv;
                 return o;
             }
 
@@ -51,12 +49,11 @@
                 if (value < _Minimum) return _Minimum;
                 if (value > _Maximum) return _Maximum;
                 return value;
-                //return clamp(value * 2 - 1, _Minimum, _Maximum);
             }
 
             fixed4 frag(v2f i) : SV_Target
             {
-                float color = GetClamp(tex2D(_TextureA, i.uv));
+                float color = GetClamp(tex2Dlod(_TextureA, float4(i.uv, 0, 0)));
 
                 return float4(color, color, color, 1);
             }
