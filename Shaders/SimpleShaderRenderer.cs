@@ -52,7 +52,6 @@ namespace Xnoise
             if (tex == null) return;
 
             UnityEngine.Debug.Log(Application.dataPath + DataPath + PictureName + ".png");
-
             File.WriteAllBytes(Application.dataPath + DataPath + PictureName + ".png", tex.EncodeToPNG());
         }
     }

@@ -32,5 +32,8 @@ namespace Xnoise
         public const string Blend = "Xnoise/Selectors/Blend";
         public const string Add = "Xnoise/Combiners/Add";
         public const string Abs = "Xnoise/Modifiers/Abs";
+
+        // Misc
+        public const string Visualizer = "Xnoise/Visualizer";
     }
 }

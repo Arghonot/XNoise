@@ -115,7 +115,7 @@ namespace Xnoise
                 map.GenerateCylindrical(angleMin, angleMax, heightMin, heightMax);
             }
 
-            tex = map.GetTexture();
+            tex = map.GetTextureVisualization();
 
             watch.Stop();
             RenderTime = watch.ElapsedMilliseconds;
