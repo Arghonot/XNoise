@@ -1,17 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-namespace Xnoise
+﻿namespace Xnoise
 {
-    //public enum Quality
-    //{
-    //    Low,
-    //    Medium,
-    //    High
-    //}
 
-    [CreateNodeMenu("NoiseGraph/Input/Quality")]
+    [CreateNodeMenu("NoiseGraph/Constants/Quality")]
     public class QualityNode : Graph.Leaf<LibNoise.QualityMode>
     {
         [Output(ShowBackingValue.Always, ConnectionType.Multiple, TypeConstraint.Strict)]

@@ -1,11 +1,13 @@
 ﻿using System;
+using Graph;
 using LibNoise;
 using UnityEngine;
 
 namespace Xnoise
 {
     [Serializable]
-    public class RootModuleBase : Graph.Root//<SerializableModuleBase>
+    [HideFromNodeMenu]
+    public class RootModuleBase : Graph.Root
     {
         [Input(ShowBackingValue.Never, ConnectionType.Override, TypeConstraint.Strict)]
         public SerializableModuleBase Input;

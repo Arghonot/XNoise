@@ -1,32 +1,18 @@
-﻿using GraphEditor;
-using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 using XNode;
 using XNodeEditor;
 using Graph;
+using System.Reflection;
 
 namespace Xnoise
 {
     [CustomNodeGraphEditor(typeof(XnoiseGraph))]
     public class LibnoiseGraphEditor : DefaultGraphEditor
     {
-        // TODO find a way to make this inherit generic node graph editor as well
-        // perhaps use attribute Don't show in dialogue
-        List<Type> HiddenTypes = new List<Type>()
-        {
-            typeof(RootModuleBase),
-            typeof(Graph.Blackboard),
-            typeof(Graph.Single),
-            typeof(LibnoiseNode),
-            typeof(Graph.NodeBase)
-        };
-
         public override void RemoveNode(Node node)
         {
-            if (node != ((XnoiseGraph)target).blackboard &&
-                !node.GetType().ToString().Contains("Root"))
+            if (node != ((XnoiseGraph)target).blackboard && !node.GetType().ToString().Contains("Root"))
             {
                 base.RemoveNode(node);
             }
@@ -41,9 +27,7 @@ namespace Xnoise
 
         public override string GetNodeMenuName(Type type)
         {
-            if (!HiddenTypes.Contains(type) &&
-                !type.ToString().Contains("Root") &&
-                !type.ToString().Contains("[T]"))
+            if (type.GetCustomAttribute<HideFromNodeMenu>(false) == null)
             {
                 return base.GetNodeMenuName(type);
             }

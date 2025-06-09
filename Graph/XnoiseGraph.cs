@@ -3,6 +3,8 @@ using System.Linq;
 using UnityEngine;
 using LibNoise;
 using System;
+using static TreeEditor.TreeEditorHelper;
+using XNodeEditor;
 
 namespace Xnoise
 {
