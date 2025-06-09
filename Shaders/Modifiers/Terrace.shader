@@ -2,8 +2,8 @@
 {
     Properties
     {
-        _Src ("Source", 2D) = "black" {}
-        _Gradient ("Gradient", 2D) = "black" {}
+        _Src("Source", 2D) = "black" {}
+        _Gradient("Gradient", 2D) = "black" {}
     }
     SubShader
     {
@@ -41,18 +41,14 @@
             {
                 v2f o;
                 o.vertex = UnityObjectToClipPos(v.vertex);
-                o.uv = TRANSFORM_TEX(v.uv, _Src);
+                o.uv = v.uv;
                 return o;
-            }
-            
-            float getColorGrayscale(float3 sample)
-            {
-                return 0.21 * sample.r + 0.71 * sample.g + 0.07 * sample.b;
             }
 
             float frag (v2f i) : SV_Target
             {
-                return tex2D(_Gradient, float2(getColorGrayscale(tex2D(_Src, i.uv)), i.uv.y)).r;
+                float color = clamp(tex2D(_Src, i.uv), 0, 0.975);
+                return tex2D(_Gradient, float2(color, i.uv.y)).x;
             }
             ENDCG
         }

@@ -15,14 +15,7 @@ namespace Xnoise
 
         public override object Run()
         {
-            //if editing the graph -> we stick to current variables
-            if (Application.isEditor && !Application.isPlaying)
-            {
-                return new Const(this.value);
-            }
-
-            return new Const(
-                GetInputValue<double>("value", this.value));
+            return new Const(GetInputValue<double>("value", this.value));
         }
     }
 }
