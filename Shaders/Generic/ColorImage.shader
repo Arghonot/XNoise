@@ -1,11 +1,15 @@
 ﻿Shader "Unlit/ColorImage"
 {
+    // USE ME AT THE END OF A GRAPH TO TRANSFORM A 1 CHANNEL IMAGE INTO A GREYSCALE ONE
     Properties
     {
         _TextureA("TextureA", 2D) = "white" {}
         _Gradient("gradient", 2D) = "white" {} }
     SubShader
     {
+        Cull Off
+        ZWrite Off
+        ZTest Always
         Tags { "RenderType"="Opaque" }
         LOD 100
 

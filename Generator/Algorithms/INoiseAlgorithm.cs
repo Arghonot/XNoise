@@ -1,4 +1,3 @@
-
 using LibNoise;
 
 namespace XNoise
