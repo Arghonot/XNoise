@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Graph
+namespace CustomGraph
 {
     [Serializable]
     [StorableType(typeof(LibNoise.QualityMode))]

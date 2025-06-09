@@ -1,5 +1,5 @@
 ﻿using System;
-using Graph;
+using CustomGraph;
 using LibNoise;
 using UnityEngine;
 
@@ -7,7 +7,7 @@ namespace Xnoise
 {
     [Serializable]
     [HideFromNodeMenu]
-    public class RootModuleBase : Graph.Root
+    public class RootModuleBase : Root
     {
         [Input(ShowBackingValue.Never, ConnectionType.Override, TypeConstraint.Strict)]
         public SerializableModuleBase Input;

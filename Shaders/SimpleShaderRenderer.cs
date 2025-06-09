@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 using System.Diagnostics;
 using System.IO;
-using Graph;
+using CustomGraph;
 
 namespace Xnoise
 {
     [CreateNodeMenu("Experimental/Generator/SimpleShaderRenderer")]
-    [NodeTint(Graph.ColorProfile.FlatBlue)]
+    [NodeTint(CustomGraph.ColorProfile.FlatBlue)]
     [HideFromNodeMenu] // TODO finish me for V2
     public class SimpleShaderRenderer : LibnoiseNode
     {

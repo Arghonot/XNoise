@@ -1,5 +1,5 @@
 ﻿using LibNoise;
-using Graph;
+using CustomGraph;
 
 namespace Xnoise
 {
@@ -7,7 +7,7 @@ namespace Xnoise
     /// A default class with a generic output node.
     /// </summary>
     [HideFromNodeMenu]
-    public class LibnoiseNode : Graph.Branch<SerializableModuleBase>
+    public class LibnoiseNode : CustomGraph.Branch<SerializableModuleBase>
     {
         public override object Run()
         {

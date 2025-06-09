@@ -8,7 +8,7 @@ using System;
 namespace Xnoise
 {
     [CreateNodeMenu("NoiseGraph/Debug/Render")]
-    [NodeTint(Graph.ColorProfile.Debug)]
+    [NodeTint(CustomGraph.ColorProfile.Debug)]
     public class Renderer : Node
     {
         public static int index = 0;
