@@ -18,7 +18,6 @@ namespace XNoise
             {
                 var bb = this.AddNode<CustomGraph.Blackboard>();
                 this.blackboard = bb as CustomGraph.Blackboard;
-                this.blackboard.InitializeBlackboard(); // TODO redundant code with graph's inner stuff
             }
             // we do not want to have two outputs
             if (this.root == null && nodes.Any(n => n is RootModuleBase))

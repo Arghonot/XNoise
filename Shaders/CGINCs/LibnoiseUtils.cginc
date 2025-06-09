@@ -17,8 +17,6 @@ float3 rotateVector(float4 quat, float3 vec ) {
     return multQuat( qv, float4(-quat.x, -quat.y, -quat.z, quat.w) ).xyz;
 }
 
-// TODO still need these even with the displacement map ?
-
 // return a position using an origin(pos), an offset(offsets) and a rotation(rot)
 float3 GetRotatedPositions(float3 pos, float3 offsets, float4 rot)
 {

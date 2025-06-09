@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using XNodeEditor;
@@ -42,7 +40,7 @@ namespace XNoise
 
         private void DisplayInputFromName(string name)
         {
-            string[] excludes = { "m_Script", "graph", "position", "ports" };
+            string[] excludes = { "m_Script", "graph", "position", "ports" }; // Todo fix me
             SerializedProperty iterator = serializedObject.GetIterator();
             bool enterChildren = true;
             while (iterator.NextVisible(enterChildren))
