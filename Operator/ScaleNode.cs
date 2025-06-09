@@ -3,7 +3,7 @@ using LibNoise.Operator;
 using LibNoise;
 using static XNode.Node;
 
-namespace Xnoise
+namespace XNoise
 {
     [CreateNodeMenu("NoiseGraph/Modifier/Scale")]
     public class ScaleNode : LibnoiseNode

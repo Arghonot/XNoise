@@ -2,7 +2,7 @@ using System;
 using System.IO;
 using UnityEngine;
 
-namespace Xnoise
+namespace XNoise
 {
     public static class ImageFileHelpers 
     {

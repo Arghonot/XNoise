@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using CustomGraph;
 
-namespace Xnoise
+namespace XNoise
 {
     [CreateNodeMenu("Experimental/Generator/SimpleShaderRenderer")]
     [NodeTint(CustomGraph.ColorProfile.FlatBlue)]

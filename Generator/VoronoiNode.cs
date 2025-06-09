@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Xnoise
+namespace XNoise
 {
     [CreateNodeMenu("NoiseGraph/Generator/Voronoi")]
     public class VoronoiNode : LibnoiseNode

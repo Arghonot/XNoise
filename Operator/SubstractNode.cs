@@ -2,7 +2,7 @@
 using LibNoise;
 using UnityEngine;
 
-namespace Xnoise
+namespace XNoise
 {
     [CreateNodeMenu("NoiseGraph/Combiner/Substract")]
     public class SubstractNode : LibnoiseNode

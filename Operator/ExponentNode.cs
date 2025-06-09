@@ -2,7 +2,7 @@
 using UnityEngine;
 using LibNoise;
 
-namespace Xnoise
+namespace XNoise
 {
     [CreateNodeMenu("NoiseGraph/Modifier/Exponent")]
     public class ExponentNode : LibnoiseNode

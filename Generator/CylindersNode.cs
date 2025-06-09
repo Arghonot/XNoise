@@ -2,7 +2,7 @@
 using LibNoise;
 using LibNoise.Generator;
 
-namespace Xnoise
+namespace XNoise
 {
     [CreateNodeMenu("NoiseGraph/Generator/Cylinders")]
     public class CylindersNode : LibnoiseNode

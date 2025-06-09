@@ -2,7 +2,7 @@
 using LibNoise;
 using UnityEngine;
 
-namespace Xnoise
+namespace XNoise
 {
     [CreateNodeMenu("NoiseGraph/Modifier/Invert")]
     public class InvertNode : LibnoiseNode

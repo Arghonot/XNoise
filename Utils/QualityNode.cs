@@ -1,4 +1,4 @@
-﻿namespace Xnoise
+﻿namespace XNoise
 {
 
     [CreateNodeMenu("NoiseGraph/Constants/Quality")]

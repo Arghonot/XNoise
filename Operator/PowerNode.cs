@@ -2,7 +2,7 @@
 using LibNoise.Operator;
 using LibNoise;
 
-namespace Xnoise
+namespace XNoise
 {
     [CreateNodeMenu("NoiseGraph/Combiner/Power")]
     public class PowerNode : LibnoiseNode

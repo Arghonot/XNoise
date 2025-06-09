@@ -4,7 +4,7 @@ using UnityEngine;
 using LibNoise;
 using System;
 
-namespace Xnoise
+namespace XNoise
 {
     [CreateAssetMenu(fileName = "XnoiseGraph", menuName = "Graphs/XnoiseGraph", order = 2)]
     public class XnoiseGraph : DefaultGraph, ISerializationCallbackReceiver

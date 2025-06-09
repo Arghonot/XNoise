@@ -1,5 +1,5 @@
 using UnityEditor;
-using Xnoise;
+using XNoise;
 
 [InitializeOnLoad]
 public static class XNoiseShaderCacheCleaner

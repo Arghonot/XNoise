@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Xnoise
+namespace XNoise
 {
     public static class XNoiseShaderCache
     {

@@ -1,7 +1,7 @@
 ﻿using LibNoise;
 using CustomGraph;
 
-namespace Xnoise
+namespace XNoise
 {
     /// <summary>
     /// A default class with a generic output node.

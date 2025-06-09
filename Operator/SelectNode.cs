@@ -2,7 +2,7 @@
 using UnityEngine;
 using LibNoise;
 
-namespace Xnoise
+namespace XNoise
 {
     [CreateNodeMenu("NoiseGraph/Selector/Select")]
     public class SelectNode : LibnoiseNode

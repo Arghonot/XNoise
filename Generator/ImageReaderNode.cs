@@ -2,7 +2,7 @@ using CustomGraph;
 using UnityEngine;
 using XNode;
 
-namespace Xnoise
+namespace XNoise
 {
     [CreateNodeMenu("NoiseGraph/Debug/ImageReader")]
     [HideFromNodeMenu] // TODO finish me for V2

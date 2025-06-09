@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 using XNode;
 
-namespace Xnoise
+namespace XNoise
 {
     [CreateNodeMenu("NoiseGraph/Generator/Perlin")]
     public class PerlinNode : LibnoiseNode

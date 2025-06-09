@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using LibNoise;
 
-namespace Xnoise
+namespace XNoise
 {
     [CreateNodeMenu("NoiseGraph/Transformer/Translate")]
     public class TranslateNode : LibnoiseNode

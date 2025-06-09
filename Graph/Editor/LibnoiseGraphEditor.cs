@@ -5,7 +5,7 @@ using XNodeEditor;
 using CustomGraph;
 using System.Reflection;
 
-namespace Xnoise
+namespace XNoise
 {
     [CustomNodeGraphEditor(typeof(XnoiseGraph))]
     public class LibnoiseGraphEditor : DefaultGraphEditor

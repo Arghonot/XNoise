@@ -2,7 +2,7 @@
 using UnityEngine;
 using LibNoise;
 
-namespace Xnoise
+namespace XNoise
 {
     [CreateNodeMenu("NoiseGraph/Modifier/Abs")]
     public class AbsNode : LibnoiseNode

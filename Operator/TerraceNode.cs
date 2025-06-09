@@ -6,7 +6,7 @@ using LibNoise.Generator;
 using System.Linq;
 using System.Collections.Generic;
 
-namespace Xnoise
+namespace XNoise
 {
     [CreateNodeMenu("NoiseGraph/Modifier/Terrace")]
     public class TerraceNode : LibnoiseNode

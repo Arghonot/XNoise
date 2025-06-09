@@ -1,7 +1,7 @@
 ﻿using LibNoise;
 using LibNoise.Generator;
 
-namespace Xnoise
+namespace XNoise
 {
     [CreateNodeMenu("NoiseGraph/Generator/Checker")]
     public class CheckerNode : LibnoiseNode

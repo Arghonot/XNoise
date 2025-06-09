@@ -2,7 +2,7 @@
 using LibNoise.Operator;
 using LibNoise;
 
-namespace Xnoise
+namespace XNoise
 {
     [CreateNodeMenu("NoiseGraph/Combiner/Min")]
     public class MinNode : LibnoiseNode

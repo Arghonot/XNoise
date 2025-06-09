@@ -2,7 +2,7 @@
 using LibNoise;
 using UnityEngine;
 
-namespace Xnoise
+namespace XNoise
 {
     [System.Serializable]
     [CreateNodeMenu("NoiseGraph/Modifier/Curve")]

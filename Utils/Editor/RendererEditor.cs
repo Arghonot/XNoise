@@ -5,7 +5,7 @@ using UnityEditor;
 using UnityEngine;
 using XNodeEditor;
 
-namespace Xnoise
+namespace XNoise
 {
     [CustomNodeEditor(typeof(Renderer))]
     public class RendererEditor : NodeEditor

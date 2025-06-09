@@ -1,7 +1,7 @@
 ﻿using CustomGraph;
 using LibNoise;
 
-namespace Xnoise
+namespace XNoise
 {
     [CreateNodeMenu("NoiseGraph/Graph/LibNoiseSubGraph")]
     [HideFromNodeMenu] // TODO finish me for V2

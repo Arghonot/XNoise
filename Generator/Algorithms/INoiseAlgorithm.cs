@@ -1,7 +1,7 @@
 
 using LibNoise;
 
-namespace Xnoise
+namespace XNoise
 {
     // base class for any 3d noise sampling algorithm
     public interface INoiseAlgorithm

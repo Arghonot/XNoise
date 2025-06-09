@@ -3,7 +3,7 @@ using LibNoise.Generator;
 using Unity.Mathematics;
 using UnityEngine;
 
-namespace Xnoise
+namespace XNoise
 {
     public static class NoiseUtils
     {

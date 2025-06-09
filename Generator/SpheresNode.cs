@@ -2,7 +2,7 @@
 using LibNoise.Generator;
 using UnityEngine;
 
-namespace Xnoise
+namespace XNoise
 {
     [CreateNodeMenu("NoiseGraph/Generator/Spheres")]
     public class SpheresNode : LibnoiseNode

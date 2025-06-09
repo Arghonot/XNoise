@@ -3,7 +3,7 @@ using CustomGraph;
 using LibNoise;
 using UnityEngine;
 
-namespace Xnoise
+namespace XNoise
 {
     [Serializable]
     [HideFromNodeMenu]

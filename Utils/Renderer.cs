@@ -5,7 +5,7 @@ using XNode;
 using System.IO;
 using System;
 
-namespace Xnoise
+namespace XNoise
 {
     [CreateNodeMenu("NoiseGraph/Debug/Render")]
     [NodeTint(CustomGraph.ColorProfile.Debug)]

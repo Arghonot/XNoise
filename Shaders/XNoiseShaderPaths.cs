@@ -1,4 +1,4 @@
-namespace Xnoise
+namespace XNoise
 {
     public static class XNoiseShaderPaths
     {

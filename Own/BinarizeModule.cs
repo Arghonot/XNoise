@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using LibNoise;
 using UnityEngine;
-using Xnoise;
+using XNoise;
 
 public class BinarizeModule : SerializableModuleBase
 {
