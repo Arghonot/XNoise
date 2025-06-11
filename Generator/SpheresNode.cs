@@ -1,10 +1,10 @@
-﻿using LibNoise;
-using LibNoise.Generator;
+﻿using LibNoise.Generator;
 using UnityEngine;
 
 namespace XNoise
 {
     [CreateNodeMenu("NoiseGraph/Generator/Spheres")]
+    [NodeTint(XNoiseNodeColors.Generator)]
     public class SpheresNode : LibnoiseNode
     {
         [Output(ShowBackingValue.Always, ConnectionType.Multiple, TypeConstraint.Strict)]

@@ -5,6 +5,7 @@ using UnityEngine;
 namespace XNoise
 {
     [CreateNodeMenu("NoiseGraph/Modifier/Clamp")]
+    [NodeTint(XNoiseNodeColors.Modifier)]
     public class ClampNode : LibnoiseNode
     {
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]

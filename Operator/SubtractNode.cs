@@ -4,8 +4,9 @@ using UnityEngine;
 
 namespace XNoise
 {
-    [CreateNodeMenu("NoiseGraph/Combiner/Substract")]
-    public class SubstractNode : LibnoiseNode
+    [CreateNodeMenu("NoiseGraph/Combiner/Subtract")]
+    [NodeTint(XNoiseNodeColors.Combiner)]
+    public class SubtractNode : LibnoiseNode
     {
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
         public SerializableModuleBase SourceA;

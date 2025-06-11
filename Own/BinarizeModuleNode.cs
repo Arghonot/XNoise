@@ -1,11 +1,11 @@
-﻿using LibNoise.Operator;
-using LibNoise;
+﻿using LibNoise;
 
 using UnityEngine;
 
 namespace XNoise
 {
     [CreateNodeMenu("NoiseGraph/Modifier/Binarize")]
+    [NodeTint(XNoiseNodeColors.Modifier)]
     public class BinarizeModuleNode : LibnoiseNode
     {
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
@@ -13,8 +13,7 @@ namespace XNoise
 
         public override object Run()
         {
-            return new BinarizeModule(
-                GetInputValue<SerializableModuleBase>("Input", this.Input));
+            return new BinarizeModule(GetInputValue<SerializableModuleBase>("Input", this.Input));
         }
     }
 }

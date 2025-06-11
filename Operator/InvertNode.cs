@@ -5,6 +5,7 @@ using UnityEngine;
 namespace XNoise
 {
     [CreateNodeMenu("NoiseGraph/Modifier/Invert")]
+    [NodeTint(XNoiseNodeColors.Modifier)]
     public class InvertNode : LibnoiseNode
     {
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
@@ -12,8 +13,7 @@ namespace XNoise
 
         public override object Run()
         {
-            return new Invert(
-                GetInputValue<SerializableModuleBase>("Input", this.Input));
+            return new Invert(GetInputValue<SerializableModuleBase>("Input", this.Input));
 
         }
     }

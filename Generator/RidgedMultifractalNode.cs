@@ -1,11 +1,11 @@
 ﻿using LibNoise;
 using LibNoise.Generator;
-using LibNoise.Operator;
 using UnityEngine;
 
 namespace XNoise
 {
     [CreateNodeMenu("NoiseGraph/Generator/RidgedMultifractal")]
+    [NodeTint(XNoiseNodeColors.Generator)]
     public class RidgedMultifractalNode : LibnoiseNode
     {
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]

@@ -5,6 +5,7 @@ using LibNoise;
 namespace XNoise
 {
     [CreateNodeMenu("NoiseGraph/Combiner/Multiply")]
+    [NodeTint(XNoiseNodeColors.Combiner)]
     public class MultiplyNode : LibnoiseNode
     {
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]

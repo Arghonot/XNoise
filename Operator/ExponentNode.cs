@@ -5,6 +5,7 @@ using LibNoise;
 namespace XNoise
 {
     [CreateNodeMenu("NoiseGraph/Modifier/Exponent")]
+    [NodeTint(XNoiseNodeColors.Modifier)]
     public class ExponentNode : LibnoiseNode
     {
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]

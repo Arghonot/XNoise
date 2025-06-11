@@ -5,6 +5,7 @@ using UnityEngine;
 namespace XNoise
 {
     [CreateNodeMenu("NoiseGraph/Modifier/ScaleBias")]
+    [NodeTint(XNoiseNodeColors.Modifier)]
     public class ScaleBiasNode : LibnoiseNode
     {
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]

@@ -5,6 +5,7 @@ using LibNoise;
 namespace XNoise
 {
     [CreateNodeMenu("NoiseGraph/Transformer/Turbulence")]
+    [NodeTint(XNoiseNodeColors.Transformer)]
     public class TurbulenceNode : LibnoiseNode
     {
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.InheritedAny)]

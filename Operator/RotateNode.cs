@@ -5,6 +5,7 @@ using UnityEngine;
 namespace XNoise
 {
     [CreateNodeMenu("NoiseGraph/Transformer/Rotate")]
+    [NodeTint(XNoiseNodeColors.Transformer)]
     public class RotateNode : LibnoiseNode
     {
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]

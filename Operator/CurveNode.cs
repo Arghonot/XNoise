@@ -6,6 +6,7 @@ namespace XNoise
 {
     [System.Serializable]
     [CreateNodeMenu("NoiseGraph/Modifier/Curve")]
+    [NodeTint(XNoiseNodeColors.Modifier)]
     public class CurveNode : LibnoiseNode
     {
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
@@ -23,7 +24,6 @@ namespace XNoise
             Curve curve = new Curve(GetInputValue<SerializableModuleBase>("Input", this.Input));
 
             curve.mathematicalCurve = GetInputValue<AnimationCurve>("InputCurve", this.InputCurve);
-            //curve.SetCurve(animCurve);//UtilsFunctions.GetCurveAsTexture(InputCurve));
 
             return curve;
         }

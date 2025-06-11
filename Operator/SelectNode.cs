@@ -5,6 +5,7 @@ using LibNoise;
 namespace XNoise
 {
     [CreateNodeMenu("NoiseGraph/Selector/Select")]
+    [NodeTint(XNoiseNodeColors.Selector)]
     public class SelectNode : LibnoiseNode
     {
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]

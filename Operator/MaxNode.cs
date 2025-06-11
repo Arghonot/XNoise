@@ -5,6 +5,7 @@ using LibNoise;
 namespace XNoise
 {
     [CreateNodeMenu("NoiseGraph/Combiner/Max")]
+    [NodeTint(XNoiseNodeColors.Combiner)]
     public class MaxNode : LibnoiseNode
     {
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]

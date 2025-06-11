@@ -7,6 +7,7 @@ using UnityEngine;
 namespace XNoise
 {
     [CreateNodeMenu("NoiseGraph/Generator/Billow")]
+    [NodeTint(XNoiseNodeColors.Generator)]
     public class BillowNode : LibnoiseNode
     {
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]

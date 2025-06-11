@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
-using LibNoise;
 using LibNoise.Generator;
 
 namespace XNoise
 {
     [CreateNodeMenu("NoiseGraph/Generator/Cylinders")]
+    [NodeTint(XNoiseNodeColors.Generator)]
     public class CylindersNode : LibnoiseNode
     {
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]

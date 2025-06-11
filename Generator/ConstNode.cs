@@ -1,13 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using LibNoise;
+﻿using UnityEngine;
 using LibNoise.Generator;
-using static XNode.Node;
 
 namespace XNoise
 {
     [CreateNodeMenu("NoiseGraph/Generator/Const")]
+    [NodeTint(XNoiseNodeColors.Generator)]
     public class ConstNode : LibnoiseNode
     {
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]

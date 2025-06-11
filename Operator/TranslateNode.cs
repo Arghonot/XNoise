@@ -7,6 +7,7 @@ using LibNoise;
 namespace XNoise
 {
     [CreateNodeMenu("NoiseGraph/Transformer/Translate")]
+    [NodeTint(XNoiseNodeColors.Transformer)]
     public class TranslateNode : LibnoiseNode
     {
 

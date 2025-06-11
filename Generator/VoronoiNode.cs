@@ -1,12 +1,10 @@
-﻿using LibNoise;
-using LibNoise.Generator;
-using System.Collections;
-using System.Collections.Generic;
+﻿using LibNoise.Generator;
 using UnityEngine;
 
 namespace XNoise
 {
     [CreateNodeMenu("NoiseGraph/Generator/Voronoi")]
+    [NodeTint(XNoiseNodeColors.Generator)]
     public class VoronoiNode : LibnoiseNode
     {
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]

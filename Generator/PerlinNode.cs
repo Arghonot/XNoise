@@ -1,12 +1,11 @@
 ﻿using LibNoise;
 using LibNoise.Generator;
-using System.Linq;
 using UnityEngine;
-using XNode;
 
 namespace XNoise
 {
     [CreateNodeMenu("NoiseGraph/Generator/Perlin")]
+    [NodeTint(XNoiseNodeColors.Generator)]
     public class PerlinNode : LibnoiseNode
     {
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
@@ -21,16 +20,6 @@ namespace XNoise
         public int Seed;
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
         public QualityMode Quality;
-
-        [ContextMenu("Debugdkmj")]
-        public void Debugdkmj()
-        {
-            Debug.Log("frequency " + GetInputValue<double>("frequency", this.frequency));
-            Debug.Log("lacunarity " + GetInputValue<double>("lacunarity", this.lacunarity));
-            Debug.Log("persistence " + GetInputValue<double>("persistence", this.persistence));
-            Debug.Log("Octaves " + GetInputValue<int>("Octaves", this.Octaves));
-            Debug.Log("Seed " + GetInputValue<int>("Seed", this.Seed));
-        }
 
         public override object Run()
         {
