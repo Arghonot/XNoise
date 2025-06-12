@@ -6,7 +6,7 @@ using CustomGraph;
 namespace XNoise
 {
     [CreateNodeMenu("Experimental/Generator/SimpleShaderRenderer")]
-    [NodeTint(CustomGraph.ColorProfile.FlatBlue)]
+    [NodeTint(XNoiseNodeColors.Generator)]
     [HideFromNodeMenu] // TODO finish me for V2
     public class SimpleShaderRenderer : LibnoiseNode
     {

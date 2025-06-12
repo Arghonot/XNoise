@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
 using LibNoise.Generator;
+using CustomGraph;
 
 namespace XNoise
 {
     [CreateNodeMenu("NoiseGraph/Generator/Const")]
-    [NodeTint(XNoiseNodeColors.Generator)]
+    [NodeTint(ColorProfile.Input)]
     public class ConstNode : LibnoiseNode
     {
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]

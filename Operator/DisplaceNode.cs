@@ -5,7 +5,7 @@ using UnityEngine;
 namespace XNoise
 {
     [CreateNodeMenu("NoiseGraph/Transformer/Displace")]
-    [NodeTint(XNoiseNodeColors.Selector)]
+    [NodeTint(XNoiseNodeColors.Transformer)]
     public class DisplaceNode : LibnoiseNode
     {
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]

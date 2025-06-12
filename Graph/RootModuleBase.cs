@@ -7,6 +7,7 @@ namespace XNoise
 {
     [Serializable]
     [HideFromNodeMenu]
+    [NodeTint(XNoiseNodeColors.Output)]
     public class RootModuleBase : Root
     {
         [Input(ShowBackingValue.Never, ConnectionType.Override, TypeConstraint.Strict)]
