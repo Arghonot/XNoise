@@ -6,7 +6,7 @@ namespace XNoise
 {
     [CreateNodeMenu("NoiseGraph/Modifier/Terrace")]
     [NodeTint(XNoiseNodeColors.Modifier)]
-    public class TerraceNode : LibnoiseNode
+    public class TerraceNode : XNoiseNode
     {
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
         public SerializableModuleBase InputModule;

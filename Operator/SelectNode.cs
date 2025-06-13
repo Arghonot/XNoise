@@ -6,7 +6,7 @@ namespace XNoise
 {
     [CreateNodeMenu("NoiseGraph/Selector/Select")]
     [NodeTint(XNoiseNodeColors.Selector)]
-    public class SelectNode : LibnoiseNode
+    public class SelectNode : XNoiseNode
     {
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
         public SerializableModuleBase SourceA;

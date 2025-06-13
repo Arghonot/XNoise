@@ -1,43 +1,43 @@
 ﻿using LibNoise;
 using System.Diagnostics;
 using UnityEngine;
-using XNode;
-using System.IO;
-using System;
 
 namespace XNoise
 {
-    [CreateNodeMenu("NoiseGraph/Debug/Render")]
-    [NodeTint(CustomGraph.ColorProfile.Debug)]
-    public class Renderer : Node
+    public class Renderer
     {
-        public static int index = 0;
+        [HideInInspector] public static int index = 0;
         string DataPath = "/";
-        [SerializeField] public string PictureName = "Test";
-        [SerializeField] public float south = 90.0f;
-        [SerializeField] public float north = -90.0f;
-        [SerializeField] public float west = -180.0f;
-        [SerializeField] public float east = 180.0f;
-        [SerializeField] public float angleMin = -180.0f;   // or 0.0f
-        [SerializeField] public float angleMax = 180.0f;    // or 360.0f
-        [SerializeField] public float heightMin = -1.0f;    // bottom of the cylinder
-        [SerializeField] public float heightMax = 1.0f;     // top of the cylinder
+        [HideInInspector] public string PictureName = "Test";
+        [HideInInspector] public float south = 90.0f;
+        [HideInInspector] public float north = -90.0f;
+        [HideInInspector] public float west = -180.0f;
+        [HideInInspector] public float east = 180.0f;
+        [HideInInspector] public float angleMin = -180.0f;   // or 0.0f
+        [HideInInspector] public float angleMax = 180.0f;    // or 360.0
+        [HideInInspector] public float heightMin = -1.0f;    // bottom of the cylinder
+        [HideInInspector] public float heightMax = 1.0f;     // top of the cylinder
 
-        [SerializeField] public int width = 512;
-        [SerializeField] public int Height = 0;
-        [SerializeField] public Texture2D tex = null;
-        [SerializeField] public Gradient grad = new Gradient();
+        [HideInInspector] public int width = 512;
+        [HideInInspector] public int Height = 0;
+        [HideInInspector] public Texture2D tex = null;
+        [HideInInspector] public Gradient grad = new Gradient();
 
-        public float Space = 110;
-        public int renderMode;
-        public int projectionMode;
+        [HideInInspector] public float Space = 110;
+        [HideInInspector] public int renderMode;
+        [HideInInspector] public int projectionMode;
 
-        [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
-        public SerializableModuleBase Input;
+        [HideInInspector] public Rect TexturePosition = new Rect(14, 210, 180, 90);
 
-        public Rect TexturePosition = new Rect(14, 210, 180, 90);
+        [HideInInspector] public long RenderTime;
 
-        public long RenderTime;
+
+        [HideInInspector] public SerializableModuleBase input;
+
+        public Renderer()
+        {
+
+        }
 
         public void Render()
         {
@@ -49,10 +49,6 @@ namespace XNoise
             {
                 RenderGPU();
             }
-            else
-            {
-
-            }
         }
 
         public void RenderCPU()
@@ -60,10 +56,7 @@ namespace XNoise
             Stopwatch watch = new Stopwatch();
 
             watch.Start();
-            Noise2D map = new Noise2D(
-                width,
-                Height == 0 ? width / 2 : Height, 
-                GetInputValue<SerializableModuleBase>("Input", this.Input));
+            Noise2D map = new Noise2D(width, Height == 0 ? width / 2 : Height, input);
 
             if (projectionMode == 0)
             {
@@ -82,7 +75,6 @@ namespace XNoise
                 map.GenerateCylindrical(Noise2D.AngleMin, Noise2D.AngleMax, Noise2D.Top, Noise2D.Bottom);
             }
 
-
             tex = map.GetTexture();
             tex.Apply();
 
@@ -96,10 +88,7 @@ namespace XNoise
             Stopwatch watch = new Stopwatch();
             watch.Start();
 
-            var map = new Noise2D(
-                width,
-                Height == 0 ? width / 2 : Height,
-                GetInputValue<SerializableModuleBase>("Input", this.Input));
+            var map = new Noise2D(width, Height == 0 ? width / 2 : Height, input);
             map.useGPU = true;
 
             if (projectionMode == 0)
@@ -118,7 +107,6 @@ namespace XNoise
             watch.Stop();
             RenderTime = watch.ElapsedMilliseconds;
             tex = map.GetTextureVisualization();
-
         }
 
         public void Save()

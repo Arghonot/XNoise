@@ -1,12 +1,11 @@
 using UnityEngine;
 using LibNoise.Operator;
 using LibNoise;
-using static XNode.Node;
 
 namespace XNoise
 {
     [CreateNodeMenu("NoiseGraph/Modifier/Scale")]
-    public class ScaleNode : LibnoiseNode
+    public class ScaleNode : XNoiseNode
     {
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
         public SerializableModuleBase Input;

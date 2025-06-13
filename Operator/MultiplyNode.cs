@@ -6,11 +6,10 @@ namespace XNoise
 {
     [CreateNodeMenu("NoiseGraph/Combiner/Multiply")]
     [NodeTint(XNoiseNodeColors.Combiner)]
-    public class MultiplyNode : LibnoiseNode
+    public class MultiplyNode : XNoiseNode
     {
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
         public SerializableModuleBase SourceA;
-
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
         public SerializableModuleBase SourceB;
 

@@ -6,17 +6,14 @@ namespace XNoise
 {
     [CreateNodeMenu("NoiseGraph/Transformer/Displace")]
     [NodeTint(XNoiseNodeColors.Transformer)]
-    public class DisplaceNode : LibnoiseNode
+    public class DisplaceNode : XNoiseNode
     {
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
         public SerializableModuleBase Source;
-
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
         public SerializableModuleBase ControllerA;
-
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
         public SerializableModuleBase ControllerB;
-
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
         public SerializableModuleBase ControllerC;
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]

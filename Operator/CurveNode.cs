@@ -7,11 +7,10 @@ namespace XNoise
     [System.Serializable]
     [CreateNodeMenu("NoiseGraph/Modifier/Curve")]
     [NodeTint(XNoiseNodeColors.Modifier)]
-    public class CurveNode : LibnoiseNode
+    public class CurveNode : XNoiseNode
     {
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
         public SerializableModuleBase Input;
-
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
         public AnimationCurve InputCurve;
 

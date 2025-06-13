@@ -8,7 +8,7 @@ namespace XNoise
     [CreateNodeMenu("Experimental/Generator/SimpleShaderRenderer")]
     [NodeTint(XNoiseNodeColors.Generator)]
     [HideFromNodeMenu] // TODO finish me for V2
-    public class SimpleShaderRenderer : LibnoiseNode
+    public class SimpleShaderRenderer : XNoiseNode
     {
 
         public Material ShaderA;

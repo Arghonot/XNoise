@@ -7,11 +7,8 @@ namespace XNoise
     /// A default class with a generic output node.
     /// </summary>
     [HideFromNodeMenu]
-    public class LibnoiseNode : CustomGraph.Branch<SerializableModuleBase>
+    public class XNoiseNode : CustomGraph.Branch<SerializableModuleBase>
     {
-        public override object Run()
-        {
-            return null;
-        }
+        public override object Run() => null;
     }
 }

@@ -9,6 +9,8 @@ namespace XNoise
     [CreateAssetMenu(fileName = "XnoiseGraph", menuName = "Graphs/XnoiseGraph", order = 2)]
     public class XnoiseGraph : DefaultGraph, ISerializationCallbackReceiver
     {
+        [SerializeField] public Renderer renderer = new Renderer();
+
         [HideInInspector] public int width = 512;
         [HideInInspector] public int Height = 512;
 

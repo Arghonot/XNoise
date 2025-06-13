@@ -1,6 +1,4 @@
 ﻿using LibNoise.Operator;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using LibNoise;
 
@@ -8,7 +6,7 @@ namespace XNoise
 {
     [CreateNodeMenu("NoiseGraph/Transformer/Translate")]
     [NodeTint(XNoiseNodeColors.Transformer)]
-    public class TranslateNode : LibnoiseNode
+    public class TranslateNode : XNoiseNode
     {
 
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]

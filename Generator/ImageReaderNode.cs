@@ -6,11 +6,10 @@ namespace XNoise
 {
     [CreateNodeMenu("NoiseGraph/Debug/ImageReader")]
     [HideFromNodeMenu] // TODO finish me for V2
-    public class ImageReaderNode : LibnoiseNode
+    public class ImageReaderNode : XNoiseNode
     {
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
         public Texture2D input;
-
         [Output(ShowBackingValue.Unconnected, ConnectionType.Multiple, TypeConstraint.Strict)]
         public Texture2D outputTexture2D;
 

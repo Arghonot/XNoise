@@ -6,7 +6,7 @@ namespace XNoise
 {
     [CreateNodeMenu("NoiseGraph/Generator/RidgedMultifractal")]
     [NodeTint(XNoiseNodeColors.Generator)]
-    public class RidgedMultifractalNode : LibnoiseNode
+    public class RidgedMultifractalNode : XNoiseNode
     {
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
         public double frequency;
@@ -21,17 +21,6 @@ namespace XNoise
 
         public override object Run()
         {
-            //// if editing the graph -> we stick to current variables
-            //if (Application.isEditor && !Application.isPlaying)
-            //{
-            //    return new RidgedMultifractal(
-            //        this.frequency,
-            //        this.lacunarity,
-            //        this.Octaves,
-            //        this.Seed,
-            //        (QualityMode)this.Quality);
-            //}
-
             return new RidgedMultifractal(
                 GetInputValue<double>("frequency", this.frequency),
                 GetInputValue<double>("lacunarity", this.lacunarity),

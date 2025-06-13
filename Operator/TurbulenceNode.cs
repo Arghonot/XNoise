@@ -6,7 +6,7 @@ namespace XNoise
 {
     [CreateNodeMenu("NoiseGraph/Transformer/Turbulence")]
     [NodeTint(XNoiseNodeColors.Transformer)]
-    public class TurbulenceNode : LibnoiseNode
+    public class TurbulenceNode : XNoiseNode
     {
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.InheritedAny)]
         public SerializableModuleBase Input;

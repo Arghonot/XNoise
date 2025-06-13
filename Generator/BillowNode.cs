@@ -1,14 +1,12 @@
 ﻿using LibNoise;
 using LibNoise.Generator;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace XNoise
 {
     [CreateNodeMenu("NoiseGraph/Generator/Billow")]
     [NodeTint(XNoiseNodeColors.Generator)]
-    public class BillowNode : LibnoiseNode
+    public class BillowNode : XNoiseNode
     {
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
         public double frequency;
@@ -25,18 +23,6 @@ namespace XNoise
 
         public override object Run()
         {
-            // if editing the graph -> we stick to current variables
-            //if (Application.isEditor && !Application.isPlaying)
-            //{
-            //    return new Billow(
-            //        this.frequency,
-            //        this.lacunarity,
-            //        this.persistence,
-            //        this.Octaves,
-            //        this.Seed,
-            //        this.Quality);
-            //}
-
             return new Billow(
                 GetInputValue<double>("frequency", this.frequency),
                 GetInputValue<double>("lacunarity", this.lacunarity),

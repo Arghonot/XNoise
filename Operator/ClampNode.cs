@@ -6,14 +6,12 @@ namespace XNoise
 {
     [CreateNodeMenu("NoiseGraph/Modifier/Clamp")]
     [NodeTint(XNoiseNodeColors.Modifier)]
-    public class ClampNode : LibnoiseNode
+    public class ClampNode : XNoiseNode
     {
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
         public SerializableModuleBase Input;
-
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
         public double Minimum;
-
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
         public double Maximum;
 

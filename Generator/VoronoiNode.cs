@@ -5,7 +5,7 @@ namespace XNoise
 {
     [CreateNodeMenu("NoiseGraph/Generator/Voronoi")]
     [NodeTint(XNoiseNodeColors.Generator)]
-    public class VoronoiNode : LibnoiseNode
+    public class VoronoiNode : XNoiseNode
     {
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
         public double frequency;

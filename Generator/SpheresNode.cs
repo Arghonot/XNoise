@@ -5,7 +5,7 @@ namespace XNoise
 {
     [CreateNodeMenu("NoiseGraph/Generator/Spheres")]
     [NodeTint(XNoiseNodeColors.Generator)]
-    public class SpheresNode : LibnoiseNode
+    public class SpheresNode : XNoiseNode
     {
         [Output(ShowBackingValue.Always, ConnectionType.Multiple, TypeConstraint.Strict)]
         public double frequency;

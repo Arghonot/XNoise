@@ -6,7 +6,7 @@ namespace XNoise
 {
     [CreateNodeMenu("NoiseGraph/Generator/Const")]
     [NodeTint(ColorProfile.Input)]
-    public class ConstNode : LibnoiseNode
+    public class ConstNode : XNoiseNode
     {
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
         public double value;

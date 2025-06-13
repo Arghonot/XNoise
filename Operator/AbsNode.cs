@@ -6,7 +6,7 @@ namespace XNoise
 {
     [CreateNodeMenu("NoiseGraph/Modifier/Abs")]
     [NodeTint(XNoiseNodeColors.Modifier)]
-    public class AbsNode : LibnoiseNode
+    public class AbsNode : XNoiseNode
     {
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
         public SerializableModuleBase Controller;

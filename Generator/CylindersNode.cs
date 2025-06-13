@@ -5,7 +5,7 @@ namespace XNoise
 {
     [CreateNodeMenu("NoiseGraph/Generator/Cylinders")]
     [NodeTint(XNoiseNodeColors.Generator)]
-    public class CylindersNode : LibnoiseNode
+    public class CylindersNode : XNoiseNode
     {
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
         public double frequency;

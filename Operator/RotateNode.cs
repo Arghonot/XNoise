@@ -6,17 +6,14 @@ namespace XNoise
 {
     [CreateNodeMenu("NoiseGraph/Transformer/Rotate")]
     [NodeTint(XNoiseNodeColors.Transformer)]
-    public class RotateNode : LibnoiseNode
+    public class RotateNode : XNoiseNode
     {
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
         public SerializableModuleBase Input;
-
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
         public double XDegrees;
-
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
         public double YDegrees;
-
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
         public double ZDegrees;
 

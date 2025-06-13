@@ -6,11 +6,10 @@ namespace XNoise
 {
     [CreateNodeMenu("NoiseGraph/Combiner/Max")]
     [NodeTint(XNoiseNodeColors.Combiner)]
-    public class MaxNode : LibnoiseNode
+    public class MaxNode : XNoiseNode
     {
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
         public SerializableModuleBase SourceA;
-
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
         public SerializableModuleBase SourceB;
 

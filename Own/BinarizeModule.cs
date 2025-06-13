@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using LibNoise;
+﻿using LibNoise;
 using UnityEngine;
 using XNoise;
 

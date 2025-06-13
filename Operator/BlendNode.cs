@@ -6,14 +6,12 @@ namespace XNoise
 {
     [CreateNodeMenu("NoiseGraph/Selector/Blend")]
     [NodeTint(XNoiseNodeColors.Selector)]
-    public class BlendNode : LibnoiseNode
+    public class BlendNode : XNoiseNode
     {
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
         public SerializableModuleBase SourceA;
-
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
         public SerializableModuleBase SourceB;
-
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
         public SerializableModuleBase Controller;
 

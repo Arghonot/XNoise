@@ -6,7 +6,7 @@ namespace XNoise
 {
     [CreateNodeMenu("NoiseGraph/Modifier/Invert")]
     [NodeTint(XNoiseNodeColors.Modifier)]
-    public class InvertNode : LibnoiseNode
+    public class InvertNode : XNoiseNode
     {
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
         public SerializableModuleBase Input;

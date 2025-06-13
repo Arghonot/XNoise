@@ -6,7 +6,7 @@ namespace XNoise
 {
     [CreateNodeMenu("NoiseGraph/Modifier/ScaleBias")]
     [NodeTint(XNoiseNodeColors.Modifier)]
-    public class ScaleBiasNode : LibnoiseNode
+    public class ScaleBiasNode : XNoiseNode
     {
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
         public SerializableModuleBase Input;

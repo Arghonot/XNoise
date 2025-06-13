@@ -6,7 +6,7 @@ namespace XNoise
 {
     [CreateNodeMenu("NoiseGraph/Generator/Perlin")]
     [NodeTint(XNoiseNodeColors.Generator)]
-    public class PerlinNode : LibnoiseNode
+    public class PerlinNode : XNoiseNode
     {
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
         public double frequency;

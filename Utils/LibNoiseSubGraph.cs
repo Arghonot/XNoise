@@ -5,7 +5,7 @@ namespace XNoise
 {
     [CreateNodeMenu("NoiseGraph/Graph/LibNoiseSubGraph")]
     [HideFromNodeMenu] // TODO finish me for V2
-    public class LibNoiseSubGraph : CustomGraph.SubGraphNode<SerializableModuleBase>
+    public class LibNoiseSubGraph : SubGraphNode<SerializableModuleBase>
     {
         public override object Run()
         {

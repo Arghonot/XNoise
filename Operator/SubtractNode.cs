@@ -6,7 +6,7 @@ namespace XNoise
 {
     [CreateNodeMenu("NoiseGraph/Combiner/Subtract")]
     [NodeTint(XNoiseNodeColors.Combiner)]
-    public class SubtractNode : LibnoiseNode
+    public class SubtractNode : XNoiseNode
     {
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
         public SerializableModuleBase SourceA;
