@@ -34,7 +34,7 @@ namespace XNoise
 
         public override Type GetRootNodeType() => typeof(RootModuleBase);
 
-        public SerializableModuleBase GetGenerator(GraphVariableStorage newstorage = null)
+        public SerializableModuleBase GetGenerator(GraphVariables newstorage = null)
         {
             if (newstorage != null)
             {
@@ -53,18 +53,5 @@ namespace XNoise
                 blackboard.storage = originalStorage;
             }
         }
-
-        public Texture2D Render(bool isGPU = true) // TODO does it belongs here ?
-        {
-            Texture2D tex;
-            var generator = GetGenerator();
-            Noise2D map = new Noise2D(width, Height == 0 ? width / 2 : Height, generator);
-
-            map.useGPU = isGPU;
-            map.GeneratePlanar(Noise2D.Left, Noise2D.Right, Noise2D.Top, Noise2D.Bottom);
-            tex = map.GetTexture();
-            tex.Apply();
-            return tex;
-        }
-    }    
+    }
 }
