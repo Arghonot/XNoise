@@ -7,38 +7,30 @@ using System;
 namespace XNoise
 {
     [CreateAssetMenu(fileName = "XnoiseGraph", menuName = "Graphs/XnoiseGraph", order = 2)]
-    public class XnoiseGraph : DefaultGraph, ISerializationCallbackReceiver
+    public class XnoiseGraph : GraphBase, ISerializationCallbackReceiver
     {
         [SerializeField] public Renderer renderer = new Renderer();
 
-        [HideInInspector] public int width = 512;
-        [HideInInspector] public int Height = 512;
+        public override Type GetRootNodeType() => typeof(RootModuleBase);
 
-        public void Initialize()
+        public override void Initialize()
         {
-            if (this.blackboard == null)
+            base.Initialize();
+            if (root == null && nodes.Any(n => n is RootModuleBase))
             {
-                var bb = this.AddNode<CustomGraph.Blackboard>();
-                this.blackboard = bb as CustomGraph.Blackboard;
+                root = nodes.OfType<RootModuleBase>().FirstOrDefault();
             }
-            // we do not want to have two outputs
-            if (this.root == null && nodes.Any(n => n is RootModuleBase))
+            else if (root == null)
             {
-                this.root = nodes.OfType<RootModuleBase>().FirstOrDefault();
-            }
-            else if (this.root == null)
-            {
-                this.root = this.AddNode<RootModuleBase>();
+                root = AddNode<RootModuleBase>();
             }
         }
-
-        public override Type GetRootNodeType() => typeof(RootModuleBase);
 
         public SerializableModuleBase GetGenerator(GraphVariables newstorage = null)
         {
             if (newstorage != null)
             {
-                this.originalStorage = newstorage;
+                runtimeStorage = newstorage; // changed a pretty bad typo here does it still work ?
             }
 
             return (SerializableModuleBase)root.GetValue(root.Ports.First());
