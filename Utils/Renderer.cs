@@ -7,8 +7,10 @@ namespace XNoise
     public class Renderer
     {
         [HideInInspector] public static int index = 0;
+        // TODO move to a nested class for better clarity
         string DataPath = "/";
         [HideInInspector] public string PictureName = "Test";
+        // todo store me in a class for better wrapping
         [HideInInspector] public float south = 90.0f;
         [HideInInspector] public float north = -90.0f;
         [HideInInspector] public float west = -180.0f;
@@ -20,13 +22,15 @@ namespace XNoise
 
         [HideInInspector] public int width = 512;
         [HideInInspector] public int Height = 0;
+        [HideInInspector] public RenderTexture rtex = null;
         [HideInInspector] public Texture2D tex = null;
         [HideInInspector] public Gradient grad = new Gradient();
 
-        [HideInInspector] public float Space = 110; // clean me
-        [HideInInspector] public int renderMode;
-        [HideInInspector] public int projectionMode;
+        [HideInInspector] public float Space = 110; // todo clean me
+        [HideInInspector] public int renderMode; // todo use enum here
+        [HideInInspector] public int projectionMode; // todo use enum here
 
+        // todo move to UI logic
         [HideInInspector] public Rect TexturePosition = new Rect(14, 210, 180, 90);
 
         [HideInInspector] public long RenderTime;
@@ -34,10 +38,9 @@ namespace XNoise
 
         [HideInInspector] public SerializableModuleBase input;
 
-        public Renderer()
-        {
+        private Noise2D _noise;
 
-        }
+        public Renderer() { }
 
         public void Render()
         {
@@ -48,6 +51,7 @@ namespace XNoise
             if (renderMode == 1)
             {
                 RenderGPU();
+                StoreTex();
             }
         }
 
@@ -56,15 +60,15 @@ namespace XNoise
             Stopwatch watch = new Stopwatch();
 
             watch.Start();
-            Noise2D map = new Noise2D(width, Height == 0 ? width / 2 : Height, input);
+            _noise = new Noise2D(width, Height == 0 ? width / 2 : Height, input);
 
             if (projectionMode == 0)
             {
-                map.GeneratePlanar(Noise2D.Left, Noise2D.Right, Noise2D.Top, Noise2D.Bottom);
+                _noise.GeneratePlanar(Noise2D.Left, Noise2D.Right, Noise2D.Top, Noise2D.Bottom);
             }
             else if (projectionMode == 1)
             {
-                map.GenerateSpherical(
+                _noise.GenerateSpherical(
                     south,
                     north,
                     west,
@@ -72,10 +76,10 @@ namespace XNoise
             }
             else if (projectionMode == 2)
             {
-                map.GenerateCylindrical(Noise2D.AngleMin, Noise2D.AngleMax, Noise2D.Top, Noise2D.Bottom);
+                _noise.GenerateCylindrical(Noise2D.AngleMin, Noise2D.AngleMax, Noise2D.Top, Noise2D.Bottom);
             }
 
-            tex = map.GetTexture();
+            tex = _noise.GetTexture();
             tex.Apply();
 
             watch.Stop();
@@ -88,32 +92,39 @@ namespace XNoise
             Stopwatch watch = new Stopwatch();
             watch.Start();
 
-            var map = new Noise2D(width, Height == 0 ? width / 2 : Height, input);
-            map.useGPU = true;
+            _noise = null;
+            _noise = new Noise2D(width, Height == 0 ? width / 2 : Height, input);
+            _noise.useGPU = true;
 
+            // TODO rewrite me with a dictionnary of functions per projectionMode
             if (projectionMode == 0)
             {
-                map.GeneratePlanar(Noise2D.Left, Noise2D.Right, Noise2D.Top, Noise2D.Bottom);
+                _noise.GeneratePlanar(Noise2D.Left, Noise2D.Right, Noise2D.Top, Noise2D.Bottom);
             }
             else if (projectionMode == 1)
             {
-                map.GenerateSpherical(south, north, west, east);
+                _noise.GenerateSpherical(south, north, west, east);
             }
             else if (projectionMode == 2)
             {
-                map.GenerateCylindrical(angleMin, angleMax, heightMin, heightMax);
+                _noise.GenerateCylindrical(angleMin, angleMax, heightMin, heightMax);
             }
 
             watch.Stop();
             RenderTime = watch.ElapsedMilliseconds;
-            tex = map.GetTextureVisualization();
+            rtex = _noise.renderTexture;
+        }
+
+        public void StoreTex()
+        {
+            tex = _noise.GetFinalizedTexture();
         }
 
         public void Save()
         {
-            if (tex == null) return;
+            if (_noise == null) return;
 
-            ImageFileHelpers.SaveToPng(tex, DataPath, PictureName);
+            ImageFileHelpers.SaveToPng(_noise.GetFinalizedTexture(), DataPath, PictureName);
         }
     }
 }    
