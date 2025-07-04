@@ -23,7 +23,7 @@ namespace XNoise
         [HideInInspector] public Texture2D tex = null;
         [HideInInspector] public Gradient grad = new Gradient();
 
-        [HideInInspector] public float Space = 110;
+        [HideInInspector] public float Space = 110; // clean me
         [HideInInspector] public int renderMode;
         [HideInInspector] public int projectionMode;
 
