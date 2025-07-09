@@ -48,7 +48,7 @@ Shader "Xnoise/Generators/BillowSurfaceShader"
 
         float GetColor(float3 pos)
         {
-            float color = GetBillow(pos, _Frequency, _Persistence, _Lacunarity, _Octaves);
+            float color = GetBillow(pos, _Seed, _Frequency, _Persistence, _Lacunarity, _Octaves);
             return Normalize(color);
         }
         ENDCG

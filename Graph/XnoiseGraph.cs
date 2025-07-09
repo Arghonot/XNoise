@@ -16,13 +16,13 @@ namespace XNoise
         public override void Initialize()
         {
             base.Initialize();
-            if (root == null && nodes.Any(n => n is RootModuleBase))
+            if (rootNode == null && nodes.Any(n => n is RootModuleBase))
             {
-                root = nodes.OfType<RootModuleBase>().FirstOrDefault();
+                rootNode = nodes.OfType<RootModuleBase>().FirstOrDefault();
             }
-            else if (root == null)
+            else if (rootNode == null)
             {
-                root = AddNode<RootModuleBase>();
+                rootNode = AddNode<RootModuleBase>();
             }
         }
 
@@ -33,7 +33,7 @@ namespace XNoise
                 runtimeStorage = newstorage; // changed a pretty bad typo here does it still work ?
             }
 
-            return (SerializableModuleBase)root.GetValue(root.Ports.First());
+            return (SerializableModuleBase)rootNode.GetValue(rootNode.Ports.First());
         }
 
         public void OnAfterDeserialize() { }

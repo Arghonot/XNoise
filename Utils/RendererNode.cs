@@ -6,17 +6,9 @@ namespace XNoise
 {
     [CreateNodeMenu("NoiseGraph/Debug/Render")]
     [NodeTint(CustomGraph.ColorProfile.Debug)]
-    public class RendererNode : Root
+    public class RendererNode : Root<SerializableModuleBase>
     {
-        [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
-        public SerializableModuleBase Input;
-
-        [SerializeField] public Renderer renderer = new Renderer();
-
-        public override object Run()
-        {
-            return GetInputValue<SerializableModuleBase>("Input", this.Input);
-        }
+       [SerializeField] public Renderer renderer = new Renderer();
     }
 }
 
