@@ -26,7 +26,7 @@ namespace XNoise
                 GetInputValue<double>("lacunarity", this.lacunarity),
                 GetInputValue<int>("Octaves", this.Octaves),
                 GetInputValue<int>("Seed", this.Seed),
-                GetInputValue<QualityMode>("frequency", (QualityMode)this.Quality));
+                GetInputValue<QualityMode>("QualityMode", (QualityMode)this.Quality));
         }
     }
 }

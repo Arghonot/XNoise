@@ -48,7 +48,7 @@ Shader "Xnoise/Generators/RidgedMultifractalSurfaceShader"
 
         float GetColor(float3 coord)
         {
-            float value = GetRidgedMultifractal(coord, _Frequency, _Lacunarity, _Octaves);
+            float value = GetRidgedMultifractal(coord, _Seed, _Frequency, _Lacunarity, _Octaves);
             return (value + 1.0) * 0.5;
         }
         ENDCG

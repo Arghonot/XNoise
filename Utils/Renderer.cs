@@ -120,11 +120,11 @@ namespace XNoise
             tex = _noise.GetFinalizedTexture();
         }
 
-        public void Save()
+        public void Save(string savePictureName = "")
         {
             if (_noise == null) return;
 
-            ImageFileHelpers.SaveToPng(_noise.GetFinalizedTexture(), DataPath, PictureName);
+            ImageFileHelpers.SaveToPng(_noise.GetFinalizedTexture(), DataPath, savePictureName == "" ? PictureName : savePictureName);
         }
     }
 }    

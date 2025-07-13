@@ -1,57 +1,58 @@
 #ifndef RIDGEDMULTIFRACTAL_SHADER_LOGIC
 #define RIDGEDMULTIFRACTAL_SHADER_LOGIC
-
-
-float GetRidgedMultifractal(float3 position, float frequency, float lacunarity, int octaves)
+// Hash-based offset for each octave and seed
+float3 RidgedSeedOffset(float seed, int octave)
 {
+    float x = frac(sin(seed + octave * 12.9898) * 43758.5453);
+    float y = frac(sin(seed + octave * 78.233) * 12345.6789);
+    float z = frac(sin(seed + octave * 45.164) * 98765.4321);
+    return float3(x, y, z) * 256.0;
+}
+
+float GetRidgedMultifractal(float3 position, float seed, float frequency, float lacunarity, int octaves)
+{
+    // Ridged multifractal parameters
+    const float offset = 1.0;
+    const float gain = 2.0;
+
     float value = 0.0;
-    float signal = 0.0;
     float weight = 1.0;
-    float offset = 1.0;
-    float gain = 2.0;
-    float _weights[12];
-    float nx, ny, nz;
-    float f = 1.0;
+    float amplitude = 1.0;
+    float maxValue = 0.0;
+
+    // Scale input position by frequency
+    position *= frequency;
 
     for (int i = 0; i < octaves; i++)
     {
-        _weights[i] = pow(f, -1);
-        f *= lacunarity;
-    }
+        // Offset the domain with a hash of seed and octave
+        float3 octaveOffset = RidgedSeedOffset(seed, i);
+        float3 p = position + octaveOffset;
 
-    position.x *= frequency;
-    position.y *= frequency;
-    position.z *= frequency;
+        // Sample simplex noise
+        float signal = snoise(p);
 
-    for (int curOctave = 0; curOctave < octaves; curOctave++) {
-
-        // Make sure that these floating-point values have the same range as a 32-
-        // bit integer so that we can pass them to the coherent-noise functions.
-        nx = position.x;
-        ny = position.y;
-        nz = position.z;
-
-        // Get the coherent-noise value from the input value and add it to the
-        // final result.
-        //seed = (m_seed + curOctave) & 0xffffffff;
-        //signal = GradientCoherentNoise3D(nx, ny, nz, seed, 1);
-        signal = snoise(float3(nx, ny, nz));
+        // Ridged transformation
         signal = abs(signal);
         signal = offset - signal;
         signal *= signal;
+
+        // Weighting
         signal *= weight;
+        weight = clamp(signal * gain, 0.0, 1.0);
 
-        weight = signal * 2.0;
-        weight = clamp(weight, 0, 1);
-        value += (signal * _weights[i]);
-        value = signal;
+        // Accumulate
+        value += signal * amplitude;
+        maxValue += amplitude;
 
-        position.x *= lacunarity;
-        position.y *= lacunarity;
-        position.z *= lacunarity;
+        // Prepare for next octave
+        position *= lacunarity;
+        amplitude *= 0.5; // Standard persistence for fractals
     }
 
-    return (value * 1.25) - 1.0;
+    // Normalize and remap to [-1, 1]
+    value = value / maxValue;
+    return value * 2.0 - 1.0;
 }
 
 #endif

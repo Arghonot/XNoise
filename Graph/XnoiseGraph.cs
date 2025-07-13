@@ -30,7 +30,7 @@ namespace XNoise
         {
             if (newstorage != null)
             {
-                runtimeStorage = newstorage; // changed a pretty bad typo here does it still work ?
+                runtimeStorage = newstorage;
             }
 
             return (SerializableModuleBase)rootNode.GetValue(rootNode.Ports.First());
