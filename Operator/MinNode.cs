@@ -9,15 +9,15 @@ namespace XNoise
     public class MinNode : XNoiseNode
     {
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
-        public SerializableModuleBase SourceA;
+        public ModuleBase SourceA;
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
-        public SerializableModuleBase SourceB;
+        public ModuleBase SourceB;
 
         public override object Run()
         {
             Min min = new Min(
-                GetInputValue<SerializableModuleBase>("SourceA", this.SourceA),
-                GetInputValue<SerializableModuleBase>("SourceB", this.SourceB));
+                GetInputValue<ModuleBase>("SourceA", this.SourceA),
+                GetInputValue<ModuleBase>("SourceB", this.SourceB));
 
             return min;
         }

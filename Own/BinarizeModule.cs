@@ -2,7 +2,7 @@
 using UnityEngine;
 using XNoise;
 
-public class BinarizeModule : SerializableModuleBase
+public class BinarizeModule : ModuleBase
 {
     #region Constructors
 
@@ -12,7 +12,7 @@ public class BinarizeModule : SerializableModuleBase
     /// Initializes a new instance of Invert.
     /// </summary>
     /// <param name="input">The input module.</param>
-    public BinarizeModule(LibNoise.SerializableModuleBase input)
+    public BinarizeModule(LibNoise.ModuleBase input)
         : base(1)
     {
         Modules[0] = input;
@@ -22,6 +22,7 @@ public class BinarizeModule : SerializableModuleBase
 
     #region ModuleBase Members
 
+    // todo reimplement me
     /// <summary>
     /// Render this generator using a spherical shader.
     /// </summary>
@@ -29,18 +30,18 @@ public class BinarizeModule : SerializableModuleBase
     /// <returns>The generated image.</returns>
     /// 
     /// 
-    public override RenderTexture GetValueGPU(GPUSurfaceNoise2d.GPURenderingDatas renderingDatas)
+    //public override RenderTexture GetValueGPU(GPUSurfaceNoise2d.GPURenderingDatas renderingDatas)
+    //{
+    //    _materialGPU = XNoiseShaderCache.GetMaterial(XNoiseShaderPaths.Binarize);
+
+    //    _materialGPU.SetTexture("_TextureA", Modules[0].GetValueGPU(renderingDatas));
+
+    //    return GPUSurfaceNoise2d.GetImage(_materialGPU, renderingDatas);
+    //}
+
+    public override double GetValue(double x, double y, double z)
     {
-        _materialGPU = XNoiseShaderCache.GetMaterial(XNoiseShaderPaths.Binarize);
-
-        _materialGPU.SetTexture("_TextureA", Modules[0].GetValueGPU(renderingDatas));
-
-        return GPUSurfaceNoise2d.GetImage(_materialGPU, renderingDatas);
-    }
-
-    public override double GetValueCPU(double x, double y, double z)
-    {
-        double val = Modules[0].GetValueCPU(x, y, z);
+        double val = Modules[0].GetValue(x, y, z);
 
         return (Mathf.Abs((float)val - 1) > Mathf.Abs((float)val + 1)) ? 1d : -1d;
     }

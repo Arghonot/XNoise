@@ -9,15 +9,15 @@ namespace XNoise
     public class AddNode : XNoiseNode
     {
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
-        public SerializableModuleBase SourceA;
+        public ModuleBase SourceA;
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
-        public SerializableModuleBase SourceB;
+        public ModuleBase SourceB;
 
         public override object Run()
         {
             Add add = new Add(
-                GetInputValue<SerializableModuleBase>("SourceA", this.SourceA),
-                GetInputValue<SerializableModuleBase>("SourceB", this.SourceB));
+                GetInputValue<ModuleBase>("SourceA", this.SourceA),
+                GetInputValue<ModuleBase>("SourceB", this.SourceB));
 
             return add;
         }

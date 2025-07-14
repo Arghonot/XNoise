@@ -6,7 +6,7 @@ namespace XNoise
 {
     public static class RendererInspectorUI
     {
-        public static void Draw(Renderer renderer, SerializableModuleBase input, bool isNodeUI)
+        public static void Draw(Renderer renderer, ModuleBase input, bool isNodeUI)
         {
             renderer.renderMode = GUILayout.Toolbar(renderer.renderMode, new string[] { "CPU", "GPU" });
             renderer.projectionMode = EditorGUILayout.Popup(renderer.projectionMode, new string[] { "Planar", "Spherical", "Cylindrical" });

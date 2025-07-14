@@ -9,7 +9,7 @@ namespace XNoise
     public class TurbulenceNode : XNoiseNode
     {
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.InheritedAny)]
-        public SerializableModuleBase Input;
+        public ModuleBase Input;
 
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
         public double Power;
@@ -18,7 +18,7 @@ namespace XNoise
         {
             return new Turbulence(
                 GetInputValue<double>("Power", this.Power),
-                GetInputValue<SerializableModuleBase>("Input", this.Input));
+                GetInputValue<ModuleBase>("Input", this.Input));
         }
     }
 }

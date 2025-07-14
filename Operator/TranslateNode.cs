@@ -10,7 +10,7 @@ namespace XNoise
     {
 
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
-        public SerializableModuleBase Input;
+        public ModuleBase Input;
 
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
         public double X;
@@ -25,7 +25,7 @@ namespace XNoise
                 GetInputValue<double>("X", this.X),
                 GetInputValue<double>("Y", this.Y),
                 GetInputValue<double>("Z", this.Z),
-                GetInputValue<SerializableModuleBase>("Input", this.Input));
+                GetInputValue<ModuleBase>("Input", this.Input));
         }
     }
 }

@@ -9,11 +9,11 @@ namespace XNoise
     public class BinarizeModuleNode : XNoiseNode
     {
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
-        public SerializableModuleBase Input;
+        public ModuleBase Input;
 
         public override object Run()
         {
-            return new BinarizeModule(GetInputValue<SerializableModuleBase>("Input", this.Input));
+            return new BinarizeModule(GetInputValue<ModuleBase>("Input", this.Input));
         }
     }
 }

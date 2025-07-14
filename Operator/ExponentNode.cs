@@ -9,13 +9,13 @@ namespace XNoise
     public class ExponentNode : XNoiseNode
     {
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
-        public SerializableModuleBase Input;
+        public ModuleBase Input;
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
         public double exponent;
 
         public override object Run()
         {
-            var exp = new Exponent(GetInputValue<SerializableModuleBase>("Input", this.Input));
+            var exp = new Exponent(GetInputValue<ModuleBase>("Input", this.Input));
 
             exp.Value = GetInputValue<double>("exponent", this.exponent);
             return exp;

@@ -23,12 +23,14 @@ namespace XNoise
             return Run();
         }
 
+        // todo reimplement
         public override object Run()
         {
-            LibNoise.Image img = new LibNoise.Image(0);
-            img.input = GetInputValue<Texture2D>("input", this.input);
+            //LibNoise.Image img = new LibNoise.Image(0);
+            //img.input = GetInputValue<Texture2D>("input", this.input);
 
-            return img;
+            //return img;
+            return null;
         }
     }
 }

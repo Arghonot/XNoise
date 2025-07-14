@@ -6,7 +6,7 @@ namespace XNoise
 {
     [CreateNodeMenu("NoiseGraph/Debug/Render")]
     [NodeTint(CustomGraph.ColorProfile.Debug)]
-    public class RendererNode : Root<SerializableModuleBase>
+    public class RendererNode : Root<ModuleBase>
     {
        [SerializeField] public Renderer renderer = new Renderer();
     }

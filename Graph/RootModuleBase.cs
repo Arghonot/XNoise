@@ -7,5 +7,5 @@ namespace XNoise
     [Serializable]
     [HideFromNodeMenu]
     [NodeTint(XNoiseNodeColors.Output)]
-    public class RootModuleBase : Root<SerializableModuleBase> { }
+    public class RootModuleBase : Root<ModuleBase> { }
 }

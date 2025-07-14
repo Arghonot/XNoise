@@ -9,18 +9,18 @@ namespace XNoise
     public class BlendNode : XNoiseNode
     {
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
-        public SerializableModuleBase SourceA;
+        public ModuleBase SourceA;
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
-        public SerializableModuleBase SourceB;
+        public ModuleBase SourceB;
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
-        public SerializableModuleBase Controller;
+        public ModuleBase Controller;
 
         public override object Run()
         {
             return new Blend(
-                GetInputValue<SerializableModuleBase>("SourceA", this.SourceA),
-                GetInputValue<SerializableModuleBase>("SourceB", this.SourceB),
-                GetInputValue<SerializableModuleBase>("Controller", this.Controller));
+                GetInputValue<ModuleBase>("SourceA", this.SourceA),
+                GetInputValue<ModuleBase>("SourceB", this.SourceB),
+                GetInputValue<ModuleBase>("Controller", this.Controller));
         }
     }
 }

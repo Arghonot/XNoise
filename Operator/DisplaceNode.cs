@@ -9,24 +9,29 @@ namespace XNoise
     public class DisplaceNode : XNoiseNode
     {
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
-        public SerializableModuleBase Source;
+        public ModuleBase Source;
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
-        public SerializableModuleBase ControllerA;
+        public ModuleBase ControllerA;
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
-        public SerializableModuleBase ControllerB;
+        public ModuleBase ControllerB;
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
-        public SerializableModuleBase ControllerC;
+        public ModuleBase ControllerC;
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
         public double Influence = 1;
 
         public override object Run()
         {
             return new Displace(
-                GetInputValue<SerializableModuleBase>("Source", this.Source),
-                GetInputValue<SerializableModuleBase>("ControllerA", this.ControllerA),
-                GetInputValue<SerializableModuleBase>("ControllerB", this.ControllerB),
-                GetInputValue<SerializableModuleBase>("ControllerC", this.ControllerC),
-                GetInputValue<double>("Influence", this.Influence));
+                GetInputValue<ModuleBase>("Source", this.Source),
+                GetInputValue<ModuleBase>("ControllerA", this.ControllerA),
+                GetInputValue<ModuleBase>("ControllerB", this.ControllerB),
+                GetInputValue<ModuleBase>("ControllerC", this.ControllerC));
+            //return new Displace(
+            //    GetInputValue<ModuleBase>("Source", this.Source),
+            //    GetInputValue<ModuleBase>("ControllerA", this.ControllerA),
+            //    GetInputValue<ModuleBase>("ControllerB", this.ControllerB),
+            //    GetInputValue<ModuleBase>("ControllerC", this.ControllerC),
+            //    GetInputValue<double>("Influence", this.Influence));
         }
     }
 }

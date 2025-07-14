@@ -9,11 +9,11 @@ namespace XNoise
     public class AbsNode : XNoiseNode
     {
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
-        public SerializableModuleBase Controller;
+        public ModuleBase Controller;
 
         public override object Run()
         {
-            return new Abs(GetInputValue<SerializableModuleBase>("Controller", this.Controller));
+            return new Abs(GetInputValue<ModuleBase>("Controller", this.Controller));
         }
     }
 }

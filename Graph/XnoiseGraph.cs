@@ -26,14 +26,14 @@ namespace XNoise
             }
         }
 
-        public SerializableModuleBase GetGenerator(GraphVariables newstorage = null)
+        public ModuleBase GetGenerator(GraphVariables newstorage = null)
         {
             if (newstorage != null)
             {
                 runtimeStorage = newstorage;
             }
 
-            return (SerializableModuleBase)rootNode.GetValue(rootNode.Ports.First());
+            return (ModuleBase)rootNode.GetValue(rootNode.Ports.First());
         }
 
         public void OnAfterDeserialize() { }

@@ -9,7 +9,7 @@ namespace XNoise
     public class TerraceNode : XNoiseNode
     {
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
-        public SerializableModuleBase InputModule;
+        public ModuleBase InputModule;
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict, true)]
         public double[] controlPoints;
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
@@ -19,10 +19,10 @@ namespace XNoise
         {
             if (controlPoints.Length == 0)
             {
-                return GetInputValue<SerializableModuleBase>("InputModule", this.InputModule);
+                return GetInputValue<ModuleBase>("InputModule", this.InputModule);
             }
 
-            Terrace terrace = new Terrace(inverted, GetInputValue<SerializableModuleBase>("InputModule", this.InputModule));
+            Terrace terrace = new Terrace(inverted, GetInputValue<ModuleBase>("InputModule", this.InputModule));
 
             for (int i = 0; i < controlPoints.Length; i++)
             {

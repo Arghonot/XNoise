@@ -11,7 +11,7 @@ namespace XNoise
             base.OnBodyGUI();
 
             RendererNode node = target as RendererNode;
-            RendererInspectorUI.Draw(node.renderer, (SerializableModuleBase)node.Run(), true);
+            RendererInspectorUI.Draw(node.renderer, (ModuleBase)node.Run(), true);
         }
     }
 }

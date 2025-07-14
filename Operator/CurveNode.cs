@@ -10,7 +10,7 @@ namespace XNoise
     public class CurveNode : XNoiseNode
     {
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
-        public SerializableModuleBase Input;
+        public ModuleBase Input;
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
         public AnimationCurve InputCurve;
 
@@ -20,9 +20,9 @@ namespace XNoise
 
         public override object Run()
         {
-            Curve curve = new Curve(GetInputValue<SerializableModuleBase>("Input", this.Input));
+            Curve curve = new Curve(GetInputValue<ModuleBase>("Input", this.Input));
 
-            curve.mathematicalCurve = GetInputValue<AnimationCurve>("InputCurve", this.InputCurve);
+            //curve.mathematicalCurve = GetInputValue<AnimationCurve>("InputCurve", this.InputCurve);
 
             return curve;
         }

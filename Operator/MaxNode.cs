@@ -9,15 +9,15 @@ namespace XNoise
     public class MaxNode : XNoiseNode
     {
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
-        public SerializableModuleBase SourceA;
+        public ModuleBase SourceA;
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
-        public SerializableModuleBase SourceB;
+        public ModuleBase SourceB;
 
         public override object Run()
         {
             Max max = new Max(
-                GetInputValue<SerializableModuleBase>("SourceA", this.SourceA),
-                GetInputValue<SerializableModuleBase>("SourceB", this.SourceB));
+                GetInputValue<ModuleBase>("SourceA", this.SourceA),
+                GetInputValue<ModuleBase>("SourceB", this.SourceB));
 
             return max;
         }

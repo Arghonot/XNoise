@@ -36,42 +36,42 @@ namespace XNoise
         [HideInInspector] public long RenderTime;
 
 
-        [HideInInspector] public SerializableModuleBase input;
+        [HideInInspector] public ModuleBase input;
 
-        private Noise2d _noise;
+        private LibNoise.Noise2D _noise;
 
         public Renderer() { }
 
         public void Render(bool isgpu = false)
         {
-            Stopwatch watch = new Stopwatch();
-            watch.Start();
+            //Stopwatch watch = new Stopwatch();
+            //watch.Start();
 
 
-            if (isgpu)
-            {
-                _noise = new GPUSurfaceNoise2d(width, Height == 0 ? width / 2 : Height, input);
-            }
-            else
-            {
-                _noise = new CPUNoise2d(width, Height == 0 ? width / 2 : Height, input);
-            }
+            //if (isgpu)
+            //{
+            //    _noise = new GPUSurfaceNoise2d(width, Height == 0 ? width / 2 : Height, input);
+            //}
+            //else
+            //{
+            //    _noise = new CPUNoise2d(width, Height == 0 ? width / 2 : Height, input);
+            //}
 
-            if (projectionMode == 0)
-            {
-                _noise.GeneratePlanar(Noise2d.Left, Noise2d.Right, Noise2d.Top, Noise2d.Bottom);
-            }
-            else if (projectionMode == 1)
-            {
-                _noise.GenerateSpherical(south, north, west, east);
-            }
-            else if (projectionMode == 2)
-            {
-                _noise.GenerateCylindrical(Noise2d.AngleMin, Noise2d.AngleMax, Noise2d.Top, Noise2d.Bottom);
-            }
+            //if (projectionMode == 0)
+            //{
+            //    _noise.GeneratePlanar(Noise2d.Left, Noise2d.Right, Noise2d.Top, Noise2d.Bottom);
+            //}
+            //else if (projectionMode == 1)
+            //{
+            //    _noise.GenerateSpherical(south, north, west, east);
+            //}
+            //else if (projectionMode == 2)
+            //{
+            //    _noise.GenerateCylindrical(Noise2d.AngleMin, Noise2d.AngleMax, Noise2d.Top, Noise2d.Bottom);
+            //}
 
-            watch.Stop();
-            RenderTime = watch.ElapsedMilliseconds;
+            //watch.Stop();
+            //RenderTime = watch.ElapsedMilliseconds;
         }
 
         public void RenderCPU()

@@ -9,7 +9,7 @@ namespace XNoise
     public class RotateNode : XNoiseNode
     {
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
-        public SerializableModuleBase Input;
+        public ModuleBase Input;
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
         public double XDegrees;
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
@@ -22,7 +22,7 @@ namespace XNoise
             return new Rotate(GetInputValue<double>("XDegrees", this.XDegrees),
                 GetInputValue<double>("YDegrees", this.YDegrees),
                 GetInputValue<double>("ZDegrees", this.ZDegrees),
-                GetInputValue<SerializableModuleBase>("Input", this.Input));
+                GetInputValue<ModuleBase>("Input", this.Input));
         }
     }
 }

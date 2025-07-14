@@ -9,13 +9,13 @@ namespace XNoise
     public class SelectNode : XNoiseNode
     {
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
-        public SerializableModuleBase SourceA;
+        public ModuleBase SourceA;
 
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
-        public SerializableModuleBase SourceB;
+        public ModuleBase SourceB;
 
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
-        public SerializableModuleBase Controller;
+        public ModuleBase Controller;
 
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
         public float Falloff;
@@ -23,9 +23,9 @@ namespace XNoise
         public override object Run()
         {
             Select select = new Select(
-                GetInputValue<SerializableModuleBase>("SourceA", this.SourceA),
-                GetInputValue<SerializableModuleBase>("SourceB", this.SourceB),
-                GetInputValue<SerializableModuleBase>("Controller", this.Controller));
+                GetInputValue<ModuleBase>("SourceA", this.SourceA),
+                GetInputValue<ModuleBase>("SourceB", this.SourceB),
+                GetInputValue<ModuleBase>("Controller", this.Controller));
 
             select.FallOff = GetInputValue<float>("Falloff", this.Falloff);
 
