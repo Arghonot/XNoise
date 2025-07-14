@@ -6,10 +6,7 @@ public class BinarizeModule : SerializableModuleBase
 {
     #region Constructors
 
-    public BinarizeModule() : base(1)
-    {
-
-    }
+    public BinarizeModule() : base(1) { }
 
     /// <summary>
     /// Initializes a new instance of Invert.
@@ -32,13 +29,13 @@ public class BinarizeModule : SerializableModuleBase
     /// <returns>The generated image.</returns>
     /// 
     /// 
-    public override RenderTexture GetValueGPU(GPURenderingDatas renderingDatas)
+    public override RenderTexture GetValueGPU(GPUSurfaceNoise2d.GPURenderingDatas renderingDatas)
     {
         _materialGPU = XNoiseShaderCache.GetMaterial(XNoiseShaderPaths.Binarize);
 
         _materialGPU.SetTexture("_TextureA", Modules[0].GetValueGPU(renderingDatas));
 
-        return GetImage(_materialGPU, renderingDatas);
+        return GPUSurfaceNoise2d.GetImage(_materialGPU, renderingDatas);
     }
 
     public override double GetValueCPU(double x, double y, double z)

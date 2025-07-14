@@ -38,68 +38,28 @@ namespace XNoise
 
         [HideInInspector] public SerializableModuleBase input;
 
-        private Noise2D _noise;
+        private Noise2d _noise;
 
         public Renderer() { }
 
-        public void Render()
+        public void Render(bool isgpu = false)
         {
-            if (renderMode == 0)
-            {
-                RenderCPU();
-            }
-            if (renderMode == 1)
-            {
-                RenderGPU();
-                StoreTex();
-            }
-        }
-
-        public void RenderCPU()
-        {
-            Stopwatch watch = new Stopwatch();
-
-            watch.Start();
-            _noise = new Noise2D(width, Height == 0 ? width / 2 : Height, input);
-
-            if (projectionMode == 0)
-            {
-                _noise.GeneratePlanar(Noise2D.Left, Noise2D.Right, Noise2D.Top, Noise2D.Bottom);
-            }
-            else if (projectionMode == 1)
-            {
-                _noise.GenerateSpherical(
-                    south,
-                    north,
-                    west,
-                    east);
-            }
-            else if (projectionMode == 2)
-            {
-                _noise.GenerateCylindrical(Noise2D.AngleMin, Noise2D.AngleMax, Noise2D.Top, Noise2D.Bottom);
-            }
-
-            tex = _noise.GetTexture();
-            tex.Apply();
-
-            watch.Stop();
-            RenderTime = watch.ElapsedMilliseconds;
-        }
-
-        public void RenderGPU()
-        {
-            index = 0;
             Stopwatch watch = new Stopwatch();
             watch.Start();
 
-            _noise = null;
-            _noise = new Noise2D(width, Height == 0 ? width / 2 : Height, input);
-            _noise.useGPU = true;
 
-            // TODO rewrite me with a dictionnary of functions per projectionMode
+            if (isgpu)
+            {
+                _noise = new GPUSurfaceNoise2d(width, Height == 0 ? width / 2 : Height, input);
+            }
+            else
+            {
+                _noise = new CPUNoise2d(width, Height == 0 ? width / 2 : Height, input);
+            }
+
             if (projectionMode == 0)
             {
-                _noise.GeneratePlanar(Noise2D.Left, Noise2D.Right, Noise2D.Top, Noise2D.Bottom);
+                _noise.GeneratePlanar(Noise2d.Left, Noise2d.Right, Noise2d.Top, Noise2d.Bottom);
             }
             else if (projectionMode == 1)
             {
@@ -107,24 +67,37 @@ namespace XNoise
             }
             else if (projectionMode == 2)
             {
-                _noise.GenerateCylindrical(angleMin, angleMax, heightMin, heightMax);
+                _noise.GenerateCylindrical(Noise2d.AngleMin, Noise2d.AngleMax, Noise2d.Top, Noise2d.Bottom);
             }
 
             watch.Stop();
             RenderTime = watch.ElapsedMilliseconds;
-            rtex = _noise.renderTexture;
+        }
+
+        public void RenderCPU()
+        {
+
+
+            //tex = _noise.GetTexture();
+            tex.Apply();
+
+        }
+
+        public void RenderGPU()
+        {
+            //rtex = _noise.renderTexture;
         }
 
         public void StoreTex()
         {
-            tex = _noise.GetFinalizedTexture();
+            //tex = _noise.GetFinalizedTexture();
         }
 
         public void Save(string savePictureName = "")
         {
             if (_noise == null) return;
 
-            ImageFileHelpers.SaveToPng(_noise.GetFinalizedTexture(), DataPath, savePictureName == "" ? PictureName : savePictureName);
+            //ImageFileHelpers.SaveToPng(_noise.GetFinalizedTexture(), DataPath, savePictureName == "" ? PictureName : savePictureName);
         }
     }
 }    

@@ -1,5 +1,6 @@
 ﻿using CustomGraph;
 using LibNoise;
+using UnityEngine.Android;
 
 namespace XNoise
 {
@@ -11,7 +12,8 @@ namespace XNoise
         {
             if (targetSubGraph == null)
             {
-                return new SerializableModuleBase(0);
+                // TODO fix me
+                //return new SerializableModuleBase(0);
             }
 
             return ((XnoiseGraph)targetSubGraph).Run(GenerateProperStorage());
