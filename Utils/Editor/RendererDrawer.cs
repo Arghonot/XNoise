@@ -12,16 +12,16 @@ namespace XNoise
 
         public static void Draw(Renderer renderer, ModuleBase input, bool isNodeUI)
         {
-            renderer.renderMode = GUILayout.Toolbar(renderer.renderMode, new string[] { "CPU", "GPU" });
-            renderer.renderType = GUILayout.Toolbar(renderer.renderType, new string[] { "HeightMap", "NormalMap" });
-            renderer.projectionMode = EditorGUILayout.Popup(renderer.projectionMode, new string[] { "Planar", "Spherical", "Cylindrical" });
+            renderer.renderMode = (Renderer.RenderMode)GUILayout.Toolbar((int)renderer.renderMode, new string[] { "CPU", "GPU" });
+            renderer.renderMethod = (Renderer.RenderMethod)GUILayout.Toolbar((int)renderer.renderMethod, new string[] { "HeightMap", "NormalMap" });
+            renderer.projectionMode = (Renderer.ProjectionMode)EditorGUILayout.Popup((int)renderer.projectionMode, new string[] { "Planar", "Spherical", "Cylindrical" });
             if (GUILayout.Button("Render"))
             {
                 if (input != null)
                 {
                     renderer.input = input as INoiseStrategy;
                     renderer.Render();
-                    if (renderer.renderType == 0) renderer.StoreFinalizedTexture();
+                    if (renderer.renderMethod == 0) renderer.StoreFinalizedTexture();
                 }
             }
             if (GUILayout.Button("Save"))

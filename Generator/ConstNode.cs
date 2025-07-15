@@ -13,7 +13,7 @@ namespace XNoise
 
         public override object Run()
         {
-            return new Const(GetInputValue<double>("value", this.value));
+            return new ConstGenerator(GetInputValue<double>("value", this.value));
         }
     }
 }

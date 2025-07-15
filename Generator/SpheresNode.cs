@@ -1,5 +1,4 @@
-﻿using LibNoise.Generator;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace XNoise
 {
@@ -15,10 +14,10 @@ namespace XNoise
             // if editing the graph -> we stick to current variables
             if (Application.isEditor && !Application.isPlaying)
             {
-                return new Spheres(this.frequency);
+                return new SpheresGenerator(this.frequency);
             }
 
-            return new Spheres(GetInputValue<double>("frequency", this.frequency));
+            return new SpheresGenerator(GetInputValue<double>("frequency", this.frequency));
         }
     }
 }

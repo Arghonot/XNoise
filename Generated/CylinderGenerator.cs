@@ -1,16 +1,18 @@
 using UnityEngine;
-using LibNoise;
+using Xnoise;
 
 namespace XNoise
 {
     public class CylindersGenerator : LibNoise.Generator.Cylinders, INoiseStrategy
     {
+        public CylindersGenerator(double frequency) : base(frequency) { }
         public double GetValueCPU(double x, double y, double z) => GetValue(x, y, z);
 
         public RenderTexture GetValueGPU(GPURenderingDatas datas)
         {
-            // TODO: Implement GPU version
-            return null;
+            var materialGPU = XNoiseShaderCache.GetMaterial(XNoiseShaderPaths.Cylinders);
+            materialGPU.SetFloat("_Frequency", (float)Frequency);
+            return GPUSurfaceNoiseExecutor.GetImage(materialGPU, datas, true);
         }
     }
 }

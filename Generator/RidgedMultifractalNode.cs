@@ -21,7 +21,7 @@ namespace XNoise
 
         public override object Run()
         {
-            return new RidgedMultifractal(
+            return new RidgedMultifractalGenerator(
                 GetInputValue<double>("frequency", this.frequency),
                 GetInputValue<double>("lacunarity", this.lacunarity),
                 GetInputValue<int>("Octaves", this.Octaves),

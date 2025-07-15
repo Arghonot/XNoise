@@ -23,7 +23,7 @@ namespace XNoise
 
         public override object Run()
         {
-            return new Billow(
+            return new BillowGenerator(
                 GetInputValue<double>("frequency", this.frequency),
                 GetInputValue<double>("lacunarity", this.lacunarity),
                 GetInputValue<double>("persistence", this.persistence),

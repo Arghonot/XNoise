@@ -1,4 +1,5 @@
 ﻿using LibNoise;
+using System.Diagnostics;
 using UnityEngine;
 using Xnoise;
 
@@ -6,6 +7,23 @@ namespace XNoise
 {
     public class Renderer
     {
+        public enum RenderMode
+        {
+            CPU = 0,
+            GPU = 1
+        }
+        public enum RenderMethod
+        {
+            HeightMap = 0,
+            NormalMap = 1
+        }
+        public enum ProjectionMode
+        {
+            Planar = 0,
+            Spherical = 1,
+            Cylindrical = 2
+        }
+
         [HideInInspector] public static int index = 0;
         // TODO move to a nested class for better clarity
         string DataPath = "/";
@@ -17,15 +35,16 @@ namespace XNoise
         [HideInInspector] public Texture2D tex = null;
         [HideInInspector] public Gradient grad = new Gradient();
 
-        [HideInInspector] public int renderMode; // todo use enum here
-        [HideInInspector] public int renderType; // todo use enum here
-        [HideInInspector] public int projectionMode; // todo use enum here
+        [HideInInspector] public RenderMode renderMode;
+        [HideInInspector] public RenderMethod renderMethod;
+        [HideInInspector] public ProjectionMode projectionMode;
 
         [HideInInspector] public long RenderTime;
 
-        public float intensity = 100f;
+        public float intensity = 10f;
 
         [HideInInspector] public INoiseStrategy input;
+
 
         private NoiseExecutor _noise;
 
@@ -33,39 +52,33 @@ namespace XNoise
 
         public void Render()
         {
-            //Stopwatch watch = new Stopwatch();
-            //watch.Start();
-
-            if (renderMode == 0)
-            {
-                _noise = new CPUNoiseExecutor(width, Height == 0 ? width / 2 : Height, input);
-            }
-            else if (renderMode == 1)
-            {
-                _noise = new GPUSurfaceNoiseExecutor(width, Height == 0 ? width / 2 : Height, input);
-            }
-            
+            Stopwatch watch = new Stopwatch();
+            watch.Start();
+            CreateAppropriateNoiseExecutor();
             RenderHeightMap();
-            if (renderType == 1)
-            {
-                RenderNormalMap();
-            }
+            if (renderMethod == RenderMethod.NormalMap) RenderNormalMap();
+            if (renderMode == RenderMode.GPU) rtex = ((GPUSurfaceNoiseExecutor)_noise).renderTexture;
+            watch.Stop();
+            RenderTime = watch.ElapsedMilliseconds;
+        }
 
-            //watch.Stop();
-            //RenderTime = watch.ElapsedMilliseconds;
+        private void CreateAppropriateNoiseExecutor()
+        {
+            if (renderMode == RenderMode.CPU) _noise = new CPUNoiseExecutor(width, Height == 0 ? width / 2 : Height, input);
+            else if (renderMode == RenderMode.GPU) _noise = new GPUSurfaceNoiseExecutor(width, Height == 0 ? width / 2 : Height, input);
         }
 
         public void RenderHeightMap()
         {
-            if (projectionMode == 0)
+            if (projectionMode == ProjectionMode.Planar)
             {
                 _noise.GeneratePlanar(NoiseExecutor.Left, NoiseExecutor.Right, NoiseExecutor.Top, NoiseExecutor.Bottom);
             }
-            else if (projectionMode == 1)
+            else if (projectionMode == ProjectionMode.Spherical)
             {
                 _noise.GenerateSpherical(NoiseExecutor.South, NoiseExecutor.North, NoiseExecutor.West, NoiseExecutor.East);
             }
-            else if (projectionMode == 2)
+            else if (projectionMode == ProjectionMode.Cylindrical)
             {
                 _noise.GenerateCylindrical(NoiseExecutor.AngleMin, NoiseExecutor.AngleMax, NoiseExecutor.Top, NoiseExecutor.Bottom);
             }
@@ -91,7 +104,6 @@ namespace XNoise
         public void Save(string savePictureName = "")
         {
             if (tex == null) return;
-
             ImageFileHelpers.SaveToPng(tex, DataPath, savePictureName == "" ? PictureName : savePictureName);
         }
     }

@@ -58,7 +58,6 @@ namespace Xnoise
                 Graphics.Blit(texture2d, rt);
                 datas.displacementMap = rt;
             }
-            //datas.origin = origin;
             // set texture here
             _renderedTexture = _generator.GetValueGPU(datas);
         }

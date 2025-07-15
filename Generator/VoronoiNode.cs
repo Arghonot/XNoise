@@ -18,7 +18,7 @@ namespace XNoise
 
         public override object Run()
         {
-            return new Voronoi(
+            return new VoronoiGenerator(
                 GetInputValue<double>("frequency", this.frequency),
                 GetInputValue<double>("displacement", this.displacement),
                 GetInputValue<int>("Seed", this.Seed),

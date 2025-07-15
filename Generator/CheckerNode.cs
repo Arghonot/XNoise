@@ -1,6 +1,4 @@
-﻿using LibNoise.Generator;
-
-namespace XNoise
+﻿namespace XNoise
 {
     [CreateNodeMenu("NoiseGraph/Generator/Checker")]
     [NodeTint(XNoiseNodeColors.Generator)]
@@ -8,7 +6,7 @@ namespace XNoise
     {
         public override object Run()
         {
-            return new Checker();
+            return new CheckerGenerator();
         }
     }
 }
