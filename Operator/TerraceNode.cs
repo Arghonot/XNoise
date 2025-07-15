@@ -1,5 +1,4 @@
-﻿using LibNoise.Operator;
-using LibNoise;
+﻿using LibNoise;
 using UnityEngine;
 
 namespace XNoise
@@ -22,7 +21,7 @@ namespace XNoise
                 return GetInputValue<ModuleBase>("InputModule", this.InputModule);
             }
 
-            Terrace terrace = new Terrace(inverted, GetInputValue<ModuleBase>("InputModule", this.InputModule));
+            TerraceCombiner terrace = new TerraceCombiner(inverted, GetInputValue<ModuleBase>("InputModule", this.InputModule));
 
             for (int i = 0; i < controlPoints.Length; i++)
             {

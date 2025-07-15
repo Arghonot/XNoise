@@ -1,5 +1,4 @@
-﻿using LibNoise.Operator;
-using UnityEngine;
+﻿using UnityEngine;
 using LibNoise;
 
 namespace XNoise
@@ -15,7 +14,7 @@ namespace XNoise
 
         public override object Run()
         {
-            var exp = new Exponent(GetInputValue<ModuleBase>("Input", this.Input));
+            var exp = new ExponentCombiner(GetInputValue<ModuleBase>("Input", this.Input));
 
             exp.Value = GetInputValue<double>("exponent", this.exponent);
             return exp;

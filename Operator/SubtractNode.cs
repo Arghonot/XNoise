@@ -1,5 +1,4 @@
-﻿using LibNoise.Operator;
-using LibNoise;
+﻿using LibNoise;
 using UnityEngine;
 
 namespace XNoise
@@ -16,9 +15,7 @@ namespace XNoise
 
         public override object Run()
         {
-            return new Subtract(
-                GetInputValue<ModuleBase>("SourceA", this.SourceA),
-                GetInputValue<ModuleBase>("SourceB", this.SourceB));
+            return new SubtractCombiner(GetInputValue<ModuleBase>("SourceA", this.SourceA), GetInputValue<ModuleBase>("SourceB", this.SourceB));
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using LibNoise.Operator;
 using LibNoise;
 
 namespace XNoise
@@ -15,11 +14,9 @@ namespace XNoise
 
         public override object Run()
         {
-            Min min = new Min(
+            return new MinCombiner(
                 GetInputValue<ModuleBase>("SourceA", this.SourceA),
                 GetInputValue<ModuleBase>("SourceB", this.SourceB));
-
-            return min;
         }
     }
 }

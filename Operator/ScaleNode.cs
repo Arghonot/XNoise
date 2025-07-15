@@ -1,5 +1,4 @@
 using UnityEngine;
-using LibNoise.Operator;
 using LibNoise;
 
 namespace XNoise
@@ -19,7 +18,7 @@ namespace XNoise
 
         public override object Run()
         {
-            return new Scale(GetInputValue<double>("X", this.X),
+            return new ScaleCombiner(GetInputValue<double>("X", this.X),
                 GetInputValue<double>("Y", this.Y),
                 GetInputValue<double>("Z", this.Z),
                 GetInputValue<ModuleBase>("Input", this.Input));

@@ -1,5 +1,4 @@
-﻿using LibNoise.Operator;
-using LibNoise;
+﻿using LibNoise;
 using UnityEngine;
 
 namespace XNoise
@@ -21,17 +20,11 @@ namespace XNoise
 
         public override object Run()
         {
-            return new Displace(
+            return new DisplaceCombiner(
                 GetInputValue<ModuleBase>("Source", this.Source),
                 GetInputValue<ModuleBase>("ControllerA", this.ControllerA),
                 GetInputValue<ModuleBase>("ControllerB", this.ControllerB),
                 GetInputValue<ModuleBase>("ControllerC", this.ControllerC));
-            //return new Displace(
-            //    GetInputValue<ModuleBase>("Source", this.Source),
-            //    GetInputValue<ModuleBase>("ControllerA", this.ControllerA),
-            //    GetInputValue<ModuleBase>("ControllerB", this.ControllerB),
-            //    GetInputValue<ModuleBase>("ControllerC", this.ControllerC),
-            //    GetInputValue<double>("Influence", this.Influence));
         }
     }
 }

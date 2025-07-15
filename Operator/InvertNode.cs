@@ -13,7 +13,7 @@ namespace XNoise
 
         public override object Run()
         {
-            return new Invert(GetInputValue<ModuleBase>("Input", this.Input));
+            return new InvertCombiner(GetInputValue<ModuleBase>("Input", this.Input));
 
         }
     }

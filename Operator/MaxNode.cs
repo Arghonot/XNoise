@@ -15,11 +15,7 @@ namespace XNoise
 
         public override object Run()
         {
-            Max max = new Max(
-                GetInputValue<ModuleBase>("SourceA", this.SourceA),
-                GetInputValue<ModuleBase>("SourceB", this.SourceB));
-
-            return max;
+            return new MaxCombiner(GetInputValue<ModuleBase>("SourceA", this.SourceA), GetInputValue<ModuleBase>("SourceB", this.SourceB));
         }
     }
 }

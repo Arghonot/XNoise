@@ -15,7 +15,7 @@ namespace XNoise
 
         public override object Run()
         {
-            Add add = new Add(
+            Add add = new AddCombiner(
                 GetInputValue<ModuleBase>("SourceA", this.SourceA),
                 GetInputValue<ModuleBase>("SourceB", this.SourceB));
 

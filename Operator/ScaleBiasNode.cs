@@ -17,8 +17,7 @@ namespace XNoise
 
         public override object Run()
         {
-            ScaleBias bias = new ScaleBias(
-                GetInputValue<ModuleBase>("Input", this.Input));
+            ScaleBias bias = new ScaleBiasCombiner(GetInputValue<ModuleBase>("Input", this.Input));
 
             bias.Scale = GetInputValue<double>("Scale", this.Scale);
             bias.Bias = GetInputValue<double>("Bias", this.Bias);

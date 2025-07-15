@@ -1,5 +1,4 @@
-﻿using LibNoise.Operator;
-using UnityEngine;
+﻿using UnityEngine;
 using LibNoise;
 
 namespace XNoise
@@ -17,7 +16,7 @@ namespace XNoise
 
         public override object Run()
         {
-            return new Blend(
+            return new BlendCombiner(
                 GetInputValue<ModuleBase>("SourceA", this.SourceA),
                 GetInputValue<ModuleBase>("SourceB", this.SourceB),
                 GetInputValue<ModuleBase>("Controller", this.Controller));

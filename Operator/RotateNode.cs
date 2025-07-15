@@ -1,5 +1,4 @@
-﻿using LibNoise.Operator;
-using LibNoise;
+﻿using LibNoise;
 using UnityEngine;
 
 namespace XNoise
@@ -19,7 +18,7 @@ namespace XNoise
 
         public override object Run()
         {
-            return new Rotate(GetInputValue<double>("XDegrees", this.XDegrees),
+            return new RotateCombiner(GetInputValue<double>("XDegrees", this.XDegrees),
                 GetInputValue<double>("YDegrees", this.YDegrees),
                 GetInputValue<double>("ZDegrees", this.ZDegrees),
                 GetInputValue<ModuleBase>("Input", this.Input));

@@ -1,16 +1,22 @@
 using UnityEngine;
 using LibNoise;
+using Xnoise;
 
 namespace XNoise
 {
     public class InvertCombiner : LibNoise.Operator.Invert, INoiseStrategy
     {
+        public InvertCombiner(ModuleBase input) :base(input) { }
+
         public double GetValueCPU(double x, double y, double z) => GetValue(x, y, z);
 
         public RenderTexture GetValueGPU(GPURenderingDatas datas)
         {
-            // TODO: Implement GPU version
-            return null;
+            var materialGPU = XNoiseShaderCache.GetMaterial(XNoiseShaderPaths.Invert);
+
+            materialGPU.SetTexture("_TextureA", ((INoiseStrategy)Modules[0]).GetValueGPU(datas));
+
+            return GPUSurfaceNoiseExecutor.GetImage(materialGPU, datas);
         }
     }
 }

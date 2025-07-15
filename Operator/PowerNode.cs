@@ -15,7 +15,7 @@ namespace XNoise
 
         public override object Run()
         {
-            Power power = new Power(
+            Power power = new PowerCombiner(
                 GetInputValue<ModuleBase>("SourceA", this.SourceA),
                 GetInputValue<ModuleBase>("SourceB", this.SourceB));
 

@@ -1,5 +1,4 @@
-﻿using LibNoise.Operator;
-using UnityEngine;
+﻿using UnityEngine;
 using LibNoise;
 
 namespace XNoise
@@ -16,9 +15,7 @@ namespace XNoise
 
         public override object Run()
         {
-            return new Turbulence(
-                GetInputValue<double>("Power", this.Power),
-                GetInputValue<ModuleBase>("Input", this.Input));
+            return new TurbulenceCombiner(GetInputValue<double>("Power", this.Power), GetInputValue<ModuleBase>("Input", this.Input));
         }
     }
 }

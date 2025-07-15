@@ -1,5 +1,4 @@
-﻿using LibNoise.Operator;
-using UnityEngine;
+﻿using UnityEngine;
 using LibNoise;
 
 namespace XNoise
@@ -21,7 +20,7 @@ namespace XNoise
 
         public override object Run()
         {
-            return new Translate(
+            return new TranslateCombiner(
                 GetInputValue<double>("X", this.X),
                 GetInputValue<double>("Y", this.Y),
                 GetInputValue<double>("Z", this.Z),

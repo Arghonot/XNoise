@@ -20,10 +20,10 @@ namespace XNoise
 
         public override object Run()
         {
-            Curve curve = new Curve(GetInputValue<ModuleBase>("Input", this.Input));
+            Curve curve = new CurveCombiner(GetInputValue<ModuleBase>("Input", this.Input));
 
             //curve.mathematicalCurve = GetInputValue<AnimationCurve>("InputCurve", this.InputCurve);
-
+            // todo fix
             return curve;
         }
     }
