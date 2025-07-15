@@ -327,14 +327,7 @@ namespace XNoise
         /// <param name="east">The clip region to the east.</param>
         public override void GenerateSpherical(double south, double north, double west, double east)
         {
-            if (east <= west || south <= north)
-            {
-                throw new ArgumentException("Invalid east/west or north/south combination");
-            }
-            if (_generator == null)
-            {
-                throw new ArgumentNullException("Generator is null");
-            }
+            base.GenerateSpherical(south, north, west, east);
             var loe = east - west;
             var lae = north - south;
             var xd = loe / ((double)_width - _ucBorder);

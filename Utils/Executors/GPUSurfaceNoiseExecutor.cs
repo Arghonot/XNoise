@@ -44,14 +44,6 @@ namespace Xnoise
 
         #endregion
 
-        public override void GenerateCylindrical(double angleMin, double angleMax, double heightMin, double heightMax)
-        {
-            base.GenerateCylindrical(angleMin, angleMax, heightMin, heightMax);
-            GPURenderingDatas datas = new GPURenderingDatas(new Vector2(Width, Height), ProjectionType.Cylindrical, RenderingAreaData.standardCylindrical);
-            _renderedTexture = _generator.GetValueGPU(datas);
-        }
-
-
         public override void GeneratePlanar(double left, double right, double top, double bottom, bool isSeamless = true) => GeneratePlanar(left, right, top, bottom, isSeamless, null);
         public void GeneratePlanar(double left, double right, double top, double bottom, bool isSeamless = true, Texture2D texture2d = null)
         {
@@ -68,6 +60,13 @@ namespace Xnoise
             }
             //datas.origin = origin;
             // set texture here
+            _renderedTexture = _generator.GetValueGPU(datas);
+        }
+
+        public override void GenerateCylindrical(double angleMin, double angleMax, double heightMin, double heightMax)
+        {
+            base.GenerateCylindrical(angleMin, angleMax, heightMin, heightMax);
+            GPURenderingDatas datas = new GPURenderingDatas(new Vector2(Width, Height), ProjectionType.Cylindrical, RenderingAreaData.standardCylindrical);
             _renderedTexture = _generator.GetValueGPU(datas);
         }
 

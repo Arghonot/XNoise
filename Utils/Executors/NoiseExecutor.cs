@@ -161,7 +161,7 @@ namespace XNoise
         /// <param name="east">The clip region to the east.</param>
         public virtual void GenerateSpherical(double south, double north, double west, double east)
         {
-            if (east <= west || south <= north)
+            if (east <= west || south >= north)
             {
                 throw new ArgumentException("Invalid east/west or north/south combination");
             }
