@@ -359,21 +359,45 @@ namespace XNoise
         }
 
         /// <summary>
-        /// Creates a grayscale texture map for the current content of the noise map.
+        /// Creates a single channel texture map for the current content of the noise map.
         /// </summary>
         /// <returns>The created texture map.</returns>
         public override Texture2D GetTexture()
         {
-            return GetTexture(GradientPresets.Grayscale);
+            var texture = new Texture2D(_width, _height, TextureFormat.R8, false);
+            var pixels = new Color[_width * _height];
+            for (var x = 0; x < _width; x++)
+            {
+                for (var y = 0; y < _height; y++)
+                {
+                    float sample;
+                    if (!float.IsNaN(_borderValue) &&
+                        (x == 0 || x == _width - _ucBorder || y == 0 || y == _height - _ucBorder))
+                    {
+                        sample = _borderValue;
+                    }
+                    else
+                    {
+                        sample = _data[x, y];
+                    }
+                    pixels[x + y * _width] = new Color((sample + 1) / 2, 0f, 0f, 0f);
+                }
+            }
+            texture.SetPixels(pixels);
+            texture.wrapMode = TextureWrapMode.Clamp;
+            texture.Apply();
+            return texture;
         }
+
 
         /// <summary>
         /// Creates a texture map for the current content of the noise map.
         /// </summary>
         /// <param name="gradient">The gradient to color the texture map with.</param>
         /// <returns>The created texture map.</returns>
-        public override Texture2D GetTexture(Gradient gradient)
+        public override Texture2D GetFinalizedTexture(object gradient)
         {
+            
             var texture = new Texture2D(_width, _height);
             var pixels = new Color[_width * _height];
             for (var x = 0; x < _width; x++)
@@ -390,7 +414,7 @@ namespace XNoise
                     {
                         sample = _data[x, y];
                     }
-                    pixels[x + y * _width] = gradient.Evaluate((sample + 1) / 2);
+                    pixels[x + y * _width] = ((Gradient)gradient).Evaluate((sample + 1) / 2);
                 }
             }
             texture.SetPixels(pixels);

@@ -6,9 +6,14 @@ namespace XNoise
 {
     public static class RendererInspectorUI
     {
+
+        [HideInInspector] public static readonly float Space = 110; // todo clean me
+        [HideInInspector] public static readonly Rect TexturePosition = new Rect(14, 230, 180, 90);
+
         public static void Draw(Renderer renderer, ModuleBase input, bool isNodeUI)
         {
             renderer.renderMode = GUILayout.Toolbar(renderer.renderMode, new string[] { "CPU", "GPU" });
+            renderer.renderType = GUILayout.Toolbar(renderer.renderType, new string[] { "HeightMap", "NormalMap" });
             renderer.projectionMode = EditorGUILayout.Popup(renderer.projectionMode, new string[] { "Planar", "Spherical", "Cylindrical" });
             if (GUILayout.Button("Render"))
             {
@@ -16,7 +21,7 @@ namespace XNoise
                 {
                     renderer.input = input as INoiseStrategy;
                     renderer.Render();
-                    renderer.RenderCPU();
+                    if (renderer.renderType == 0) renderer.StoreFinalizedTexture();
                 }
             }
             if (GUILayout.Button("Save"))
@@ -30,13 +35,13 @@ namespace XNoise
             renderer.width = EditorGUILayout.IntField("Size ", renderer.width);
             GUILayout.Label("Render time (ms) : " + renderer.RenderTime.ToString());
 
-            if (isNodeUI) GUILayout.Space(renderer.Space);
+            if (isNodeUI) GUILayout.Space(Space);
 
             if (renderer.tex != null)
             {
                 if (isNodeUI)
                 {
-                    GUI.DrawTexture(renderer.TexturePosition, renderer.tex);
+                    GUI.DrawTexture(TexturePosition, renderer.tex);
                 }
                 else
                 {

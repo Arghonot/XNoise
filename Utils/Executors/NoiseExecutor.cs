@@ -172,17 +172,16 @@ namespace XNoise
         }
 
         /// <summary>
-        /// Creates a grayscale texture map for the current content of the noise map.
+        /// Creates a 1 channel texture map for the current content of the noise map.
         /// </summary>
         /// <returns>The created texture map.</returns>
         public abstract Texture2D GetTexture();
 
         /// <summary>
-        /// Creates a texture map for the current content of the noise map.
+        /// Creates a grayscale texture map for the current content of the noise map.
         /// </summary>
-        /// <param name="gradient">The gradient to color the texture map with.</param>
         /// <returns>The created texture map.</returns>
-        public abstract Texture2D GetTexture(Gradient gradient);
+        public abstract Texture2D GetFinalizedTexture(object gradient);
 
         /// <summary>
         /// Creates a normal map for the current content of the noise map.

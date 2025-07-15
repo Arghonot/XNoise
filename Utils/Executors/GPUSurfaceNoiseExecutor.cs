@@ -81,12 +81,16 @@ namespace Xnoise
 
         public override Texture2D GetNormalMap(float intensity)
         {
-            throw new System.NotImplementedException();
-        }
+            RenderTexture preview = new RenderTexture(_renderedTexture.width, _renderedTexture.height, 0, RenderTextureFormat.ARGB32);
+            RenderTexture.active = preview;
+            var mat = XNoiseShaderCache.GetMaterial(XNoiseShaderPaths.ToNormalMap);
 
-        public override Texture2D GetTexture()
-        {
-            RenderTexture.active = _renderedTexture;
+            mat.SetTexture("_HeightMap", _renderedTexture);
+            mat.SetFloat("_Intensity", intensity);
+            mat.SetVector("_TexelSize", new Vector4(_renderedTexture.width, _renderedTexture.height, 0, 0));
+
+            Graphics.Blit(_renderedTexture, preview, mat);
+
             var tex = new Texture2D(_renderedTexture.width, _renderedTexture.height);
             tex.ReadPixels(new Rect(0, 0, _renderedTexture.width, _renderedTexture.height), 0, 0);
             tex.Apply();
@@ -94,13 +98,21 @@ namespace Xnoise
             return tex;
         }
 
-        public override Texture2D GetTexture(Gradient gradient)
+        /// <summary>
+        /// Creates a single channel texture map for the current content of the noise map.
+        /// </summary>
+        /// <returns>The created texture map.</returns>
+        public override Texture2D GetTexture()
         {
-            throw new System.NotImplementedException();
+            RenderTexture.active = _renderedTexture;
+            var tex = new Texture2D(_renderedTexture.width, _renderedTexture.height, TextureFormat.R8, false);
+            tex.ReadPixels(new Rect(0, 0, _renderedTexture.width, _renderedTexture.height), 0, 0);
+            tex.Apply();
+
+            return tex;
         }
 
-
-        public Texture2D GetFinalizedTexture()
+        public override Texture2D GetFinalizedTexture(object gradient)
         {
             RenderTexture preview = new RenderTexture(_renderedTexture.width, _renderedTexture.height, 0, RenderTextureFormat.ARGB32);
             RenderTexture.active = preview;
@@ -115,7 +127,7 @@ namespace Xnoise
             return tex;
         }
 
-        public RenderTexture getTexture()
+        public RenderTexture GetRenderTexture()
         {
             RenderTexture.active = _renderedTexture;
 

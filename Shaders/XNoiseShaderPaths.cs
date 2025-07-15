@@ -35,5 +35,7 @@ namespace XNoise
 
         // Misc
         public const string Visualizer = "Xnoise/Visualizer";
+        public const string VisualizerWithGradient = "Xnoise/VisualizerWithGradient";
+        public const string ToNormalMap = "Hidden/Xnoise/Tools/HeightToNormal";
     }
 }
