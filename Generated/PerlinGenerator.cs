@@ -1,9 +1,13 @@
+using LibNoise;
 using UnityEngine;
+using Xnoise;
 
 namespace XNoise
 {
     public class PerlinGenerator : LibNoise.Generator.Perlin, INoiseStrategy
     {
+        public PerlinGenerator(double frequency, double lacunarity, double persistence, int octaves, int seed,
+            QualityMode quality) : base(frequency, lacunarity, persistence, octaves, seed, quality) { }
         public double GetValueCPU(double x, double y, double z) => GetValue(x, y, z);
 
         public RenderTexture GetValueGPU(GPURenderingDatas datas)
@@ -16,8 +20,7 @@ namespace XNoise
             materialGPU.SetFloat("_Octaves", OctaveCount);
             materialGPU.SetFloat("_Seed", Seed);
 
-            return null; // todo Uncomment the following line when GPUSurfaceNoise2d is available
-            //return GPUSurfaceNoise2d.GetImage(_materialGPU, datas, true);
+            return GPUSurfaceNoiseExecutor.GetImage(materialGPU, datas, true);
         }
     }
 }

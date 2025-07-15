@@ -8,7 +8,7 @@ using System.Reflection;
 namespace XNoise
 {
     [CustomNodeGraphEditor(typeof(XnoiseGraph))]
-    public class LibnoiseGraphEditor : DefaultGraphEditor
+    public class XnoiseGraphEditor : DefaultGraphEditor
     {
         public override void RemoveNode(Node node)
         {

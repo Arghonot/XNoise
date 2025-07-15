@@ -32,7 +32,7 @@ namespace XNoise
         protected int _ucBorder = 1; // Border size of extra noise for uncropped data.
 
         protected float _borderValue = float.NaN;
-        protected ModuleBase _generator;
+        protected INoiseStrategy _generator;
 
         #endregion
 
@@ -54,7 +54,7 @@ namespace XNoise
         /// </summary>
         /// <param name="size">The width and height of the noise map.</param>
         /// <param name="generator">The generator module.</param>
-        public NoiseExecutor(int size, ModuleBase generator) : this(size, size, generator) { }
+        public NoiseExecutor(int size, INoiseStrategy generator) : this(size, size, generator) { }
 
         /// <summary>
         /// Initializes a new instance of Noise2D.
@@ -62,7 +62,7 @@ namespace XNoise
         /// <param name="width">The width of the noise map.</param>
         /// <param name="height">The height of the noise map.</param>
         /// <param name="generator">The generator module.</param>
-        public NoiseExecutor(int width, int height, ModuleBase generator = null)
+        public NoiseExecutor(int width, int height, INoiseStrategy generator = null)
         {
             _generator = generator;
             _width = width;
@@ -87,7 +87,7 @@ namespace XNoise
         /// <summary>
         /// Gets or sets the generator module.
         /// </summary>
-        public ModuleBase Generator
+        public INoiseStrategy Generator
         {
             get { return _generator; }
             set { _generator = value; }
@@ -121,7 +121,17 @@ namespace XNoise
         /// <param name="top">The clip region to the top.</param>
         /// <param name="bottom">The clip region to the bottom.</param>
         /// <param name="isSeamless">Indicates whether the resulting noise map should be seamless.</param>
-        public abstract void GeneratePlanar(double left, double right, double top, double bottom, bool isSeamless = true);
+        public virtual void GeneratePlanar(double left, double right, double top, double bottom, bool isSeamless = true)
+        {
+            if (right <= left || bottom <= top)
+            {
+                throw new ArgumentException("Invalid right/left or bottom/top combination");
+            }
+            if (_generator == null)
+            {
+                throw new ArgumentNullException("Generator is null");
+            }
+        }
 
         /// <summary>
         /// Generates a cylindrical projection of the noise map.
@@ -130,7 +140,17 @@ namespace XNoise
         /// <param name="angleMax">The minimum angle of the clip region.</param>
         /// <param name="heightMin">The minimum height of the clip region.</param>
         /// <param name="heightMax">The maximum height of the clip region.</param>
-        public abstract void GenerateCylindrical(double angleMin, double angleMax, double heightMin, double heightMax);
+        public virtual void GenerateCylindrical(double angleMin, double angleMax, double heightMin, double heightMax)
+        {
+            if (angleMax <= angleMin || heightMax <= heightMin)
+            {
+                throw new ArgumentException("Invalid angle or height parameters");
+            }
+            if (_generator == null)
+            {
+                throw new ArgumentNullException("Generator is null");
+            }
+        }
 
         /// <summary>
         /// Generates a spherical projection of the noise map.
@@ -139,7 +159,17 @@ namespace XNoise
         /// <param name="north">The clip region to the north.</param>
         /// <param name="west">The clip region to the west.</param>
         /// <param name="east">The clip region to the east.</param>
-        public abstract void GenerateSpherical(double south, double north, double west, double east);
+        public virtual void GenerateSpherical(double south, double north, double west, double east)
+        {
+            if (east <= west || south <= north)
+            {
+                throw new ArgumentException("Invalid east/west or north/south combination");
+            }
+            if (_generator == null)
+            {
+                throw new ArgumentNullException("Generator is null");
+            }
+        }
 
         /// <summary>
         /// Creates a grayscale texture map for the current content of the noise map.

@@ -11,4 +11,3 @@ namespace XNoise
        [SerializeField] public Renderer renderer = new Renderer();
     }
 }
-

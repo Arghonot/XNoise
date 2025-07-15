@@ -1,6 +1,5 @@
-﻿using LibNoise;
-using System.Diagnostics;
-using UnityEngine;
+﻿using UnityEngine;
+using Xnoise;
 
 namespace XNoise
 {
@@ -36,9 +35,11 @@ namespace XNoise
         [HideInInspector] public long RenderTime;
 
 
-        [HideInInspector] public ModuleBase input;
+        [HideInInspector] public INoiseStrategy input;
+        //private NoiseExecutor _cpuGenerator = new CPUNoiseExecutor();
+        //private NoiseExecutor _gpuGenerator = new GPUSurfaceNoiseExecutor();
 
-        private LibNoise.Noise2D _noise;
+        private NoiseExecutor _noise;
 
         public Renderer() { }
 
@@ -48,27 +49,27 @@ namespace XNoise
             //watch.Start();
 
 
-            //if (isgpu)
-            //{
-            //    _noise = new GPUSurfaceNoise2d(width, Height == 0 ? width / 2 : Height, input);
-            //}
-            //else
-            //{
-            //    _noise = new CPUNoise2d(width, Height == 0 ? width / 2 : Height, input);
-            //}
+            if (isgpu)
+            {
+                _noise = new GPUSurfaceNoiseExecutor(width, Height == 0 ? width / 2 : Height, input);
+            }
+            else
+            {
+                _noise = new CPUNoiseExecutor(width, Height == 0 ? width / 2 : Height, input);
+            }
 
-            //if (projectionMode == 0)
-            //{
-            //    _noise.GeneratePlanar(Noise2d.Left, Noise2d.Right, Noise2d.Top, Noise2d.Bottom);
-            //}
-            //else if (projectionMode == 1)
-            //{
-            //    _noise.GenerateSpherical(south, north, west, east);
-            //}
-            //else if (projectionMode == 2)
-            //{
-            //    _noise.GenerateCylindrical(Noise2d.AngleMin, Noise2d.AngleMax, Noise2d.Top, Noise2d.Bottom);
-            //}
+            if (projectionMode == 0)
+            {
+                _noise.GeneratePlanar(NoiseExecutor.Left, NoiseExecutor.Right, NoiseExecutor.Top, NoiseExecutor.Bottom);
+            }
+            else if (projectionMode == 1)
+            {
+                _noise.GenerateSpherical(south, north, west, east);
+            }
+            else if (projectionMode == 2)
+            {
+                _noise.GenerateCylindrical(NoiseExecutor.AngleMin, NoiseExecutor.AngleMax, NoiseExecutor.Top, NoiseExecutor.Bottom);
+            }
 
             //watch.Stop();
             //RenderTime = watch.ElapsedMilliseconds;
@@ -76,11 +77,8 @@ namespace XNoise
 
         public void RenderCPU()
         {
-
-
-            //tex = _noise.GetTexture();
+            tex = _noise.GetTexture();
             tex.Apply();
-
         }
 
         public void RenderGPU()

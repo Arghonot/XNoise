@@ -1,5 +1,4 @@
 ﻿using LibNoise;
-using LibNoise.Generator;
 using UnityEngine;
 
 namespace XNoise
@@ -23,7 +22,7 @@ namespace XNoise
 
         public override object Run()
         {
-            return new Perlin(
+            return new PerlinGenerator(
                 GetInputValue<double>("frequency", this.frequency),
                 GetInputValue<double>("lacunarity", this.lacunarity),
                 GetInputValue<double>("persistence", this.persistence),

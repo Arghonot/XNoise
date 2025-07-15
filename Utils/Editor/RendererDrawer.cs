@@ -14,8 +14,9 @@ namespace XNoise
             {
                 if (input != null)
                 {
-                    renderer.input = input;
+                    renderer.input = input as INoiseStrategy;
                     renderer.Render();
+                    renderer.RenderCPU();
                 }
             }
             if (GUILayout.Button("Save"))

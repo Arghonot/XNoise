@@ -13,6 +13,42 @@ namespace XNoise
 
         #endregion
 
+        #region Constructors
+
+        /// <summary>
+        /// Initializes a new instance of CPUNoiseExecutor.
+        /// </summary>
+        protected CPUNoiseExecutor() : base() { }
+
+        /// <summary>
+        /// Initializes a new instance of CPUNoiseExecutor.
+        /// </summary>
+        /// <param name="size">The width and height of the noise map.</param>
+        public CPUNoiseExecutor(int size) : base(size, size, null) { }
+
+        /// <summary>
+        /// Initializes a new instance of CPUNoiseExecutor.
+        /// </summary>
+        /// <param name="size">The width and height of the noise map.</param>
+        /// <param name="generator">The generator module.</param>
+        public CPUNoiseExecutor(int size, INoiseStrategy generator) : base(size, size, generator) { }
+
+        /// <summary>
+        /// Initializes a new instance of CPUNoiseExecutor.
+        /// </summary>
+        /// <param name="width">The width of the noise map.</param>
+        /// <param name="height">The height of the noise map.</param>
+        /// <param name="generator">The generator module.</param>
+        public CPUNoiseExecutor(int width, int height, INoiseStrategy generator = null) : base(width, height)
+        {
+            _generator = generator;
+            _data = new float[width, height];
+            _ucData = new float[width + _ucBorder * 2, height + _ucBorder * 2];
+        }
+
+
+        #endregion
+
         #region Indexers
 
         /// <summary>
@@ -162,7 +198,7 @@ namespace XNoise
         /// <returns>The corresponding noise map value.</returns>
         private double GeneratePlanar(double x, double y)
         {
-            return _generator.GetValue(x, 0.0, y);
+            return _generator.GetValueCPU(x, 0.0, y);
         }
 
         /// <summary>
@@ -175,14 +211,7 @@ namespace XNoise
         /// <param name="isSeamless">Indicates whether the resulting noise map should be seamless.</param>
         public override void GeneratePlanar(double left, double right, double top, double bottom, bool isSeamless = true)
         {
-            if (right <= left || bottom <= top)
-            {
-                throw new ArgumentException("Invalid right/left or bottom/top combination");
-            }
-            if (_generator == null)
-            {
-                throw new ArgumentNullException("Generator is null");
-            }
+            base.GeneratePlanar(left, right, top, bottom, isSeamless);
             var xe = right - left;
             var ze = bottom - top;
             var xd = xe / ((double)_width - _ucBorder);
@@ -233,7 +262,7 @@ namespace XNoise
             var x = Math.Cos(angle * Mathf.Deg2Rad);
             var y = height;
             var z = Math.Sin(angle * Mathf.Deg2Rad);
-            return _generator.GetValue(x, y, z);
+            return _generator.GetValueCPU(x, y, z);
         }
 
         /// <summary>
@@ -285,7 +314,7 @@ namespace XNoise
         private double GenerateSpherical(double lat, double lon)
         {
             var r = Math.Cos(Mathf.Deg2Rad * lat);
-            return _generator.GetValue(r * Math.Cos(Mathf.Deg2Rad * lon), Math.Sin(Mathf.Deg2Rad * lat),
+            return _generator.GetValueCPU(r * Math.Cos(Mathf.Deg2Rad * lon), Math.Sin(Mathf.Deg2Rad * lat),
                 r * Math.Sin(Mathf.Deg2Rad * lon));
         }
 
