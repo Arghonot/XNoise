@@ -1,5 +1,4 @@
-﻿using LibNoise.Operator;
-using LibNoise;
+﻿using LibNoise;
 using UnityEngine;
 
 namespace XNoise

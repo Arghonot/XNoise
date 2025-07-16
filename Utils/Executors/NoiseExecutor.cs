@@ -1,4 +1,3 @@
-using LibNoise;
 using System;
 using System.Xml.Serialization;
 using UnityEngine;
