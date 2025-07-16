@@ -4,3 +4,6 @@
 [submodule "Submodules/GraphHelpers"]
 	path = Submodules/GraphHelpers
 	url = https://github.com/Arghonot/CustomGraphs.git
+[submodule "Submodules/LibNoise.Unity"]
+	path = Submodules/LibNoise.Unity
+	url = https://github.com/ricardojmendez/LibNoise.Unity.git
