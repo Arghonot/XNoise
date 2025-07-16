@@ -6,6 +6,7 @@ namespace XNoise
 {
     public class PerlinGenerator : LibNoise.Generator.Perlin, INoiseStrategy
     {
+        public PerlinGenerator() : base() { }
         public PerlinGenerator(double frequency, double lacunarity, double persistence, int octaves, int seed,
             QualityMode quality) : base(frequency, lacunarity, persistence, octaves, seed, quality) { }
         public double GetValueCPU(double x, double y, double z) => GetValue(x, y, z);

@@ -1,40 +1,50 @@
 using UnityEngine;
 using LibNoise;
+using Xnoise;
 
 namespace XNoise
 {
     public class TurbulenceCombiner : LibNoise.Operator.Turbulence, INoiseStrategy
     {
+        #region Protected Constants
+
+        protected const double X0 = (12414.0 / 65536.0);
+        protected const double Y0 = (65124.0 / 65536.0);
+        protected const double Z0 = (31337.0 / 65536.0);
+        protected const double X1 = (26519.0 / 65536.0);
+        protected const double Y1 = (18128.0 / 65536.0);
+        protected const double Z1 = (60493.0 / 65536.0);
+        protected const double X2 = (53820.0 / 65536.0);
+        protected const double Y2 = (11213.0 / 65536.0);
+        protected const double Z2 = (44845.0 / 65536.0);
+
+        #endregion
+
         public TurbulenceCombiner(double power, ModuleBase input) : base(power, input) { }
 
         public double GetValueCPU(double x, double y, double z) => GetValue(x, y, z);
 
         public RenderTexture GetValueGPU(GPURenderingDatas datas)
         {
-            //_materialGPU = XNoiseShaderCache.GetMaterial(XNoiseShaderPaths.Turbulence);
+            var materialGPU = XNoiseShaderCache.GetMaterial(XNoiseShaderPaths.Turbulence);
 
-            //var tmpTurbulence = renderingDatas.displacementMap;
-            //Vector3 tmpOrigin = renderingDatas.origin;
-            //_materialGPU.SetTexture("_OriginalDisplacementMap", renderingDatas.displacementMap);
-            //renderingDatas.origin = new Vector3((float)X0, (float)Y0, (float)Z0);
-            //_materialGPU.SetTexture("_PerlinA", new Perlin().GetValueGPU(renderingDatas));
-            //renderingDatas.origin = new Vector3((float)X1, (float)Y1, (float)Z1);
-            //_materialGPU.SetTexture("_PerlinB", new Perlin().GetValueGPU(renderingDatas));
-            //renderingDatas.origin = new Vector3((float)X2, (float)Y2, (float)Z2);
-            //_materialGPU.SetTexture("_PerlinC", new Perlin().GetValueGPU(renderingDatas));
-            //_materialGPU.SetFloat("_Power", (float)Power);
-            //renderingDatas.origin = tmpOrigin;
+            var tmpTurbulence = datas.displacementMap;
+            Vector3 tmpOrigin = datas.origin;
 
-            //ImageFileHelpers.SaveToJPG(ImageFileHelpers.toTexture2D(renderingDatas.displacementMap), "/", "TURBULENCE_BEFORE");
-            //renderingDatas.displacementMap = GPUSurfaceNoise2d.GetImage(_materialGPU, renderingDatas);
-            //ImageFileHelpers.SaveToJPG(ImageFileHelpers.toTexture2D(renderingDatas.displacementMap), "/", "TURBULENCE_AFTER");
+            materialGPU.SetTexture("_OriginalDisplacementMap", datas.displacementMap);
+            datas.origin = new Vector3((float)X0, (float)Y0, (float)Z0);
+            materialGPU.SetTexture("_PerlinA", new PerlinGenerator().GetValueGPU(datas));
+            datas.origin = new Vector3((float)X1, (float)Y1, (float)Z1);
+            materialGPU.SetTexture("_PerlinB", new PerlinGenerator().GetValueGPU(datas));
+            datas.origin = new Vector3((float)X2, (float)Y2, (float)Z2);
+            materialGPU.SetTexture("_PerlinC", new PerlinGenerator().GetValueGPU(datas));
+            materialGPU.SetFloat("_Power", (float)Power);
+            datas.origin = tmpOrigin;
 
-            //var value = Modules[0].GetValueGPU(renderingDatas);
+            datas.displacementMap = GPUSurfaceNoiseExecutor.GetImage(materialGPU, datas);
 
-            //return value;
+            return ((INoiseStrategy)Modules[0]).GetValueGPU(datas);
 
-            // todo finish me 
-            return null;
         }
     }
 }
