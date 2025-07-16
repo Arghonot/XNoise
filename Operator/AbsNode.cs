@@ -8,7 +8,7 @@ namespace XNoise
     [NodeTint(XNoiseNodeColors.Modifier)]
     public class AbsNode : XNoiseNode
     {
-        [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
+        [Input(ShowBackingValue.Never, ConnectionType.Override, TypeConstraint.Strict)]
         public ModuleBase Controller;
 
         public override object Run()

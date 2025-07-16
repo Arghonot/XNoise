@@ -1,5 +1,4 @@
 ﻿using LibNoise;
-using XNode;
 using XNodeEditor;
 
 namespace XNoise
@@ -9,12 +8,14 @@ namespace XNoise
     {
         public override void OnBodyGUI()
         {
-            base.OnBodyGUI();
+            serializedObject.Update();
 
+            base.OnBodyGUI();
             RendererNode node = target as RendererNode;
-            NodePort port = node.GetPort("Input");
-            NodeEditorGUILayout.PortField(port);
+            CustomGraph.NodeBaseEditor.DrawNonInstantiableTypeInputPorts(target);
             RendererInspectorUI.Draw(node.renderer, (ModuleBase)node.Run(), true);
+
+            serializedObject.ApplyModifiedProperties();
         }
     }
 }
