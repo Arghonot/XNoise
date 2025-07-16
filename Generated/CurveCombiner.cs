@@ -33,7 +33,6 @@ namespace XNoise
             {
                 curve = UtilsFunctions.GetCurveAsTexture(mathematicalCurve);
             }
-
             materialGPU.SetTexture("_Src", ((INoiseStrategy)Modules[0]).GetValueGPU(datas));
             materialGPU.SetTexture("_Gradient", curve);
 
