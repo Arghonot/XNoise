@@ -107,4 +107,4 @@ namespace XNoise
             ImageFileHelpers.SaveToPng(tex, DataPath, savePictureName == "" ? PictureName : savePictureName);
         }
     }
-}    
+}
