@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.IO;
 using UnityEngine;
 
 namespace XNoise
@@ -23,7 +21,6 @@ namespace XNoise
                         1f) + 1f) / 2f;
                 curveTexture.SetPixel(i, 0, new Color(currentValue, currentValue, currentValue));
             }
-
             curveTexture.Apply();
 
             return curveTexture;
@@ -39,30 +36,12 @@ namespace XNoise
             {
                 float channelValue = ((float)_data[i - 1] + 1f) / 2f;
                 pointList.SetPixel(i, 0, new Color(channelValue, channelValue, channelValue, 1f));
-                Debug.Log("<color=red>Pixel " + i + " is of colour : " + ((((float)_data[i - 1] + 1f) / 2f)) + "</color>");
             }
 
             pointList.Apply();
 
             return pointList;
         }
-
-        //public static Texture2D GetDoubleArrayAsTexture(double[] array)
-        //{
-        //    //Texture2D curveTexture = new Texture2D(TextureSize, 1, UnityEngine.Experimental.Rendering.DefaultFormat.LDR, 
-        //    //float currentValue = 0f;
-        //    //AnimationCurve curve = new AnimationCurve();
-
-        //    //for (int i = 0; i < TextureSize; i++)
-        //    //{
-        //    //    //currentValue = curve.Evaluate(Mathf.Lerp(-1f, 1f, (float)i / (float)TextureSize)) + 1f / 2f;
-        //    //    curveTexture.SetPixel(i, 0, new Color(currentValue, currentValue, currentValue));
-        //    //}
-
-        //    //curveTexture.Apply();
-
-        //    //return curveTexture;
-        //}
 
         public static Texture2D GetGradientAsTexture(Gradient gradient)
         {
@@ -72,7 +51,6 @@ namespace XNoise
             {
                 gradientTexture.SetPixel(i, 0, gradient.Evaluate((float)i / (float)TextureSize));
             }
-
             gradientTexture.Apply();
 
             return gradientTexture;

@@ -89,6 +89,8 @@ namespace XNoise
             tex = _noise.GetNormalMap(intensity);
         }
 
+        public Texture2D GetNormalMap(float intensity) => _noise.GetNormalMap(intensity);
+
         public void StoreFinalizedTexture()
         {
             tex = _noise.GetFinalizedTexture(GradientPresets.Grayscale);
