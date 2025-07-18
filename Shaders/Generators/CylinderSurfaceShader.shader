@@ -3,10 +3,6 @@
     Properties
     {
         _Frequency("Frequency", Float) = 1
-        _Radius("radius",Float) = 1.0
-        _OffsetPosition("Offset", Vector) = (0,0,0,0)
-        _Rotation("rotation", Vector) = (0, 0, 0, 1)
-        _TurbulenceMap("Turbulence Map", 2D) = "black" {}
     }
     SubShader
     {
@@ -30,9 +26,7 @@
             float4 vertex : SV_POSITION;
         };
 
-        float _Frequency, _Lacunarity, _Octaves, _Persistence;
-        sampler2D _DisplacementMap;
-        float4 _DisplacementMap_ST;
+        float _Frequency;
 
         v2f vert(appdata v)
         {
@@ -65,7 +59,7 @@
 
             float frag_Planar(v2f i) : SV_Target
             {
-                float3 coord = GetPlanarCartesianFromUV(i.uv, _Radius);
+                float3 coord = GetPointPlanarFromUV(i.uv);
                 return Normalize(ComputeCylinder(coord.x, coord.y, coord.z));
             }
             ENDCG
@@ -80,7 +74,7 @@
 
             float frag_Spherical(v2f i) : SV_Target
             {
-                float3 coord = GetSphericalCartesianFromUV(i.uv, _Radius);
+                float3 coord = GetPointSphericalFromUV(i.uv);
                 if (length(coord) <= 2) coord += float3(10.0, 0.0, 0.0);
                 return Normalize(ComputeCylinder(coord.x, coord.y, coord.z));
             }
@@ -96,7 +90,7 @@
 
             float frag_Cylindrical(v2f i) : SV_Target
             {
-                float3 coord = GetCylindricalCartesianFromUV(i.uv, _OffsetPosition.xyz, _Radius);
+                float3 coord = GetPointCylindricalFromUV(i.uv);
                 return Normalize(ComputeCylinder(coord.x, coord.y, coord.z));
             }
             ENDCG
