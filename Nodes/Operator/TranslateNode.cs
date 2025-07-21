@@ -20,7 +20,7 @@ namespace XNoise
 
         public override object Run()
         {
-            return new TranslateCombiner(
+            return new TranslateTransformer(
                 GetInputValue<double>("X", this.X),
                 GetInputValue<double>("Y", this.Y),
                 GetInputValue<double>("Z", this.Z),

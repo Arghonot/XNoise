@@ -22,7 +22,7 @@ namespace XNoise
 
         public override object Run()
         {
-            Select select = new SelectCombiner(
+            Select select = new SelectSelector(
                 GetInputValue<ModuleBase>("SourceA", this.SourceA),
                 GetInputValue<ModuleBase>("SourceB", this.SourceB),
                 GetInputValue<ModuleBase>("Controller", this.Controller));

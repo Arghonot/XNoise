@@ -17,7 +17,7 @@ namespace XNoise
 
         public override object Run()
         {
-            Clamp clamp = new ClampCombiner(GetInputValue<ModuleBase>("Input", this.Input));
+            Clamp clamp = new ClampModifier(GetInputValue<ModuleBase>("Input", this.Input));
 
             clamp.Minimum = GetInputValue<double>("Minimum", this.Minimum);
             clamp.Maximum = GetInputValue<double>("Maximum", this.Maximum);

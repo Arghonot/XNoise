@@ -5,11 +5,11 @@ using System.Collections.Generic;
 
 namespace XNoise
 {
-    public class TerraceCombiner : LibNoise.Operator.Terrace, INoiseStrategy
+    public class TerraceModifier : LibNoise.Operator.Terrace, INoiseStrategy
     {
         public AnimationCurve curve;
 
-        public TerraceCombiner(bool inverted, ModuleBase input) : base(inverted, input) { }
+        public TerraceModifier(bool inverted, ModuleBase input) : base(inverted, input) { }
         public double GetValueCPU(double x, double y, double z) => GetValue(x, y, z);
 
         public RenderTexture GetValueGPU(GPURenderingDatas datas)

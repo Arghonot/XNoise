@@ -3,9 +3,9 @@ using LibNoise;
 
 namespace XNoise
 {
-    public class RotateCombiner : LibNoise.Operator.Rotate, INoiseStrategy
+    public class RotateTransformer : LibNoise.Operator.Rotate, INoiseStrategy
     {
-        public RotateCombiner(double x, double y, double z, ModuleBase input) : base(x, y, z, input) { }
+        public RotateTransformer(double x, double y, double z, ModuleBase input) : base(x, y, z, input) { }
         public double GetValueCPU(double x, double y, double z) => GetValue(x, y, z);
 
         public RenderTexture GetValueGPU(GPURenderingDatas datas)

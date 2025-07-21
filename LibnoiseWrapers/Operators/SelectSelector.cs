@@ -4,9 +4,9 @@ using Xnoise;
 
 namespace XNoise
 {
-    public class SelectCombiner : LibNoise.Operator.Select, INoiseStrategy
+    public class SelectSelector : LibNoise.Operator.Select, INoiseStrategy
     {
-        public SelectCombiner(ModuleBase inputA, ModuleBase inputB, ModuleBase controller) : base(inputA, inputB, controller) { }
+        public SelectSelector(ModuleBase inputA, ModuleBase inputB, ModuleBase controller) : base(inputA, inputB, controller) { }
 
         public double GetValueCPU(double x, double y, double z) => GetValue(x, y, z);
 

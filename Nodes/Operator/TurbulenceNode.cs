@@ -15,7 +15,7 @@ namespace XNoise
 
         public override object Run()
         {
-            return new TurbulenceCombiner(GetInputValue<double>("Power", this.Power), GetInputValue<ModuleBase>("Input", this.Input));
+            return new TurbulenceTransformer(GetInputValue<double>("Power", this.Power), GetInputValue<ModuleBase>("Input", this.Input));
         }
     }
 }

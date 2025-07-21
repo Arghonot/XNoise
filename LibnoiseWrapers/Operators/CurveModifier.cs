@@ -4,7 +4,7 @@ using Xnoise;
 
 namespace XNoise
 {
-    public class CurveCombiner : LibNoise.Operator.Curve, INoiseStrategy
+    public class CurveModifier : LibNoise.Operator.Curve, INoiseStrategy
     {
         private Texture2D curve;
         public AnimationCurve mathematicalCurve;
@@ -14,11 +14,11 @@ namespace XNoise
             new Keyframe(1f, 1f, 1f, 1f)
         );
 
-        public CurveCombiner(ModuleBase input): base(input)
+        public CurveModifier(ModuleBase input): base(input)
         {
             mathematicalCurve = CreateLinearCurve();
         }
-        public CurveCombiner(ModuleBase input, AnimationCurve curveInput) : base(input)
+        public CurveModifier(ModuleBase input, AnimationCurve curveInput) : base(input)
         {
             mathematicalCurve = curveInput;
             SetCurve(UtilsFunctions.GetCurveAsTexture(curveInput));

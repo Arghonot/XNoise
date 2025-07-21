@@ -4,11 +4,11 @@ using Xnoise;
 
 namespace XNoise
 {
-    public class ClampCombiner : LibNoise.Operator.Clamp, INoiseStrategy
+    public class ClampModifier : LibNoise.Operator.Clamp, INoiseStrategy
     {
-        public ClampCombiner(ModuleBase input) : base(input) { }
+        public ClampModifier(ModuleBase input) : base(input) { }
 
-        public ClampCombiner(double min, double max, ModuleBase input): base(min, max, input) { }
+        public ClampModifier(double min, double max, ModuleBase input): base(min, max, input) { }
         public double GetValueCPU(double x, double y, double z) => GetValue(x, y, z);
 
         public RenderTexture GetValueGPU(GPURenderingDatas datas)

@@ -13,7 +13,7 @@ namespace XNoise
 
         public override object Run()
         {
-            return new AbsCombiner(GetInputValue<ModuleBase>("Controller", this.Controller));
+            return new AbsModifier(GetInputValue<ModuleBase>("Controller", this.Controller));
         }
     }
 }

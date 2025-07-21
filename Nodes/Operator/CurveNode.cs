@@ -16,12 +16,12 @@ namespace XNoise
         protected override void Init()
         {
             base.Init();
-            InputCurve = CurveCombiner.CreateLinearCurve();
+            InputCurve = CurveModifier.CreateLinearCurve();
         }
 
         public override object Run()
         {
-           return new CurveCombiner(GetInputValue<ModuleBase>("Input", this.Input), GetInputValue<AnimationCurve>("InputCurve", this.InputCurve));
+           return new CurveModifier(GetInputValue<ModuleBase>("Input", this.Input), GetInputValue<AnimationCurve>("InputCurve", this.InputCurve));
         }
     }
 }

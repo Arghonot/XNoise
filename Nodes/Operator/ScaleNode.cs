@@ -18,7 +18,7 @@ namespace XNoise
 
         public override object Run()
         {
-            return new ScaleCombiner(GetInputValue<double>("X", this.X),
+            return new ScaleModifier(GetInputValue<double>("X", this.X),
                 GetInputValue<double>("Y", this.Y),
                 GetInputValue<double>("Z", this.Z),
                 GetInputValue<ModuleBase>("Input", this.Input));

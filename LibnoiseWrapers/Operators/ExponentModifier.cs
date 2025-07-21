@@ -4,15 +4,18 @@ using Xnoise;
 
 namespace XNoise
 {
-    public class AbsCombiner : LibNoise.Operator.Abs, INoiseStrategy
+    public class ExponentModifier : LibNoise.Operator.Exponent, INoiseStrategy
     {
-        public AbsCombiner(ModuleBase input) : base(input) { }
+        public ExponentModifier(ModuleBase input) : base(input) { }
         public double GetValueCPU(double x, double y, double z) => GetValue(x, y, z);
 
         public RenderTexture GetValueGPU(GPURenderingDatas datas)
         {
-            var materialGPU = XNoiseShaderCache.GetMaterial(XNoiseShaderPaths.Abs);
+            var materialGPU = XNoiseShaderCache.GetMaterial(XNoiseShaderPaths.Exponent);
+
             materialGPU.SetTexture("_TextureA", ((INoiseStrategy)Modules[0]).GetValueGPU(datas));
+            materialGPU.SetFloat("_Exponent", (float)Value);
+
             return GPUSurfaceNoiseExecutor.GetImage(materialGPU, datas);
         }
     }

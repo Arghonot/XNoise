@@ -21,7 +21,7 @@ namespace XNoise
                 return GetInputValue<ModuleBase>("InputModule", this.InputModule);
             }
 
-            TerraceCombiner terrace = new TerraceCombiner(inverted, GetInputValue<ModuleBase>("InputModule", this.InputModule));
+            TerraceModifier terrace = new TerraceModifier(inverted, GetInputValue<ModuleBase>("InputModule", this.InputModule));
 
             for (int i = 0; i < controlPoints.Length; i++)
             {

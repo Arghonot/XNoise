@@ -4,9 +4,9 @@ using Xnoise;
 
 namespace XNoise
 {
-    public class BlendCombiner : LibNoise.Operator.Blend, INoiseStrategy
+    public class BlendSelector : LibNoise.Operator.Blend, INoiseStrategy
     {
-        public BlendCombiner(ModuleBase lhs, ModuleBase rhs, ModuleBase controller) : base(lhs, rhs, controller) { }
+        public BlendSelector(ModuleBase lhs, ModuleBase rhs, ModuleBase controller) : base(lhs, rhs, controller) { }
 
         public double GetValueCPU(double x, double y, double z) => GetValue(x, y, z);
 

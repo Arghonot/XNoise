@@ -4,12 +4,12 @@ using Xnoise;
 
 namespace XNoise
 {
-    public class DisplaceCombiner : LibNoise.Operator.Displace, INoiseStrategy
+    public class DisplaceTransformer : LibNoise.Operator.Displace, INoiseStrategy
     {
         private double _influence = 1.0;
 
-        public DisplaceCombiner(ModuleBase input, ModuleBase x, ModuleBase y, ModuleBase z) : base(input, x, y, z) { }
-        public DisplaceCombiner(ModuleBase input, ModuleBase x, ModuleBase y, ModuleBase z, double influence) : base(input, x, y, z)
+        public DisplaceTransformer(ModuleBase input, ModuleBase x, ModuleBase y, ModuleBase z) : base(input, x, y, z) { }
+        public DisplaceTransformer(ModuleBase input, ModuleBase x, ModuleBase y, ModuleBase z, double influence) : base(input, x, y, z)
         {
             _influence = influence;
         }

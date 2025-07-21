@@ -20,7 +20,7 @@ namespace XNoise
 
         public override object Run()
         {
-            return new DisplaceCombiner(
+            return new DisplaceTransformer(
                 GetInputValue<ModuleBase>("Source", this.Source),
                 GetInputValue<ModuleBase>("ControllerA", this.ControllerA),
                 GetInputValue<ModuleBase>("ControllerB", this.ControllerB),

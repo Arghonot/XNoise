@@ -14,7 +14,7 @@ namespace XNoise
 
         public override object Run()
         {
-            var exp = new ExponentCombiner(GetInputValue<ModuleBase>("Input", this.Input));
+            var exp = new ExponentModifier(GetInputValue<ModuleBase>("Input", this.Input));
 
             exp.Value = GetInputValue<double>("exponent", this.exponent);
             return exp;

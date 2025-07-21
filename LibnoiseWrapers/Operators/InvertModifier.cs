@@ -4,9 +4,9 @@ using Xnoise;
 
 namespace XNoise
 {
-    public class InvertCombiner : LibNoise.Operator.Invert, INoiseStrategy
+    public class InvertModifier : LibNoise.Operator.Invert, INoiseStrategy
     {
-        public InvertCombiner(ModuleBase input) :base(input) { }
+        public InvertModifier(ModuleBase input) :base(input) { }
 
         public double GetValueCPU(double x, double y, double z) => GetValue(x, y, z);
 

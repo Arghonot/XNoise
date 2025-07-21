@@ -3,9 +3,9 @@ using LibNoise;
 
 namespace XNoise
 {
-    public class ScaleCombiner : LibNoise.Operator.Scale, INoiseStrategy
+    public class ScaleModifier : LibNoise.Operator.Scale, INoiseStrategy
     {
-        public ScaleCombiner(double x, double y, double z, ModuleBase input) : base(input) { }
+        public ScaleModifier(double x, double y, double z, ModuleBase input) : base(input) { }
 
         public double GetValueCPU(double x, double y, double z) => GetValue(x, y, z);
 

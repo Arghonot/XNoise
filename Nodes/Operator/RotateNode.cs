@@ -18,7 +18,7 @@ namespace XNoise
 
         public override object Run()
         {
-            return new RotateCombiner(GetInputValue<double>("XDegrees", this.XDegrees),
+            return new RotateTransformer(GetInputValue<double>("XDegrees", this.XDegrees),
                 GetInputValue<double>("YDegrees", this.YDegrees),
                 GetInputValue<double>("ZDegrees", this.ZDegrees),
                 GetInputValue<ModuleBase>("Input", this.Input));

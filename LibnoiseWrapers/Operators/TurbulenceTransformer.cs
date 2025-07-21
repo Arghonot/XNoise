@@ -4,7 +4,7 @@ using Xnoise;
 
 namespace XNoise
 {
-    public class TurbulenceCombiner : LibNoise.Operator.Turbulence, INoiseStrategy
+    public class TurbulenceTransformer : LibNoise.Operator.Turbulence, INoiseStrategy
     {
         #region Protected Constants
 
@@ -20,7 +20,7 @@ namespace XNoise
 
         #endregion
 
-        public TurbulenceCombiner(double power, ModuleBase input) : base(power, input) { }
+        public TurbulenceTransformer(double power, ModuleBase input) : base(power, input) { }
 
         public double GetValueCPU(double x, double y, double z) => GetValue(x, y, z);
 

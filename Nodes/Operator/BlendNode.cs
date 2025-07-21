@@ -16,7 +16,7 @@ namespace XNoise
 
         public override object Run()
         {
-            return new BlendCombiner(
+            return new BlendSelector(
                 GetInputValue<ModuleBase>("SourceA", this.SourceA),
                 GetInputValue<ModuleBase>("SourceB", this.SourceB),
                 GetInputValue<ModuleBase>("Controller", this.Controller));

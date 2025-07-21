@@ -3,9 +3,9 @@ using LibNoise;
 
 namespace XNoise
 {
-    public class TranslateCombiner : LibNoise.Operator.Translate, INoiseStrategy
+    public class TranslateTransformer : LibNoise.Operator.Translate, INoiseStrategy
     {
-        public TranslateCombiner(double x, double y, double z, ModuleBase input) : base(x, y, z, input) { }
+        public TranslateTransformer(double x, double y, double z, ModuleBase input) : base(x, y, z, input) { }
         public double GetValueCPU(double x, double y, double z) => GetValue(x, y, z);
 
         public RenderTexture GetValueGPU(GPURenderingDatas datas)
