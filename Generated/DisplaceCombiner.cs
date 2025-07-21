@@ -9,6 +9,10 @@ namespace XNoise
         private double _influence = 1.0;
 
         public DisplaceCombiner(ModuleBase input, ModuleBase x, ModuleBase y, ModuleBase z) : base(input, x, y, z) { }
+        public DisplaceCombiner(ModuleBase input, ModuleBase x, ModuleBase y, ModuleBase z, double influence) : base(input, x, y, z)
+        {
+            _influence = influence;
+        }
 
         public double GetValueCPU(double x, double y, double z) => GetValue(x, y, z);
 

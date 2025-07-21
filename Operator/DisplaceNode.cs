@@ -24,7 +24,8 @@ namespace XNoise
                 GetInputValue<ModuleBase>("Source", this.Source),
                 GetInputValue<ModuleBase>("ControllerA", this.ControllerA),
                 GetInputValue<ModuleBase>("ControllerB", this.ControllerB),
-                GetInputValue<ModuleBase>("ControllerC", this.ControllerC));
+                GetInputValue<ModuleBase>("ControllerC", this.ControllerC),
+                GetInputValue<double>("Influence", this.Influence));
         }
     }
 }

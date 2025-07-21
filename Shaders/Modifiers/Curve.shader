@@ -52,7 +52,7 @@
 
             float frag (v2f i) : SV_Target
             {
-                return tex2Dlod(_Gradient, float4(getColorGrayscale(tex2D(_Src, i.uv)), i.uv.y, 0, 0)).x;
+                return clamp(tex2Dlod(_Gradient, float4(getColorGrayscale(tex2D(_Src, i.uv)), i.uv.y, 0, 0)).x, 0, 1);
             }
             ENDCG
         }

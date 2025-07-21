@@ -108,5 +108,11 @@ namespace XNoise
             if (tex == null) return;
             ImageFileHelpers.SaveToPng(tex, DataPath, savePictureName == "" ? PictureName : savePictureName);
         }
+
+        public void Save(Texture2D texture, string savePictureName = "")
+        {
+            if (tex == null) return;
+            ImageFileHelpers.SaveToPng(texture, DataPath, savePictureName == "" ? PictureName : savePictureName);
+        }
     }
 }

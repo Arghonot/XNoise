@@ -8,13 +8,13 @@ namespace XNoise
     public class PerlinNode : XNoiseNode
     {
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
-        public double frequency;
+        public double frequency = 3;
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
-        public double lacunarity;
+        public double lacunarity = 2;
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
-        public double persistence;
+        public double persistence = 0.5;
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
-        public int Octaves;
+        public int Octaves = 6;
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
         public int Seed;
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]

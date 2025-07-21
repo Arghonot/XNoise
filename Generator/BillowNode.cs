@@ -8,13 +8,13 @@ namespace XNoise
     public class BillowNode : XNoiseNode
     {
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
-        public double frequency;
+        public double frequency = 0.6;
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
-        public double lacunarity;
+        public double lacunarity = 3;
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
-        public double persistence;
+        public double persistence = 0.4;
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
-        public int Octaves;
+        public int Octaves = 6;
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]
         public int Seed;
         [Input(ShowBackingValue.Always, ConnectionType.Override, TypeConstraint.Strict)]

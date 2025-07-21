@@ -10,6 +10,7 @@ namespace XNoise
         public static Texture2D GetCurveAsTexture(AnimationCurve curve)
         {
             Texture2D curveTexture = new Texture2D(TextureSize, 1);
+            curveTexture.wrapMode = TextureWrapMode.Clamp;
             float currentValue = 0f;
 
             for (int i = 0; i < TextureSize; i++)
