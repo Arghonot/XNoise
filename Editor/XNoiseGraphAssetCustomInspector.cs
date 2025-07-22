@@ -4,7 +4,7 @@ using UnityEngine;
 namespace XNoise
 {
     [CustomEditor(typeof(XnoiseGraph))]
-    public class XNoiseGraphAssetCustomInspector : Editor
+    public class XNoiseGraphAssetCustomInspector : UnityEditor.Editor
     {
         private bool folded;
         public override void OnInspectorGUI()

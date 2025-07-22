@@ -1,7 +1,7 @@
 ﻿using LibNoise;
 using XNodeEditor;
 
-namespace XNoise
+namespace XNoise.Editor
 {
     [CustomNodeEditor(typeof(RendererNode))]
     public class RendererNodeEditor : NodeEditor
@@ -12,7 +12,7 @@ namespace XNoise
 
             base.OnBodyGUI();
             RendererNode node = target as RendererNode;
-            CustomGraph.NodeBaseEditor.DrawNonInstantiableTypeInputPorts(target);
+            GraphHelpers.Editor.NodeBaseEditor.DrawNonInstantiableTypeInputPorts(target);
             RendererInspectorUI.Draw(node.renderer, (ModuleBase)node.Run(), true);
 
             serializedObject.ApplyModifiedProperties();

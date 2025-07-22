@@ -4,6 +4,7 @@ using XNode;
 using XNodeEditor;
 using CustomGraph;
 using System.Reflection;
+using UnityEditor;
 
 namespace XNoise
 {
@@ -34,12 +35,13 @@ namespace XNoise
              return null;
         }
 
-        public override void OnCreate()
-        {
-            base.OnCreate();
-            XnoiseGraph graph = target as XnoiseGraph;
-            NodeEditorWindow.current.graphEditor = this;
-            graph.Initialize();
-        }
+        //public override void OnCreate()
+        //{
+        //    base.OnCreate();
+        //    XnoiseGraph graph = target as XnoiseGraph;
+        //    NodeEditorWindow.current.graphEditor = this;
+        //    graph.Initialize();
+        //    if (NodeEditorPreferences.GetSettings().autoSave) AssetDatabase.SaveAssets();
+        //}
     }
 }

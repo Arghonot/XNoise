@@ -1,0 +1,22 @@
+{
+    "name": "XNoise.Editor",
+    "rootNamespace": "",
+    "references": [
+        "XNoise",
+        "GraphHelpers",
+        "GraphHelpers.editor",
+        "XNode",
+        "XNodeEditor"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
