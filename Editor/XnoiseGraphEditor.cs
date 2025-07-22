@@ -4,12 +4,11 @@ using XNode;
 using XNodeEditor;
 using CustomGraph;
 using System.Reflection;
-using UnityEditor;
 
 namespace XNoise
 {
     [CustomNodeGraphEditor(typeof(XnoiseGraph))]
-    public class XnoiseGraphEditor : DefaultGraphEditor
+    public class XnoiseGraphEditor : GraphBaseEditor
     {
         public override void RemoveNode(Node node)
         {
