@@ -64,21 +64,21 @@ namespace XNoise
             {
                 if (isCropped)
                 {
-                    if (x < 0 && x >= _width)
+                    if (x < 0 || x >= _width)
                     {
                         throw new ArgumentOutOfRangeException("Invalid x position");
                     }
-                    if (y < 0 && y >= _height)
+                    if (y < 0 || y >= _height)
                     {
                         throw new ArgumentOutOfRangeException("Invalid y position");
                     }
                     return _data[x, y];
                 }
-                if (x < 0 && x >= _ucWidth)
+                if (x < 0 || x >= _ucWidth)
                 {
                     throw new ArgumentOutOfRangeException("Invalid x position");
                 }
-                if (y < 0 && y >= _ucHeight)
+                if (y < 0 || y >= _ucHeight)
                 {
                     throw new ArgumentOutOfRangeException("Invalid y position");
                 }
@@ -88,11 +88,11 @@ namespace XNoise
             {
                 if (isCropped)
                 {
-                    if (x < 0 && x >= _width)
+                    if (x < 0 || x >= _width)
                     {
                         throw new ArgumentOutOfRangeException("Invalid x position");
                     }
-                    if (y < 0 && y >= _height)
+                    if (y < 0 || y >= _height)
                     {
                         throw new ArgumentOutOfRangeException("Invalid y position");
                     }
@@ -100,11 +100,11 @@ namespace XNoise
                 }
                 else
                 {
-                    if (x < 0 && x >= _ucWidth)
+                    if (x < 0 || x >= _ucWidth)
                     {
                         throw new ArgumentOutOfRangeException("Invalid x position");
                     }
-                    if (y < 0 && y >= _ucHeight)
+                    if (y < 0 || y >= _ucHeight)
                     {
                         throw new ArgumentOutOfRangeException("Invalid y position");
                     }

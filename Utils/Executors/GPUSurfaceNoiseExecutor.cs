@@ -50,22 +50,29 @@ namespace Xnoise
             base.GeneratePlanar(left, right, top, bottom, isSeamless);
             datas = new GPURenderingDatas(new Vector2(Width, Height), ProjectionType.Planar, RenderingAreaData.standardCartesian);
 
+            RenderTexture displacementRt = null;
             if (texture2d != null)
             {
-                RenderTexture rt = new RenderTexture(texture2d.width / 2, texture2d.height / 2, 0);
-                RenderTexture.active = rt;
-                // Copy your texture ref to the render texture
-                Graphics.Blit(texture2d, rt);
-                datas.displacementMap = rt;
+                displacementRt = RenderTexture.GetTemporary(texture2d.width / 2, texture2d.height / 2, 0);
+                Graphics.Blit(texture2d, displacementRt);
+                datas.displacementMap = displacementRt;
             }
-            // set texture here
+
+            _renderedTexture?.Release();
             _renderedTexture = _generator.GetValueGPU(datas);
+
+            if (displacementRt != null)
+            {
+                RenderTexture.ReleaseTemporary(displacementRt);
+                datas.displacementMap = null;
+            }
         }
 
         public override void GenerateCylindrical(double angleMin, double angleMax, double heightMin, double heightMax)
         {
             base.GenerateCylindrical(angleMin, angleMax, heightMin, heightMax);
             GPURenderingDatas datas = new GPURenderingDatas(new Vector2(Width, Height), ProjectionType.Cylindrical, RenderingAreaData.standardCylindrical);
+            _renderedTexture?.Release();
             _renderedTexture = _generator.GetValueGPU(datas);
         }
 
@@ -73,27 +80,33 @@ namespace Xnoise
         {
             base.GenerateSpherical(south, north, west, east);
             GPURenderingDatas datas = new GPURenderingDatas(new Vector2(Width, Height), ProjectionType.Spherical, RenderingAreaData.standardSpherical);
-
+            _renderedTexture?.Release();
             _renderedTexture = _generator.GetValueGPU(datas);
         }
 
         public override Texture2D GetNormalMap(float intensity)
         {
-            RenderTexture preview = new RenderTexture(_renderedTexture.width, _renderedTexture.height, 0, RenderTextureFormat.ARGB32);
-            RenderTexture.active = preview;
-            var mat = XNoiseShaderCache.GetMaterial(XNoiseShaderPaths.ToNormalMap);
+            var preview = RenderTexture.GetTemporary(_renderedTexture.width, _renderedTexture.height, 0, RenderTextureFormat.ARGB32);
+            var prevActive = RenderTexture.active;
+            try
+            {
+                RenderTexture.active = preview;
+                var mat = XNoiseShaderCache.GetMaterial(XNoiseShaderPaths.ToNormalMap);
+                mat.SetTexture("_HeightMap", _renderedTexture);
+                mat.SetFloat("_Intensity", intensity);
+                mat.SetVector("_TexelSize", new Vector4(_renderedTexture.width, _renderedTexture.height, 0, 0));
+                Graphics.Blit(_renderedTexture, preview, mat);
 
-            mat.SetTexture("_HeightMap", _renderedTexture);
-            mat.SetFloat("_Intensity", intensity);
-            mat.SetVector("_TexelSize", new Vector4(_renderedTexture.width, _renderedTexture.height, 0, 0));
-
-            Graphics.Blit(_renderedTexture, preview, mat);
-
-            var tex = new Texture2D(_renderedTexture.width, _renderedTexture.height);
-            tex.ReadPixels(new Rect(0, 0, _renderedTexture.width, _renderedTexture.height), 0, 0);
-            tex.Apply();
-
-            return tex;
+                var tex = new Texture2D(_renderedTexture.width, _renderedTexture.height);
+                tex.ReadPixels(new Rect(0, 0, _renderedTexture.width, _renderedTexture.height), 0, 0);
+                tex.Apply();
+                return tex;
+            }
+            finally
+            {
+                RenderTexture.active = prevActive;
+                RenderTexture.ReleaseTemporary(preview);
+            }
         }
 
         /// <summary>
@@ -112,17 +125,25 @@ namespace Xnoise
 
         public override Texture2D GetFinalizedTexture(object gradient)
         {
-            RenderTexture preview = new RenderTexture(_renderedTexture.width, _renderedTexture.height, 0, RenderTextureFormat.ARGB32);
-            RenderTexture.active = preview;
-            var mat = XNoiseShaderCache.GetMaterial(XNoiseShaderPaths.Visualizer);
+            var preview = RenderTexture.GetTemporary(_renderedTexture.width, _renderedTexture.height, 0, RenderTextureFormat.ARGB32);
+            var prevActive = RenderTexture.active;
+            try
+            {
+                RenderTexture.active = preview;
+                var mat = XNoiseShaderCache.GetMaterial(XNoiseShaderPaths.Visualizer);
+                mat.SetTexture("_Input", _renderedTexture);
+                Graphics.Blit(_renderedTexture, preview, mat);
 
-            mat.SetTexture("_Input", _renderedTexture);
-            Graphics.Blit(_renderedTexture, preview, mat);
-            var tex = new Texture2D(_renderedTexture.width, _renderedTexture.height);
-            tex.ReadPixels(new Rect(0, 0, _renderedTexture.width, _renderedTexture.height), 0, 0);
-            tex.Apply();
-
-            return tex;
+                var tex = new Texture2D(_renderedTexture.width, _renderedTexture.height);
+                tex.ReadPixels(new Rect(0, 0, _renderedTexture.width, _renderedTexture.height), 0, 0);
+                tex.Apply();
+                return tex;
+            }
+            finally
+            {
+                RenderTexture.active = prevActive;
+                RenderTexture.ReleaseTemporary(preview);
+            }
         }
 
         public RenderTexture GetRenderTexture()
