@@ -14,7 +14,7 @@ namespace XNoise
         public RenderTexture GetValueGPU(GPURenderingDatas datas)
         {
             var materialGPU = XNoiseShaderCache.GetMaterial(XNoiseShaderPaths.Perlin);
-            
+
             materialGPU.SetFloat("_Frequency", (float)Frequency);
             materialGPU.SetFloat("_Lacunarity", (float)Lacunarity);
             materialGPU.SetFloat("_Persistence", (float)Persistence);

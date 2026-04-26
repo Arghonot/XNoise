@@ -1,5 +1,5 @@
-using UnityEngine;
 using LibNoise;
+using UnityEngine;
 using Xnoise;
 
 namespace XNoise
